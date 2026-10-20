@@ -63,6 +63,10 @@ The experimental MARIO checkout additionally accepts
 on solve/resume calls. These settings do not alter cleaning and are not selected
 by default. Use a fresh trial/checkpoint root when changing the model; normalized
 options are saved in accepted checkpoints and cannot change across a resume.
+The project's `quadratic.json` sets `defer_satellite_recalculation=true` because
+E will be rebuilt after the monetary split. E is provisional and explicitly
+listed in `pending_recalculations`; its conservation does not block acceptance.
+All monetary/accounting checks and the EY/VY checks remain enforced.
 `scripts/run_model_trial.py` is the controlled comparison entry point described
 in the baseline report: it copies inputs, records code/input identities and
 checks their hashes after the run.

@@ -7,5 +7,6 @@
   "supply_weight": 1.0,
   "check_feasibility": true,
   "compact_constraints": true,
+  "defer_satellite_recalculation": true,
   "scale": 1000.0
 }

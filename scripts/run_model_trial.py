@@ -92,7 +92,8 @@ def main():
         if options is not None:
             kwargs['split_model_options'] = options
         db.add_sectors('inventories', **kwargs)
-        manifest.update(status='accepted', completed_sectors=db._intermediate_steps_state['completed_sectors'])
+        manifest.update(status='accepted', completed_sectors=db._intermediate_steps_state['completed_sectors'],
+                        pending_recalculations=db._intermediate_steps_state.get('pending_recalculations',[]))
         exit_code = 0
     except Exception as exc:
         manifest.update(status='failed', error=str(exc), traceback=traceback.format_exc())
@@ -106,7 +107,8 @@ def main():
             manifest.update(status='failed', integrity_error='Input hashes changed during the trial.')
             exit_code = 1
         path.write_text(json.dumps(manifest, indent=2, allow_nan=False))
-        print(json.dumps({k: manifest.get(k) for k in ('status','elapsed_seconds','error','completed_sectors')}, indent=2))
+        print(json.dumps({k: manifest.get(k) for k in ('status','elapsed_seconds','error','completed_sectors',
+                                                     'pending_recalculations')}, indent=2))
     return exit_code
 
 

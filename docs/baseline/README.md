@@ -304,11 +304,31 @@ Model development uses MARIO `codex/mrio-model-improvements`, based on merge
 split implementation. ENTICE development continues on `codex/configurable-regions`.
 The original preparation and the failed mining-first pilot remain immutable.
 
-Current result: MARIO `9f44c26` adds joint, conserving Y/supplier priors on top
-of experimental model commit `15bffc1`. The Mining monetary QP solves optimally
-and passes independent Z/Y/V, row/column and bilateral-trade checks. The complete
-pipeline still has no accepted Mining checkpoint: E observations conflict with
-the supplied satellite aggregates and require separate reconciliation.
+MARIO `9f44c26` adds joint, conserving Y/supplier priors on top of experimental
+model commit `15bffc1`. The Mining monetary QP solves optimally and passes
+independent Z/Y/V, row/column and bilateral-trade checks.
+
+The user clarified on 20 October that E will be recalculated after the monetary
+split. MARIO `df6ffa2` implements this policy. The active `quadratic.json` now sets
+`defer_satellite_recalculation=true`. This omits E conservation from sequential
+acceptance, records E as `status: deferred` / `passed: null`, and lists
+`pending_recalculations: ["E"]` in checkpoint state and the trial manifest.
+E remains provisional; the monetary, EY and VY checks remain enforced. The
+strict-E failures below are historical diagnostics, not a blocker under this
+requested acceptance policy. Strict E checking remains the MARIO default.
+
+The full `quadratic_deferred_E` trial is **accepted**. Its `001_Mining`
+checkpoint contains 17 completed sectors across 13 regions and a remaining
+workbook for the other 50 sectors. The QP reached `optimal` in 52.90 solver
+seconds; the full command, including input preparation, a 134.23-second LP and
+checkpoint export, took 566.07 seconds. No model constraint exceeds the existing
+tolerances (maximum violation `3.15e-7 MUSD`). Checkpoint reload verifies its
+file hashes and passes Z/Y/V/X/EY/VY reaggregation, inherited row/column accounting
+and an independent check of all 1,487 selected bilateral trade targets.
+E is explicitly deferred, not certified, and its pending marker survives reload.
+Source baseline, source workbook and working baseline hashes are unchanged.
+The ignored run directory retains `trial.json`, `checkpoint_verification.json`,
+the verification driver and console log alongside the reloadable checkpoint.
 
 `scripts/run_model_trial.py` copies a prepared baseline and workbook into a new
 directory, checks cumulative parent budgets, then executes the selected initial
@@ -405,9 +425,10 @@ coordinates where the **explicit child observations alone** exceed the GTAP
 parent total, using the same physical units and all 2,686 explicit satellite
 records. This remains true when missing satellite observations contribute zero.
 These conflicting estimates cannot all remain fixed alongside a nonnegative
-residual parent and unchanged GTAP E. Source definitions/reliabilities or an
-explicit satellite reconciliation policy must be reviewed before accepting the
-complete build; no E values were silently rescaled or discarded.
+residual parent and unchanged GTAP E. Under strict E preservation, source
+definitions/reliabilities or a satellite reconciliation policy must be reviewed
+before certifying the satellite accounts; no E values were silently rescaled
+or discarded. E is now deferred in the monetary acceptance policy above.
 
 During the monetary audit, the initial deterministic reference exposed a separate
 construction defect: successive children repeatedly reduce the parent Y row,
@@ -430,14 +451,17 @@ is 17.15% in relative L1 distance from the corrected proportional prior. This is
 a sensitivity result, not an economic plausibility certificate or a calibrated
 uncertainty measure. Explicit Y bands have not been validated on the corrected
 reference. E handling is unchanged, so this monetary diagnostic does not resolve
-the complete-pipeline satellite failure.
+the satellite failure under the original strict-E policy.
 
-The 34 passing IOT regression tests cover signed taxes/final demand, mixed-sign
+The 39 passing IOT regression tests cover signed taxes/final demand, mixed-sign
 KL, quadratic loss, sparse parameter domains, exhausted and zero-output parents,
 joint prior conservation and independence of child order, numerical scaling and
-two-group checkpoint/resume. Four updated integration
+two-group checkpoint/resume. Eight updated integration
 cases also pass with an actual checkpoint reload between groups, nonzero row
-and column discrepancies, both losses and both compact-constraint settings.
+and column discrepancies, both losses, both compact-constraint settings and
+strict/deferred E. Deliberately inconsistent E is accepted only when deferred;
+altered monetary totals still fail. Strict checkpoints predating the new option
+remain resumable, while deferred checkpoints retain their pending E marker.
 All 64 ENTICE tests pass with producer integration
 enabled. A separate SUT comparison gives the identical seven failure IDs on the
 experimental checkout and unmodified merge `97fb352` (64 passes and one skip
