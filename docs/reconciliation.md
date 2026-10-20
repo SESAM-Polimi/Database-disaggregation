@@ -57,6 +57,13 @@ python scripts/run_disaggregation.py \
   --prepared build/disaggregation/clean01 --solve
 ```
 
+For a first-group pilot, name its plan column `Mining` and add
+`--stop-after-step Mining` to that solve command. MARIO writes the accepted
+intermediate database and remaining workbook, then returns before the next
+group. The complete plan and canonical future-sector references are preserved;
+cleaning is not repeated. An unknown/already completed stop group is rejected
+before solving, and a partial database is not labelled as the final build.
+
 `--no-cleaning` requests the former preparation path. All numerical capacity
 checks remain blocking; the flag does not allow incompatible inputs into a
 solve. The D2.4 generation runner also honours `disaggregation.cleaning_policy`:
@@ -429,3 +436,10 @@ particular, the solver's relative-entropy treatment of signed Tax/TTM priors,
 cumulative technology-input constraints and supplied baseline accounting
 residuals still require model-level work. The default policy marks
 `source_certified: false` and `MRIO_split_solved: false` in each success manifest.
+
+The subsequent [real mining-first pilot](baseline/README.md#actual-mining-first-split-20-october-2026)
+reached CLARABEL with all 17 mining sectors on 13 regions, then terminated with
+`InsufficientProgress`; no accepted intermediate checkpoint was saved. Actual
+V0 references and a negative fixed parent Tax total expose an entropy-domain
+contradiction. The report distinguishes that structural certificate from the
+full solver status and records negative Capital/Labor priors for separate review.

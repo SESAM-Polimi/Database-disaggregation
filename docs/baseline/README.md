@@ -229,6 +229,74 @@ accounting residuals remain model concerns. Passing the preprocessing checks
 does not establish those properties. Baseline residuals must still be reported
 separately; baseline closure remains outside the inventory task.
 
+## Actual mining-first split: 20 October 2026
+
+At the owner's request, the reconciled 13-region inputs were used in a real
+`split=True` run with mining as the first group. Group membership follows the
+released names beginning "Mining of": CHR, COB, GRA, LIT, MAN, MAO, MCU, MGC,
+MIO, MUR, NIK, NIO, PGM, REE, SIL, TIT and ZIN. All 17 use OXT; MGC retains its
+existing mixed magnesite/magnesia activity convention. The other 50 sectors
+remain in a later placeholder group, with their original canonical priors.
+
+MARIO now accepts `stop_after_step="Mining"` together with
+`intermediate_steps=True` and `save_intermediates`. It saves that accepted group
+and returns before subsequent groups, retaining the complete plan and editable
+remaining workbook. Unknown/already completed stop groups fail before solving.
+ENTICE exposes `--stop-after-step`; a partial build is not exported as `final`.
+The new option has an actual small-model checkpoint/reload test. All 20 focused
+MARIO sequential/flow-scenario tests and all 64 ENTICE tests pass.
+MARIO implementation commit: `3a5639e` on `codex/intermediate-sector-steps`.
+
+The real command, from this ENTICE worktree in the `mario` environment, was:
+
+```bash
+python scripts/run_disaggregation.py \
+  --prepared build/split_runs/20261020_mining13_001 \
+  --solve --stop-after-step Mining --solver CLARABEL
+```
+
+Both preprocessing capacity reports passed. MARIO inserted the mining
+inventories, generated the split scenario and reached CVXLab 1.1.0 / CLARABEL
+0.11.1. CLARABEL terminated with **InsufficientProgress**, last iteration 10,
+after 12.72 solver seconds; the complete command took 228.47 seconds. CVXPY
+reported 524,394 variables, 2,232,295 constraints and 861,777 parameters. Its
+conic representation had 805,194 variables, 3,074,695 constraints and 280,800
+exponential cones. No sector completed and **no valid intermediate database was
+saved**. The failed hidden staging directory retains all inputs and traceback.
+
+Independent inspection of the actual generated CSVs finds 139 active V0 cells
+with `V0 + 1e-8 < 0`: Capital 8, Labor 8, TTM 81 and Tax 42. The objective still
+contains `entropy(V,V0)`, implemented as `rel_entr(V,V0+1e-8)`. Its domain
+requires nonnegative V and nonnegative reference values even when the variable
+is declared free. Negative reference values therefore create an empty entropy
+domain. Separately, the fixed original OXT Tax total in Middle East is negative;
+the exact eps=0 conservation constraint cannot express it as a sum of
+nonnegative OXT/child V cells. An independent 18-variable necessary subsystem
+returns `infeasible`. This is a structural certificate, distinct from the full
+run's `InsufficientProgress` status; other conflicts are not ruled out.
+
+The cleaned source profiles have 176 negative factor coefficients (Capital 9,
+Labor 9, TTM 101, Tax 57). All corresponding generated child V0 flows match
+coefficient times target output: 138 remain outside the entropy domain, 36 have
+zero target output, and two fall within the 1e-8 shift. One negative residual
+parent prior raises the active-domain total to 139. The 16 active Capital/Labor
+negatives require a separate economic/source-prior review. Preserving signed
+Tax/TTM does not certify every negative primary-factor estimate as appropriate.
+
+Baseline copies and the verified source workbook were rehashed unchanged. No
+objective, tolerance, source observation or baseline adjustment was applied.
+Private evidence is in `build/split_runs/20261020_mining13_001/`: `pilot.json`,
+`groups.json`, the two capacity reports, `solver.log`, the failed-stage
+`failure.json`, actual model/input CSVs, `entropy_domain_violations.csv`, and
+`diagnose.py` / `result.json`. The run README documents exact commands and
+interpretation. Numerical payloads remain outside Git.
+
+The next model-level dependency is a convex treatment of signed value added
+consistent with fixed signed parent totals. Primary-factor prior quality also
+needs review. Geographic aggregation, dropping trade or solver retuning cannot
+remove this sign-domain contradiction. A valid checkpoint still requires a
+solved model and independent preservation/accounting checks.
+
 ## Repository integration and publication
 
 Publication completed on 1 October 2026: [ENTICE_inventory](https://github.com/SESAM-Polimi/ENTICE_inventory) is the public code repository; [ENTICE_inventory_archive](https://github.com/SESAM-Polimi/ENTICE_inventory_archive) retains the original private history. A fresh clone from GitHub was checked before changing visibility. Its complete reachable history excludes the three file names listed below, including both historical locations of the licensed totals workbook.

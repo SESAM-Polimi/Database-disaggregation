@@ -195,6 +195,11 @@ python scripts/run_disaggregation.py \
   --prepared build/disaggregation/trial01 --solve
 ```
 
+To trial only the initial groups, add `--stop-after-step Mining` with the exact
+pending group name. Its database and remaining workbook are saved as a checkpoint;
+later groups are retained and not executed. A partial build is not exported as
+`final`. Omit the flag to execute all pending groups.
+
 The runner reads the plan actually present in the edited workbook. Each
 accepted group saves a reloadable database and remaining template under
 `checkpoints`. Resume after revising the remaining groups:
