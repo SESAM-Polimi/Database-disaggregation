@@ -94,9 +94,68 @@ The inspected Camilla HYE copy omits MRT output coverage. For CPP, original
 output references expose positive COG/TZA production without corresponding
 resolved profiles in the final copy. These source limitations are reported;
 no coefficients, output values or trade targets were invented to bypass them.
-A full 67-workbook preflight was interrupted while a native output-reference
+The initial full 67-workbook preflight was interrupted while a native output-reference
 file read remained blocked in OneDrive. It produced no complete all-sector
-validation report and is not counted among the successful checks above.
+validation report and is not counted among the successful checks above. The
+subsequent complete target check below supersedes that cloud-read limitation.
+
+## Mandatory cumulative parent budgets: 20 October 2026
+
+The owner now requires both cumulative checks to block preprocessing: all child
+output targets must fit parent X in each selected region, and all child trade
+targets on each directed foreign route must fit the baseline parent Z + Y
+deliveries to that destination. These checks span every planned sector group.
+They are mandatory in the D2.4 runner, `prepare_inputs`, and again before solving
+edited prepared/resume workbooks. A resumed run compares only pending children
+with the remaining parent flows in the checkpoint. Violations are collected in
+JSON and stop execution; no automatic target cap or baseline adjustment is
+applied. This specific blocking instruction supersedes the older warning/cap
+discussion below; the other optional review screens retain their prior policy.
+
+The numerical allowance is `1e-6 + 1e-8 * abs(parent)` in the parent unit; equality
+is accepted and target units must match. Geographic aggregation cannot turn
+unknown native output into an observed zero. Partial known sums can already
+prove a violation, but incomplete output coverage also blocks acceptance.
+
+All 67 current D2.4 inventories and all 68 original MARIO input files were read
+afresh into ignored snapshots. SHA-256 rereads confirm that baseline X, Z, Y
+and units remain byte-identical to the independently verified 12 October
+captures, allowing reuse of their native aggregate arrays. This is the current
+written target structure, without any conditional source substitutions from
+the earlier simulations. Observations absent from the D2.4 export are restored
+only when explicitly stored in the original MARIO `Total outputs` sheets.
+
+| Target coverage / geography | Output violations | Trade violations | Unknown output cells |
+|---|---:|---:|---:|
+| D2.4 export alone, 163 regions | 39 | 4,720 | 1,091 |
+| With explicit original output references, 163 regions | 41 | 4,720 | 31 |
+| With those references, Camilla's 13-region partition | 6 | 13 | 31 |
+
+One output violation means one parent/region group; one trade violation means
+one parent/origin/destination group. The 31 remaining unknown native outputs
+affect 12 parent/region groups in both geographies and are counted separately
+from definite exceedances. The output violation totals are therefore lower
+bounds. Missing child trade routes are not invented or source-filled.
+The earlier 5,164-route audit used a stricter `max(1e-8, 1e-8 * abs(parent))`
+allowance; the 4,720 count uses the mandatory checks' stated numerical allowance.
+
+At 13 regions, the output violations are CHM in Africa, Oceania and Russia,
+and RPP in Rest of Asia, EU27 and USA. CHM/Africa already exceeds its parent
+with the known partial sum. The 13 foreign-route violations involve CHM (2),
+NFM (1), OXT (6), P_C (1) and RPP (3). Values, child contributions, excesses,
+coordinates, input hashes and complete/incomplete flags remain private in
+`build/qa_parent_budgets_20261020/`, including `summary.json`, per-scope JSON
+reports and CSV violation tables. No licensed numerical payload is added to Git.
+An independent OOXML reader confirmed that the current written target values
+match the 12 October captures; direct arithmetic with `math.fsum` independently
+reproduced both sets of violation coordinates. Evidence is in `verification.json`.
+
+All 48 ENTICE tests pass with producer integration enabled, including cumulative
+failures where each individual child fits, equality/roundoff, directed trade,
+regional aggregation, missing-output propagation and edited-workbook guards.
+A real preparation from all 67 snapshots and the actual GTAP parquet baseline
+also stopped before profile processing, reporting the expected 6 output and 13
+trade violations plus 12 incomplete output groups. No real-data split solver was run.
 
 ## Repository integration and publication
 

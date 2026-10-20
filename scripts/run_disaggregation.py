@@ -10,6 +10,7 @@ from pathlib import Path
 from entice_inventory.core.paths import local_config, project_data_root, data_path
 from entice_inventory.core.geography import Geography, configured_geography
 from entice_inventory.core.disaggregation import prepare_inputs
+from entice_inventory.core.parent_budgets import ChildTargets, ParentBudgets, require_parent_budgets
 
 
 def main():
@@ -36,8 +37,13 @@ def main():
         if not args.output:
             parser.error('--resume requires --output for the checkpoint root')
         from mario.ops.add_sector_steps import load_checkpoint
+        from mario.ops.add_sector_workbook import load_add_sector_workbook_input
         db = load_checkpoint(args.resume)
         workbook = args.workbook or args.resume / 'remaining_add_sectors.xlsx'
+        payload, _ = load_add_sector_workbook_input(workbook, table='IOT', read_inventories=True, split=True)
+        require_parent_budgets(ParentBudgets.from_database(db),
+                               ChildTargets.from_workbook(payload).pending(db),
+                               report_path=args.output / 'parent_budgets_resume.json')
         db.add_sectors(workbook, split=True, intermediate_steps=True, save_intermediates=args.output,
                        solver=args.solver)
         return
@@ -69,6 +75,8 @@ def main():
         db = mario.parse_from_parquet(str(destination / 'baseline' / 'flows'), table='IOT', mode='flows')
         workbook = args.workbook or destination / 'add_sectors.xlsx'
         db.read_add_sectors_excel(workbook, read_inventories=True, split=True)
+        require_parent_budgets(ParentBudgets.from_database(db), ChildTargets.from_workbook(db.add_sectors_workbook),
+                               report_path=destination / 'parent_budgets_solve.json')
         steps = db.add_sectors_workbook.intermediate_steps
         options = dict(split=True, solver=args.solver)
         if steps is not None:

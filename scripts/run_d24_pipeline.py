@@ -7,6 +7,7 @@ Run as Jupyter-style cells (#%%). The flow is:
   3. Save the enhanced database, then re-parse it as coefficients.
   4. Export the per-sector D2.4 inventory workbooks (export_d24_inventories).
   5. Inject Purdue bilateral trade data into the exported workbooks.
+     Block on cumulative child output/trade budgets in the selected geography.
   6. Plot the X / VA disaggregation of each split parent sector for QA.
 
 Set ENTICE_DATA_ROOT or data_root in paths.local.json to the shared ENTICE
@@ -27,7 +28,8 @@ from entice_inventory.export import plot_d24_split
 from entice_inventory.core.paths import project_data_root, data_path, PROJECT_ROOT
 from entice_inventory.core.baseline import load_baseline
 from entice_inventory.core.geography import configured_geography
-from entice_inventory.core.disaggregation import prepare_inputs
+from entice_inventory.core.disaggregation import prepare_inputs, read_output_references
+from entice_inventory.core.parent_budgets import ParentBudgets, read_child_targets, require_parent_budgets
 from entice_inventory.core.paths import local_config
 
 # --- Paths (all derived from BASE) ----------------------------------------- #
@@ -46,6 +48,7 @@ D24_WORK.mkdir(parents=True, exist_ok=False)
 #%%
 # 1. Baseline GTAP database (flows).
 db = load_baseline(GTAP_DB)
+parent_budgets = ParentBudgets.from_database(db)
 
 #%%
 # 2. Read the MARIO add_sector inventories and apply them.
@@ -80,6 +83,14 @@ updated_files = update_trades_in_exported_inventories(
     output_dir=str(D24_INVENTORIES),
     purdue_trade_path=str(PURDUE_TRADE),
 )
+
+# Both budgets cover all children together, regardless of future sector groups.
+targets = read_child_targets(sorted(D24_INVENTORIES.glob('*.xlsx')),
+                             output_references=read_output_references(MARIO_INVENTORIES))
+geography = configured_geography()
+if geography is not None:
+    parent_budgets, targets = parent_budgets.aggregate(geography), targets.aggregate(geography)
+require_parent_budgets(parent_budgets, targets, report_path=D24_WORK / 'parent_budgets.json')
 
 #%%
 # 6. QA plot: X / VA disaggregation of each split parent sector.

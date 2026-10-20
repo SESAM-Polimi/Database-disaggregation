@@ -223,8 +223,28 @@ Parquet flows are aggregated in column batches before constructing the smaller
 database. No baseline closure or artificial zero-output epsilon is applied.
 Production and interregional trade totals are sums; costs are output-weighted
 averages. Within-group trade is absent from interregional targets and remains
-inside the aggregated baseline. Parent output/trade feasibility still needs
-review: geographic aggregation is not numerical certification of `split=True`.
+inside the aggregated baseline. These transformations preserve flows;
+geographic aggregation does not certify the numerical feasibility of `split=True`.
+
+Two cumulative budget checks are **mandatory and blocking** in the D2.4 runner,
+input preparation, and immediately before a prepared or resumed solve:
+
+- For each parent and selected region, the sum of **all** child output targets
+  must not exceed the supplied baseline parent X.
+- For each parent and directed foreign origin/destination pair, summed child
+  trade targets must not exceed parent deliveries to that destination in Z + Y.
+
+All planned children are checked together, including those assigned to later
+groups. On resume, pending children are compared with the remaining parent
+flows in the checkpoint. Equality is allowed; the numerical allowance is
+`1e-6 + 1e-8 * abs(parent)` in the parent sector's units. Targets must use those
+same units. This is not the optional 1% exports/output review screen.
+Every violation is recorded in `parent_budgets.json` and raises an error; targets
+are not rescaled. Missing native outputs also block acceptance, even if other
+members of an aggregated region have known output. After a failed preparation,
+the report remains in the hidden staging directory named in the exception.
+Edited workbooks are checked again in `parent_budgets_solve.json` or
+`parent_budgets_resume.json` before invoking MARIO's solver.
 
 ## Canonical registry
 

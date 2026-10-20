@@ -1,6 +1,15 @@
 {
   "schema_version": 1,
-  "status": "Accepted design direction; not yet connected to the production runner",
+  "status": "Cumulative child budgets are mandatory in preprocessing; other review screens retain their existing optional policy",
+  "blocking_checks": {
+    "cumulative_child_output": "Sum all children of each parent in each selected region; must not exceed baseline X",
+    "cumulative_child_trade": "Sum all children of each parent on each directed foreign route; must not exceed baseline parent Z + Y deliveries",
+    "absolute_tolerance": 1e-6,
+    "relative_tolerance": 1e-8,
+    "action": "stop_and_report_all_violations",
+    "automatic_adjustment": false,
+    "incomplete_output_coverage": "stop; never infer missing observations as zero"
+  },
   "checks_optional": true,
   "default_action": "warn_and_continue",
   "skipped_checks_must_be_listed": true,

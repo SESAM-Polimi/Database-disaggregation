@@ -10,6 +10,7 @@ import tempfile
 
 from entice_inventory.core.baseline import load_baseline
 from entice_inventory.core.geography import Geography
+from entice_inventory.core.parent_budgets import ChildTargets, ParentBudgets, read_child_targets, require_parent_budgets
 from entice_inventory.inventory.regionalize import aggregate_inventory
 
 
@@ -44,17 +45,22 @@ def prepare_inputs(source_dir, output_dir, *, geography=None, steps=None,
     try:
         reference_dir = Path(output_reference_dir) if output_reference_dir else None
         references = None
+        targets = read_child_targets(files)
+        coverage = targets.output.groupby('Sector')['Region'].agg(set)
+        missing_outputs = any(sector not in coverage or geography.mapping.keys() - coverage[sector]
+                              for sector in targets.master['Sector'].dropna().unique())
+        if missing_outputs and reference_dir and reference_dir.is_dir():
+            references = read_output_references(reference_dir)
+            targets = read_child_targets(files, output_references=references)
+        budgets = ParentBudgets.from_database(database)
+        require_parent_budgets(budgets, targets.aggregate(geography), report_path=staging / 'parent_budgets.json')
         for source in files:
             from openpyxl import load_workbook
             book = load_workbook(BytesIO(source.read_bytes()), read_only=True, data_only=True)
             try:
                 sector = next(book['Master'].iter_rows(min_row=2, values_only=True))[1]
-                header, *values = book['Total outputs'].values
-                native_regions = {dict(zip(header, row))['Region'] for row in values if row[0] is not None}
             finally:
                 book.close()
-            if geography.mapping.keys() - native_regions and references is None and reference_dir and reference_dir.is_dir():
-                references = read_output_references(reference_dir)
             results.append(aggregate_inventory(source, inventories / source.name, geography,
                                                output_reference=(references or {}).get(sector)))
         database.read_add_sectors_excel(inventories, read_inventories=True, split=True)
@@ -63,6 +69,8 @@ def prepare_inputs(source_dir, output_dir, *, geography=None, steps=None,
         actual = set(workbook.master_sheet['Sector'])
         if expected != actual:
             raise ValueError(f"Native MARIO reader did not retain all inventories: expected={expected}, actual={actual}")
+        budget_report = require_parent_budgets(budgets, ChildTargets.from_workbook(workbook),
+                                               report_path=staging / 'parent_budgets.json')
         if intermediate_steps and steps is None:
             steps = {'Step 1': workbook.master_sheet['Sector'].drop_duplicates().tolist()}
         workbook = replace(workbook, intermediate_steps=steps)
@@ -73,6 +81,7 @@ def prepare_inputs(source_dir, output_dir, *, geography=None, steps=None,
         manifest = {'geography': {'name': geography.name, 'mapping': geography.mapping,
                                    'regions': geography.regions}, 'inventories': results,
                     'steps': steps, 'source_files': {r['source']: r['source_sha256'] for r in results},
+                    'parent_budget_checks': budget_report['summary'],
                     'output_reference_files': {r['output_reference']: r['output_reference_sha256']
                                                for r in results if r['output_reference']},
                     'input_kind': 'resolved_native_profiles', 'status': 'prepared',
