@@ -297,6 +297,152 @@ needs review. Geographic aggregation, dropping trade or solver retuning cannot
 remove this sign-domain contradiction. A valid checkpoint still requires a
 solved model and independent preservation/accounting checks.
 
+## MRIO model experiments: 20 October 2026
+
+Model development uses MARIO `codex/mrio-model-improvements`, based on merge
+`97fb352` of Camilla's signed-account corrections (`98bc710`) and the sequential
+split implementation. ENTICE development continues on `codex/configurable-regions`.
+The original preparation and the failed mining-first pilot remain immutable.
+
+Current result: MARIO `9f44c26` adds joint, conserving Y/supplier priors on top
+of experimental model commit `15bffc1`. The Mining monetary QP solves optimally
+and passes independent Z/Y/V, row/column and bilateral-trade checks. The complete
+pipeline still has no accepted Mining checkpoint: E observations conflict with
+the supplied satellite aggregates and require separate reconciliation.
+
+`scripts/run_model_trial.py` copies a prepared baseline and workbook into a new
+directory, checks cumulative parent budgets, then executes the selected initial
+group. It never repeats cleaning or modifies the source preparation. Each
+`trial.json` records both code identities and Python implementation hashes,
+runtime versions, options, solver settings, input hashes, outcome and elapsed
+time. Source and working baseline hashes are checked again on completion.
+Point the process `PYTHONPATH` at the experimental MARIO checkout and this
+repository's `src`; no shared Python installation needs to be changed.
+
+```bash
+python scripts/run_model_trial.py \
+  --prepared build/split_runs/20261020_mining13_001 \
+  --output build/model_trials/my_accounting_trial \
+  --options config/model-trials/accounting.json \
+  --solver-options config/model-trials/solver.json \
+  --stop-after-step Mining
+```
+
+Omit both option files for the unchanged merged model reference. Every output
+directory must be new. The accounting option allocates supplied GTAP row/column
+discrepancies within each split family using output shares, while preserving
+all preceding aggregates. It does not close the baseline or introduce free
+balancing errors. The optional LP includes objective-implied sign domains.
+The regularized option additionally uses complete signed KL on V, a weak
+final-demand reference (weight 0.1), and priors on every free Z block. These
+weights and proportional discrepancy allocation are explicit experimental
+assumptions; source-specific reliability is not yet propagated into cell weights.
+No experimental setting is selected by the normal production runner.
+
+For the tested QP, use `config/model-trials/quadratic.json` with
+`--solver-options config/model-trials/solver-qp-refined.json`, still in a fresh
+output directory. The initial `solver.json` remains a comparison setting.
+
+The separate `quadratic.json` experiment replaces all three prior losses with
+weighted squared deviations, retaining the KL sign domains explicitly. It is
+a different objective from cross entropy. The denominator is the absolute prior,
+with a block-relative floor of `1e-6` and an original-unit absolute floor of
+`1e-8`. This tests whether exponential-cone conditioning is the remaining obstacle;
+it does not make weak prior information empirical. In inherited mode, supplied
+X remains an independent target during model construction and checkpoint reload.
+
+The unchanged merged-model reference in `build/model_trials/20261020/reference`
+again terminated with CLARABEL `InsufficientProgress` (331.39 seconds total,
+29.39 solver seconds). This run includes Camilla's fixes and supersedes the
+old entropy-domain failure as a statement about that merged revision. Further
+trial outcomes and acceptance remain experimental.
+
+The accounting-only retry `build/model_trials/20261020/accounting_v2` passed
+the HiGHS affine feasibility check: 524,394 variables, 2,793,427 explicit/domain
+constraint cells, 20.59 solver seconds and maximum violation `8.94e-7 MUSD`
+after restoring original units. CLARABEL subsequently stopped with
+`InsufficientProgress` after 13.06 seconds; no valid checkpoint was saved.
+The full command took 332.39 seconds and source/working baseline hashes remained
+unchanged. This distinguishes remaining conic numerical failure from an empty
+feasible set. The earlier `accounting` attempt stopped in sparse-matrix residual
+reporting; its failed artifacts remain separate and are not an accepted result.
+
+The complete-KL trial `build/model_trials/20261020/regularized` also passed the
+LP (140.72 seconds; maximum violation `8.94e-7 MUSD`) but CLARABEL terminated
+with `InsufficientProgress` after 53.20 seconds and 38 iterations. Total time was
+529.46 seconds. All source and working baseline hashes remained unchanged.
+
+The first `quadratic` trial passed the LP in 140.78 seconds (524,394 variables,
+2,261,855 explicit/domain constraint cells and maximum violation `8.94e-7 MUSD`).
+Its canonical QP has 436,392 diagonal quadratic coefficients and no exponential
+cones. The latest implementation also enforces the Y prior-sign domain explicitly
+for quadratic loss, including zero priors, so direct nonsequential splits retain
+the KL admissible signs as well. Trial manifests retain the exact implementation
+hashes of each development run.
+
+That first QP reached CLARABEL `AlmostSolved` / CVXPY `optimal_inaccurate` at
+300 iterations, but the independent constraint gate rejected 4,357 cells. The
+maximum original-unit violation was `3.59e-5 MUSD` (about USD 36), against the
+existing per-cell `1e-6 + 1e-8*abs(reference)` allowance. No checkpoint was
+accepted. Solver time was 271.48 seconds; total time was 743.88 seconds and all
+input hashes remained unchanged. A small objective gap alone does not establish
+required accounting precision. `solver-qp-refined.json` is a separate numerical
+settings experiment; it does not relax the acceptance tolerances.
+
+The solver-only `qp_precision_v2` diagnostic uses that refined setting and the
+explicit Y prior-sign domain. It reached `optimal` in 55.37 solver seconds and
+97.18 seconds overall, with no constraint cells beyond tolerance and maximum
+violation `1.99e-7 MUSD`. Independent reaggregation of Z, Y and V passed, as did
+row/column discrepancy allocation and 1,487 selected bilateral trade targets.
+This diagnostic retains the initial prior construction and is not a full
+pipeline checkpoint.
+
+The full `quadratic_refined` retry on commit `15bffc1` reached `optimal` in
+53.97 solver seconds, passed the monetary constraint gate, then failed E
+preservation. Total runtime was 533.01 seconds and all source/working hashes
+remained unchanged. An independent inventory audit found 13 satellite/region
+coordinates where the **explicit child observations alone** exceed the GTAP
+parent total, using the same physical units and all 2,686 explicit satellite
+records. This remains true when missing satellite observations contribute zero.
+These conflicting estimates cannot all remain fixed alongside a nonnegative
+residual parent and unchanged GTAP E. Source definitions/reliabilities or an
+explicit satellite reconciliation policy must be reviewed before accepting the
+complete build; no E values were silently rescaled or discarded.
+
+During the monetary audit, the initial deterministic reference exposed a separate
+construction defect: successive children repeatedly reduce the parent Y row,
+while supplier rows to unchanged buyers are duplicated. Those initial Y and
+supplier priors do not reaggregate to the parent. Commit `9f44c26` instead builds
+both references jointly from the preceding cells and fixed output shares of all
+children plus the residual parent. Cost observations in Z-use remain the source
+priors; deferred supplier observations overlay the corresponding supplier cells.
+Zero-output families retain their preceding reference in the parent. The legacy
+default split is unchanged; the fix applies to the opt-in regularization.
+
+The corrected `joint_priors` monetary diagnostic uses the same immutable inputs,
+with only Y0/Z_supply0 rebuilt by that policy. It reached `optimal` in 54.61
+solver seconds and 97.82 seconds overall. No model constraints exceed tolerance;
+maximum violation is `3.15e-7 MUSD`. Independent Z/Y/V reaggregation passes
+(maximum differences `5.53e-8`, `1.53e-8` and `7.28e-11 MUSD`), as do row/column
+accounting and all 1,487 selected trade targets. The Y and supplier **priors** also
+reaggregate independently (maximum differences below `3e-11 MUSD`). Y movement
+is 17.15% in relative L1 distance from the corrected proportional prior. This is
+a sensitivity result, not an economic plausibility certificate or a calibrated
+uncertainty measure. Explicit Y bands have not been validated on the corrected
+reference. E handling is unchanged, so this monetary diagnostic does not resolve
+the complete-pipeline satellite failure.
+
+The 34 passing IOT regression tests cover signed taxes/final demand, mixed-sign
+KL, quadratic loss, sparse parameter domains, exhausted and zero-output parents,
+joint prior conservation and independence of child order, numerical scaling and
+two-group checkpoint/resume. Four updated integration
+cases also pass with an actual checkpoint reload between groups, nonzero row
+and column discrepancies, both losses and both compact-constraint settings.
+All 64 ENTICE tests pass with producer integration
+enabled. A separate SUT comparison gives the identical seven failure IDs on the
+experimental checkout and unmodified merge `97fb352` (64 passes and one skip
+in both); those pre-existing SUT failures are not repaired by this IOT experiment.
+
 ## Repository integration and publication
 
 Publication completed on 1 October 2026: [ENTICE_inventory](https://github.com/SESAM-Polimi/ENTICE_inventory) is the public code repository; [ENTICE_inventory_archive](https://github.com/SESAM-Polimi/ENTICE_inventory_archive) retains the original private history. A fresh clone from GitHub was checked before changing visibility. Its complete reachable history excludes the three file names listed below, including both historical locations of the licensed totals workbook.

@@ -28,10 +28,14 @@ def main():
     existing.add_argument('--prepared', type=Path, help='Solve a previously prepared directory after editing its workbook.')
     parser.add_argument('--solve', action='store_true')
     parser.add_argument('--solver', default='CLARABEL')
+    parser.add_argument('--model-options',type=Path,help='Opt-in experimental MARIO IOT split model settings JSON.')
     parser.add_argument('--stop-after-step',help='Save and return after this named pending group; requires --solve and Intermediate steps.')
     existing.add_argument('--resume', type=Path, help='Committed MARIO step directory.')
     parser.add_argument('--workbook', type=Path, help='Edited remaining or full source workbook when resuming.')
     args = parser.parse_args()
+    if args.model_options and not args.solve:
+        parser.error('--model-options requires --solve')
+    model_options = json.loads(args.model_options.read_text()) if args.model_options else None
     if args.stop_after_step and not args.solve:
         parser.error('--stop-after-step requires --solve')
     if (args.resume or args.prepared) and any((args.mapping, args.inventories, args.steps,
@@ -51,7 +55,8 @@ def main():
                                ChildTargets.from_workbook(payload).pending(db),
                                report_path=args.output / 'parent_budgets_resume.json')
         db.add_sectors(workbook, split=True, intermediate_steps=True, save_intermediates=args.output,
-                       solver=args.solver,stop_after_step=args.stop_after_step)
+                       solver=args.solver,stop_after_step=args.stop_after_step,
+                       **({'split_model_options':model_options} if model_options is not None else {}))
         return
     if args.prepared:
         if not args.solve:
@@ -93,6 +98,8 @@ def main():
         if args.stop_after_step and steps is None:
             parser.error('--stop-after-step requires an Intermediate steps plan')
         options = dict(split=True, solver=args.solver,stop_after_step=args.stop_after_step)
+        if model_options is not None:
+            options['split_model_options'] = model_options
         if steps is not None:
             options.update(intermediate_steps=True, save_intermediates=args.output if args.prepared and args.output else destination / 'checkpoints')
         else:

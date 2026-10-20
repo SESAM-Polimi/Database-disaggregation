@@ -13,8 +13,9 @@ Source workbooks, the canonical registry and GTAP baseline matrices are read-onl
 
 ## Run the pipeline
 
-Use the `mario` environment and the MARIO `codex/intermediate-sector-steps`
-worktree based on `dev_SUT_disag`. Reconciliation needs the optional dependencies
+Use the `mario` environment and MARIO `dev_SUT_disag`, which includes the
+sequential-step and signed-account fixes. Experimental model trials use the
+separate MARIO `codex/mrio-model-improvements` worktree. Reconciliation needs the optional dependencies
 `pip install -e '.[reconcile]'`; MARIO is installed separately. The workflow has
 been developed with CVXLAB 1.1.0. The detailed runtime versions and implementation
 file hashes are recorded in each reconciliation run.
@@ -56,6 +57,15 @@ once in `Intermediate steps`, then run:
 python scripts/run_disaggregation.py \
   --prepared build/disaggregation/clean01 --solve
 ```
+
+The experimental MARIO checkout additionally accepts
+`--model-options config/model-trials/accounting.json` or a custom options JSON
+on solve/resume calls. These settings do not alter cleaning and are not selected
+by default. Use a fresh trial/checkpoint root when changing the model; normalized
+options are saved in accepted checkpoints and cannot change across a resume.
+`scripts/run_model_trial.py` is the controlled comparison entry point described
+in the baseline report: it copies inputs, records code/input identities and
+checks their hashes after the run.
 
 For a first-group pilot, name its plan column `Mining` and add
 `--stop-after-step Mining` to that solve command. MARIO writes the accepted
