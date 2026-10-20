@@ -330,6 +330,91 @@ Source baseline, source workbook and working baseline hashes are unchanged.
 The ignored run directory retains `trial.json`, `checkpoint_verification.json`,
 the verification driver and console log alongside the reloadable checkpoint.
 
+Resuming the same checkpoint for the remaining 50 sectors uses its existing
+single `Remaining sectors` group (11 parent sectors, 13 regions). All cumulative
+checks pass: 143 output groups and 1,364 observed trade groups, with no incomplete
+outputs or producer-export violations. The first resume, in
+`build/model_trials/20261020/remaining50`, stopped before optimization because
+fully allocated RPP families left floating-point-negative residual outputs in
+Africa, USA and Rest of the World. The largest aggregate excess is
+`2.33e-10 MUSD` (about `0.00023 USD`). Source checkpoint/workbook hashes remained
+unchanged and no second checkpoint was accepted.
+
+MARIO `d793e7d` removes only negative residuals within the floating-point
+subtraction error bound for each sibling family. It preserves child output
+observations and still rejects real capacity excesses; the model's acceptance
+tolerances are unchanged. Nineteen split-flow tests pass, including roundoff
+and real-excess cases at three scales; 26 model/sequential regression tests also
+pass (45 total). The retry is in
+`build/model_trials/20261020/remaining50_roundoff`, using the same model options
+and refined solver settings as Mining. Its manifest records the exact Python
+hashes of the roundoff fix, equivalent to `d793e7d`, and the runner is saved
+alongside the run.
+
+The full-50 retry is **infeasible**. A process sample shows HiGHS had returned
+`kInfeasible` and was running `getDualRay()`; CVXPY 1.9.2 requests this certificate
+before returning the status. Certificate construction was interrupted after
+independent smaller LPs proved nine conflicts. The run manifest explicitly
+records that interruption, the stack sample and unchanged input hashes; no QP
+or new checkpoint was accepted.
+
+The diagnostic LPs retain the original regional delivery totals, their positive
+and negative components, fixed child trades and child/residual output targets.
+They relax column accounting, cell-specific zeros and V constraints. Therefore
+infeasibility of this relaxation is already sufficient to rule out the full
+model with the same targets. The 143 parent/producer-region cases contain these
+nine failures:
+
+| Parent | Producer regions | Children in the pending family |
+|---|---|---|
+| NFM | C-S America, Middle East, Russia | APP, APS, CPP, CPS, GAR, MUN, PGR, RAL, RCP, SIR |
+| MVH | Rest of Europe | BVH, BVL, HEL, ICH, ICL |
+| RPP | Africa, Middle East, Rest of Asia, Rest of the World, Russia | PLP, PLSR, RBR |
+
+For example, Africa's residual RPP output is zero, but its fixed family trade
+and available signed final demand imply a minimum residual output of
+`93.783542 MUSD`; Russia's corresponding minimum is `753.427299 MUSD`.
+For Rest of Europe, residual MVH output is `12,682.463928 MUSD` against a
+minimum of `14,984.260377 MUSD`. These are substantive incompatibilities,
+separate from the earlier floating-point issue. The existing cumulative caps
+and child-export checks do not establish joint row/trade feasibility.
+`row_transport_diagnostics.json` and `output_bound_diagnostics.json`, with their
+drivers, retain the evidence. Elastic diagnostic LPs give lower bounds on
+required output redistribution if trade and signed delivery budgets stay
+fixed; their output changes are diagnostic alternatives and were not applied.
+
+The remaining workbook was copied and regrouped into `Remaining 32`,
+`Motor vehicles`, `Non-ferrous metals` and `Rubber and plastics`, preserving
+all 50 pending sectors. Only the ZIP member for `Intermediate steps` changed;
+every other workbook member is byte-identical to the Mining checkpoint's
+remaining workbook (`remaining50_regrouping/plan.json`). The 32 sectors in the
+other eight parent families pass all 104 reduced row/trade cases. Their separate
+resume is `build/model_trials/20261020/remaining32`, configured to stop after
+`Remaining 32`. That full MRIO LP is also **infeasible**; none of those sectors
+was accepted. Direct HiGHS evaluation of its saved LP confirms `kInfeasible`
+(1,449,240 variables and 6,441,690 constraint rows; 46.32 seconds including
+canonicalization, 4.04 solver seconds). The expensive dual-certificate phase
+was interrupted and all source checkpoint/workbook hashes are unchanged.
+
+Reduced subset tests can retain 47 of the 50 pending sectors by deferring APP,
+BVL and PLP, but this is only a row/trade necessary-condition result, not a
+successful MRIO build. In the full 32-sector LP, removing trade constraints alone
+does not restore feasibility. Removing V signs, Y signs or structural zeros
+also does not suffice; removing Z nonnegativity together with trade does.
+Mining contains 122,763 small negative Z cells (minimum `-1.50e-8 MUSD`, about
+`-0.015 USD`). Their role remains under investigation: a first numerical-floor
+diagnostic did not restore feasibility. No Z floor or sign relaxation has been
+implemented in MARIO. The direct LP, constraint-group diagnostics, proportional
+witness and unfinished canonical-mapping investigation are saved under
+`build/model_trials/20261020/remaining32_diagnosis_v2`.
+
+**Stopped at the user's request on 20 October.** Mining is still the only
+accepted checkpoint: 17 completed sectors, 50 pending, with E explicitly deferred.
+All task processes are stopped. The user selected the next reconciliation
+direction: preserve output targets and reconcile trade on copies, retaining
+original data and checkpoints. This trade reconciliation has not yet been run;
+the additional full-model feasibility issue above must also be resolved.
+
 `scripts/run_model_trial.py` copies a prepared baseline and workbook into a new
 directory, checks cumulative parent budgets, then executes the selected initial
 group. It never repeats cleaning or modifies the source preparation. Each
@@ -338,6 +423,12 @@ runtime versions, options, solver settings, input hashes, outcome and elapsed
 time. Source and working baseline hashes are checked again on completion.
 Point the process `PYTHONPATH` at the experimental MARIO checkout and this
 repository's `src`; no shared Python installation needs to be changed.
+The runner also accepts `--resume CHECKPOINT`: it verifies/reloads the accepted
+database, copies its remaining workbook, inherits its normalized model options,
+checks pending parent budgets, and executes all pending groups by default.
+An optional `--workbook` selects an edited remaining plan. Resume output must
+be a fresh directory outside the immutable source checkpoint; its hashes are
+verified again after the attempt and accepted checkpoint paths are recorded.
 
 ```bash
 python scripts/run_model_trial.py \

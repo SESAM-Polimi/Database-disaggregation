@@ -1,4 +1,4 @@
-"""Run one MRIO model experiment on a private copy of prepared inputs.
+"""Run one MRIO model experiment from prepared inputs or an accepted checkpoint.
 
 Inputs must already contain the intended Intermediate steps plan. No cleaning,
 source selection, baseline closure or modification of the source run occurs.
@@ -42,35 +42,50 @@ def code_identity(module):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--prepared', type=Path, required=True)
+    source_group = parser.add_mutually_exclusive_group(required=True)
+    source_group.add_argument('--prepared', type=Path)
+    source_group.add_argument('--resume', type=Path, help='Accepted MARIO intermediate checkpoint.')
+    parser.add_argument('--workbook', type=Path, help='Remaining workbook override; requires --resume.')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--options', type=Path, help='MARIO split_model_options JSON; omit for the unchanged model.')
     parser.add_argument('--solver-options', type=Path)
     parser.add_argument('--solver', default='CLARABEL')
-    parser.add_argument('--stop-after-step', default='Mining')
+    parser.add_argument('--stop-after-step', help='Defaults to Mining for a fresh preparation; resume runs all pending groups.')
     args = parser.parse_args()
     options = json.loads(args.options.read_text()) if args.options else None
     solver_options = json.loads(args.solver_options.read_text()) if args.solver_options else None
-    source = args.prepared.resolve()
+    if args.workbook and not args.resume:
+        parser.error('--workbook requires --resume.')
+    source = (args.resume or args.prepared).resolve()
+    stop_after_step = args.stop_after_step if args.resume else args.stop_after_step or 'Mining'
     output = args.output.resolve()
     if output == source or source in output.parents:
         parser.error('The output must be separate from the immutable preparation.')
-    if not (source/'baseline'/'flows').is_dir() or not (source/'add_sectors.xlsx').is_file():
+    if args.resume:
+        if not (source/'state.json').is_file():
+            parser.error('Expected state.json in --resume.')
+        if args.options is None:
+            options = json.loads((source/'state.json').read_text()).get('split_model_options')
+        workbook = (args.workbook or source/'remaining_add_sectors.xlsx').resolve()
+    else:
+        workbook = source/'add_sectors.xlsx'
+    if not args.resume and (not (source/'baseline'/'flows').is_dir() or not workbook.is_file()):
         parser.error('Expected baseline/flows and add_sectors.xlsx in --prepared.')
     output.mkdir(parents=True, exist_ok=False)
-    baseline_hashes = fingerprints(source/'baseline')
-    workbook_hash = hashlib.sha256((source/'add_sectors.xlsx').read_bytes()).hexdigest()
-    shutil.copytree(source/'baseline', output/'baseline')
-    shutil.copy2(source/'add_sectors.xlsx', output/'add_sectors.xlsx')
+    baseline_hashes = fingerprints(source if args.resume else source/'baseline')
+    workbook_hash = hashlib.sha256(workbook.read_bytes()).hexdigest()
+    if not args.resume:
+        shutil.copytree(source/'baseline', output/'baseline')
+    shutil.copy2(workbook, output/'add_sectors.xlsx')
     import mario
     import cvxlab
     import entice_inventory
     from entice_inventory.core.parent_budgets import ParentBudgets, ChildTargets, require_parent_budgets
-    manifest = {'status': 'running', 'source_preparation': str(source),
+    manifest = {'status': 'running', 'source_checkpoint' if args.resume else 'source_preparation': str(source),
                 'runner_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                 'source_baseline_sha256': baseline_hashes, 'source_workbook_sha256': workbook_hash,
                 'split_model_options': options, 'solver': args.solver, 'solver_options': solver_options,
-                'stop_after_step': args.stop_after_step,
+                'source_workbook': str(workbook), 'stop_after_step': stop_after_step,
                 'runtime': {p: version(p) for p in ('mariopy','cvxlab','cvxpy','numpy','pandas','clarabel')},
                 'code': {name: code_identity(module) for name,module in
                          [('mario',mario),('cvxlab',cvxlab),('entice_inventory',entice_inventory)]}}
@@ -81,14 +96,21 @@ def main():
     try:
         if options is not None and 'split_model_options' not in inspect.signature(mario.Database.add_sectors).parameters:
             raise RuntimeError('The selected MARIO checkout does not support split_model_options.')
-        db = mario.parse_from_parquet(str(output/'baseline'/'flows'), table='IOT', mode='flows')
+        if args.resume:
+            from mario.ops.add_sector_steps import load_checkpoint
+            db = load_checkpoint(source)
+        else:
+            db = mario.parse_from_parquet(str(output/'baseline'/'flows'), table='IOT', mode='flows')
         db.read_add_sectors_excel(output/'add_sectors.xlsx', read_inventories=True, split=True)
-        require_parent_budgets(ParentBudgets.from_database(db), ChildTargets.from_workbook(db.add_sectors_workbook),
+        targets = ChildTargets.from_workbook(db.add_sectors_workbook)
+        if args.resume:
+            targets = targets.pending(db)
+        require_parent_budgets(ParentBudgets.from_database(db), targets,
                                report_path=output/'parent_budgets.json')
         if not db.add_sectors_workbook.intermediate_steps:
             raise ValueError('A model trial requires an explicit Intermediate steps plan.')
         kwargs = dict(split=True, intermediate_steps=True, save_intermediates=output/'checkpoints',
-                      stop_after_step=args.stop_after_step, solver=args.solver, solver_parameters=solver_options)
+                      stop_after_step=stop_after_step, solver=args.solver, solver_parameters=solver_options)
         if options is not None:
             kwargs['split_model_options'] = options
         db.add_sectors('inventories', **kwargs)
@@ -100,9 +122,11 @@ def main():
         traceback.print_exc()
     finally:
         manifest['elapsed_seconds'] = time.monotonic()-started
-        manifest['source_baseline_unchanged'] = fingerprints(source/'baseline') == baseline_hashes
-        manifest['source_workbook_unchanged'] = hashlib.sha256((source/'add_sectors.xlsx').read_bytes()).hexdigest() == workbook_hash
-        manifest['working_baseline_unchanged'] = fingerprints(output/'baseline') == baseline_hashes
+        manifest['source_baseline_unchanged'] = fingerprints(source if args.resume else source/'baseline') == baseline_hashes
+        manifest['source_workbook_unchanged'] = hashlib.sha256(workbook.read_bytes()).hexdigest() == workbook_hash
+        manifest['working_baseline_unchanged'] = (True if args.resume else fingerprints(output/'baseline') == baseline_hashes)
+        manifest['accepted_checkpoints'] = [str(p.parent) for p in sorted((output/'checkpoints').glob('*/state.json'))
+                                            if not p.parent.name.startswith('.')]
         if not all(manifest[k] for k in ('source_baseline_unchanged','source_workbook_unchanged','working_baseline_unchanged')):
             manifest.update(status='failed', integrity_error='Input hashes changed during the trial.')
             exit_code = 1

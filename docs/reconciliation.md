@@ -71,6 +71,22 @@ All monetary/accounting checks and the EY/VY checks remain enforced.
 in the baseline report: it copies inputs, records code/input identities and
 checks their hashes after the run.
 
+The same controlled runner can resume an accepted checkpoint in a new output
+directory, retaining the checkpoint's model options and running all pending
+groups unless `--stop-after-step` is supplied:
+
+```bash
+python scripts/run_model_trial.py \
+  --resume build/model_trials/20261020/quadratic_deferred_E/checkpoints/001_Mining \
+  --output build/model_trials/20261020/remaining50 \
+  --solver-options config/model-trials/solver-qp-refined.json
+```
+
+The checkpoint is verified before loading, its remaining workbook is copied,
+and cumulative budgets are checked against its remaining parent capacities.
+The source checkpoint is hashed again after the run. An optional `--workbook`
+selects an edited remaining plan without changing that source checkpoint.
+
 For a first-group pilot, name its plan column `Mining` and add
 `--stop-after-step Mining` to that solve command. MARIO writes the accepted
 intermediate database and remaining workbook, then returns before the next
