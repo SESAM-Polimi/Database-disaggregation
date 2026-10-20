@@ -16,7 +16,7 @@ from entice_inventory.inventory.regionalize import aggregate_inventory
 
 def prepare_inputs(source_dir, output_dir, *, geography=None, steps=None,
                    intermediate_steps=False, baseline_path=None, baseline_format=None,
-                   output_reference_dir=None):
+                   output_reference_dir=None, cleaning_policy=None, source_paths=None):
     """Prepare without solving or altering the canonical native source files.
 
     ``source_dir`` contains resolved MARIO/D2.4 inventories (the same boundary
@@ -43,26 +43,39 @@ def prepare_inputs(source_dir, output_dir, *, geography=None, steps=None,
     inventories = staging / 'inventories'
     results = []
     try:
-        reference_dir = Path(output_reference_dir) if output_reference_dir else None
-        references = None
-        targets = read_child_targets(files)
-        coverage = targets.output.groupby('Sector')['Region'].agg(set)
-        missing_outputs = any(sector not in coverage or geography.mapping.keys() - coverage[sector]
-                              for sector in targets.master['Sector'].dropna().unique())
-        if missing_outputs and reference_dir and reference_dir.is_dir():
-            references = read_output_references(reference_dir)
-            targets = read_child_targets(files, output_references=references)
         budgets = ParentBudgets.from_database(database)
-        require_parent_budgets(budgets, targets.aggregate(geography), report_path=staging / 'parent_budgets.json')
-        for source in files:
-            from openpyxl import load_workbook
-            book = load_workbook(BytesIO(source.read_bytes()), read_only=True, data_only=True)
-            try:
-                sector = next(book['Master'].iter_rows(min_row=2, values_only=True))[1]
-            finally:
-                book.close()
-            results.append(aggregate_inventory(source, inventories / source.name, geography,
-                                               output_reference=(references or {}).get(sector)))
+        reconciliation = None
+        if cleaning_policy is not None and cleaning_policy is not False:
+            from entice_inventory.reconciliation import reconcile_inventories
+            cleaned = reconcile_inventories(source_dir,staging/'reconciled',geography=geography,
+                policy=cleaning_policy,baseline_path=baseline_path,baseline_format=baseline_format,
+                output_reference_dir=output_reference_dir,source_paths=source_paths,selected_database=database)
+            inventories = cleaned/'inventories'
+            reconciliation = json.loads((cleaned/'complete.json').read_text())
+            inputs = json.loads((cleaned/'audit/inputs.json').read_text())
+            results = [{'sector':c,'source':path,'source_sha256':inputs[path]['sha256'],
+                        'output_reference':None,'output_reference_sha256':None}
+                       for c,path in reconciliation['inventory_sources'].items()]
+        else:
+            reference_dir = Path(output_reference_dir) if output_reference_dir else None
+            references = None
+            targets = read_child_targets(files)
+            coverage = targets.output.groupby('Sector')['Region'].agg(set)
+            missing_outputs = any(sector not in coverage or geography.mapping.keys() - coverage[sector]
+                                  for sector in targets.master['Sector'].dropna().unique())
+            if missing_outputs and reference_dir and reference_dir.is_dir():
+                references = read_output_references(reference_dir)
+                targets = read_child_targets(files, output_references=references)
+            require_parent_budgets(budgets, targets.aggregate(geography), report_path=staging / 'parent_budgets.json')
+            for source in files:
+                from openpyxl import load_workbook
+                book = load_workbook(BytesIO(source.read_bytes()), read_only=True, data_only=True)
+                try:
+                    sector = next(book['Master'].iter_rows(min_row=2, values_only=True))[1]
+                finally:
+                    book.close()
+                results.append(aggregate_inventory(source, inventories / source.name, geography,
+                                                   output_reference=(references or {}).get(sector)))
         database.read_add_sectors_excel(inventories, read_inventories=True, split=True)
         workbook = database.add_sectors_workbook
         expected = {r['sector'] for r in results}
@@ -84,8 +97,10 @@ def prepare_inputs(source_dir, output_dir, *, geography=None, steps=None,
                     'parent_budget_checks': budget_report['summary'],
                     'output_reference_files': {r['output_reference']: r['output_reference_sha256']
                                                for r in results if r['output_reference']},
-                    'input_kind': 'resolved_native_profiles', 'status': 'prepared',
-                    'zero_output_profile_policy': 'unweighted_reference_with_warning',
+                    'input_kind': 'reconciled_sources' if reconciliation else 'resolved_native_profiles', 'status': 'prepared',
+                    'reconciliation':reconciliation,
+                    'zero_output_profile_policy': ('logged_child_donor_then_parent_reference' if reconciliation
+                                                   else 'unweighted_reference_with_warning'),
                     'support_defaults': 'Missing Exclusions empty; missing delta/eps zero. Existing values retained.'}
         (staging / 'preparation.json').write_text(json.dumps(manifest, indent=2, allow_nan=False))
         staging.rename(output_dir)
@@ -95,7 +110,7 @@ def prepare_inputs(source_dir, output_dir, *, geography=None, steps=None,
     return output_dir
 
 
-def read_output_references(directory):
+def read_output_references(directory, *, read_bytes=None):
     """Use explicitly stored native outputs to restore sparse export coverage.
 
     D2.4 export retains only countries with a rendered profile. Original MARIO
@@ -107,7 +122,7 @@ def read_output_references(directory):
     for path in sorted(Path(directory).glob('*.xlsx')):
         if path.name.startswith('~$'):
             continue
-        raw = path.read_bytes()
+        raw = read_bytes(path) if read_bytes is not None else path.read_bytes()
         book = load_workbook(BytesIO(raw), read_only=True, data_only=True)
         try:
             if 'Total outputs' not in book:

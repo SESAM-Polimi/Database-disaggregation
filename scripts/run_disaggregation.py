@@ -22,6 +22,9 @@ def main():
     parser.add_argument('--steps', type=Path, help='JSON object: named groups in execution order; omit for oneshot.')
     parser.add_argument('--output', type=Path, help='New preparation directory, or checkpoint root when resuming.')
     parser.add_argument('--intermediate-steps', action='store_true', help='Generate an editable initial group when no --steps JSON is supplied.')
+    cleaning=parser.add_mutually_exclusive_group()
+    cleaning.add_argument('--cleaning-policy',type=Path,help='Versioned reconciliation assumptions JSON; requires the existing source datasets.')
+    cleaning.add_argument('--no-cleaning',action='store_true',help='Skip reconciliation; original cumulative budget checks remain blocking.')
     existing.add_argument('--prepared', type=Path, help='Solve a previously prepared directory after editing its workbook.')
     parser.add_argument('--solve', action='store_true')
     parser.add_argument('--solver', default='CLARABEL')
@@ -29,7 +32,7 @@ def main():
     parser.add_argument('--workbook', type=Path, help='Edited remaining or full source workbook when resuming.')
     args = parser.parse_args()
     if (args.resume or args.prepared) and any((args.mapping, args.inventories, args.steps,
-                                              args.output_references, args.intermediate_steps)):
+                                              args.output_references, args.intermediate_steps,args.cleaning_policy,args.no_cleaning)):
         parser.error('Existing runs retain their geography; edit the workbook for group changes, or prepare a new run.')
     if args.resume:
         if not args.solve:
@@ -66,9 +69,14 @@ def main():
     if not args.prepared:
         geography = Geography.read(args.mapping) if args.mapping else configured_geography()
         steps = json.loads(args.steps.read_text()) if args.steps else config.get('steps')
+        policy=None if args.no_cleaning else args.cleaning_policy or config.get('cleaning_policy')
+        if isinstance(policy,str):
+            policy=Path(policy).expanduser()
+            if not policy.is_absolute():policy=project_data_root(required=True)/policy
         destination = prepare_inputs(source, args.output, geography=geography, steps=steps,
                                      intermediate_steps=args.intermediate_steps,
-                                     output_reference_dir=args.output_references or data_path('mario_inventories'))
+                                     output_reference_dir=args.output_references or data_path('mario_inventories'),
+                                     cleaning_policy=policy)
         print(f'Prepared inputs: {destination}')
     if args.solve:
         import mario

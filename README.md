@@ -41,6 +41,7 @@ src/entice_inventory/
 ```bash
 pip install -e .            # core (openpyxl)
 pip install -e '.[plots]'   # + pandas/numpy/matplotlib for the QA plots
+pip install -e '.[reconcile]' # + numerical inventory reconciliation (MARIO separately)
 ```
 
 For the tested MARIO/CVXLAB workflow, use `python3.13 scripts/bootstrap_producer.py`
@@ -159,6 +160,7 @@ Use `geography: null` for the native geography, or add this to the local config:
 },
 "disaggregation": {
   "inventories": "Inventories/20261001",
+  "cleaning_policy": true,
   "steps": null
 }
 ```
@@ -178,6 +180,7 @@ solving:
 python scripts/run_disaggregation.py \
   --inventories '/path/to/resolved/native/inventories' \
   --mapping '/path/to/GTAP region to 13.xlsx' \
+  --cleaning-policy config/cleaning-policy.json \
   --intermediate-steps --output build/disaggregation/trial01
 ```
 
@@ -203,6 +206,15 @@ python scripts/run_disaggregation.py --solve \
   --output build/disaggregation/trial01/checkpoints
 ```
 
+The [reconciliation guide](docs/reconciliation.md) documents every implemented
+cleaning rule, equation, source-column choice, confidence weight, donor hierarchy,
+failure condition and replay artifact. `cleaning_policy: true` selects the
+versioned policy for all 67 sectors. Cleaning creates separate audited estimates;
+raw files and baseline matrices remain unchanged. It runs globally before any
+sector group. The real 67-sector/13-region preparation passes all target checks;
+the MRIO split itself remains to be solved. Use `--no-cleaning` to inspect the
+former path, whose capacity checks also remain mandatory.
+
 This adapter consumes **resolved native profiles**, the boundary used by
 Camilla's shortcut. The original D2.4 generation runner now also calls it after
 resolving/exporting its native profiles when a geography is configured. It does
@@ -213,7 +225,9 @@ The manifest records which observations and reference files were used; absent
 native observations still cause an error.
 Missing rows of a resolved sparse profile mean zero; a positive output without
 a profile is an error. Zero-output groups retain an unweighted reference profile
-with a warning. Nonempty structural exclusions require a separate aggregation
+with a warning. Those descriptions apply to preparation without cleaning;
+cleaning has the explicitly documented donor and input-origin projection rules.
+Nonempty structural exclusions require a separate aggregation
 policy; origin clusters partly covering a target region must first be resolved
 into origin flows. Sources are never edited, and each preparation requires a
 new output directory. Missing split-support tabs are generated explicitly
@@ -226,21 +240,24 @@ averages. Within-group trade is absent from interregional targets and remains
 inside the aggregated baseline. These transformations preserve flows;
 geographic aggregation does not certify the numerical feasibility of `split=True`.
 
-Two cumulative budget checks are **mandatory and blocking** in the D2.4 runner,
+Three capacity checks are **mandatory and blocking** in the D2.4 runner,
 input preparation, and immediately before a prepared or resumed solve:
 
 - For each parent and selected region, the sum of **all** child output targets
   must not exceed the supplied baseline parent X.
 - For each parent and directed foreign origin/destination pair, summed child
   trade targets must not exceed parent deliveries to that destination in Z + Y.
+- For each child and producing region, total foreign exports must not exceed
+  that child's output.
 
 All planned children are checked together, including those assigned to later
 groups. On resume, pending children are compared with the remaining parent
 flows in the checkpoint. Equality is allowed; the numerical allowance is
 `1e-6 + 1e-8 * abs(parent)` in the parent sector's units. Targets must use those
 same units. This is not the optional 1% exports/output review screen.
-Every violation is recorded in `parent_budgets.json` and raises an error; targets
-are not rescaled. Missing native outputs also block acceptance, even if other
+Every violation is recorded in `parent_budgets.json` and raises an error. The
+checks never rescale targets; explicitly enabled cleaning reconciles them first
+and records the raw diagnostics separately. Missing native outputs also block acceptance, even if other
 members of an aggregated region have known output. After a failed preparation,
 the report remains in the hidden staging directory named in the exception.
 Edited workbooks are checked again in `parent_budgets_solve.json` or

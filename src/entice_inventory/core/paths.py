@@ -23,6 +23,7 @@ DATA_PATHS = {
     'gtap_totals': 'Database/GTAP Power 2023/Cache/GTAP12_X.xlsx',
     'classifications': 'Classifications/ENTICE classifications.xlsx',
     'mario_inventories': 'Data collection/Inventory cleaning/MARIO inventories',
+    'partner_templates': 'Data collection/Inventory cleaning/Partner inventories',
     'reference_inventories': 'Data collection/Inventory cleaning/D2.4 inventories',
     'inventory_runs': 'Inventories',
     'reference_coefficients': 'Data collection/Inventory cleaning/D2.4 database/coefficients',

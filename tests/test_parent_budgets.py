@@ -118,6 +118,17 @@ def test_resume_counts_only_pending_children(budgets, targets):
     assert require_parent_budgets(budgets, pending)['status'] == 'passed'
 
 
+def test_producer_exports_block_even_when_both_parent_budgets_fit(budgets, targets):
+    targets.output.loc[targets.output.Sector.eq('A') & targets.output.Region.eq('R1'),'Quantity']=3.
+    with pytest.raises(ParentBudgetError) as caught:
+        require_parent_budgets(budgets,targets)
+    summary=caught.value.report['summary']
+    assert summary['output_violations']==summary['trade_violations']==0
+    assert summary['producer_export_violations']==1
+    violation=caught.value.report['export_violations'][0]
+    assert violation['sector']=='A' and violation['origin']=='R1'
+
+
 def _baseline(tmp_path):
     import mario
     axis = pd.MultiIndex.from_product([['R1', 'R2', 'R3'], ['Sector'], ['Parent']],
@@ -166,7 +177,7 @@ def test_edited_prepared_workbook_is_rechecked_before_solve(tmp_path, monkeypatc
     baseline = _baseline(tmp_path)
     source = tmp_path/'inputs'
     source.mkdir()
-    inventory(source/'A.xlsx', sector='A', outputs=(2., 6., 1.))
+    inventory(source/'A.xlsx', sector='A', outputs=(4., 6., 1.))
     prepared = prepare_inputs(source, tmp_path/'prepared', baseline_path=baseline, intermediate_steps=True)
     book = load_workbook(prepared/'add_sectors.xlsx')
     book['Total outputs']['C2'] = 30.

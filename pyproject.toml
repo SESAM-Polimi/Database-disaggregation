@@ -15,6 +15,7 @@ dependencies = [
 export = ["pandas", "pyarrow"]
 # Needed only for the QA plotting module (entice_inventory.export.plot_d24_split).
 plots = ["pandas", "numpy", "matplotlib"]
+reconcile = ["pandas>=2.3.3", "numpy", "pyarrow", "scipy", "cvxpy"]
 
 # Note: the database steps in scripts/run_d24_pipeline.py also require `mario`,
 # which is installed separately (local/Git checkout), not from PyPI.
@@ -28,3 +29,4 @@ where = ["src"]
     "data/registry/regions.json",
     "data/registry/gtap12.json",
 ]
+"share/entice-inventory/config" = ["config/cleaning-policy.json"]

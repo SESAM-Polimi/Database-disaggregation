@@ -185,7 +185,7 @@ def evaluate_parent_budgets(budgets, targets):
             raise ValueError(f'Parent {parent!r} is absent from the baseline sector units.')
         children[parent].append(sector)
     regions = list(budgets.output.index.get_level_values('Region').unique())
-    outputs, routes = {}, defaultdict(dict)
+    outputs, routes, exports = {}, defaultdict(dict), defaultdict(float)
     for frame, columns, sector_column in ((targets.output, OUTPUT_COLUMNS, 'Sector'),
                                           (targets.trade, TRADE_COLUMNS, 'Sector_from')):
         unknown = set(frame[sector_column]) - set(targets.master['Sector'])
@@ -210,6 +210,7 @@ def evaluate_parent_budgets(budgets, targets):
                 outputs[(sector, coordinates[0])] = float(quantity)
             elif coordinates[0] != coordinates[1]:
                 routes[(parent, *coordinates)][sector] = float(quantity)
+                exports[(sector,coordinates[0])] += float(quantity)
 
     output_failures, trade_failures, incomplete = [], [], []
     for parent, sectors in children.items():
@@ -239,16 +240,26 @@ def evaluate_parent_budgets(budgets, targets):
             trade_failures.append(dict(parent=parent, origin=origin, destination=destination,
                 child_sum=total, parent_value=capacity, excess=total-capacity,
                 allowance=allowance, unit=budgets.units[parent], children=known))
-    passed = not (output_failures or trade_failures or incomplete)
+    export_failures=[]
+    for (sector,origin),total in sorted(exports.items()):
+        if (sector,origin) not in outputs or (sector,origin) in (targets.incomplete_output or {}):
+            continue
+        cap=outputs[(sector,origin)]
+        if total>cap+ATOL+RTOL*abs(cap):
+            export_failures.append({'sector':sector,'parent':parents[sector],'origin':origin,
+                                   'exports':total,'output':cap,'excess':total-cap,'unit':budgets.units[parents[sector]]})
+    passed = not (output_failures or trade_failures or incomplete or export_failures)
     return {'status': 'passed' if passed else 'failed',
             'summary': {'sectors': len(parents), 'parents': len(children), 'regions': len(regions),
                         'output_groups': len(children)*len(regions), 'observed_trade_groups': len(routes),
                         'output_violations': len(output_failures), 'trade_violations': len(trade_failures),
+                        'producer_export_violations':len(export_failures),
                         'incomplete_output_groups': len(incomplete),
                         'missing_output_cells': sum(len(r['missing_children']) for r in incomplete)},
             'tolerances': {'absolute': ATOL, 'relative': RTOL},
             'trade_definition': 'Parent Z + Y deliveries to each foreign destination region',
             'output_violations': output_failures, 'trade_violations': trade_failures,
+            'export_violations':export_failures,
             'incomplete_outputs': incomplete, 'source_files': targets.sources or {}}
 
 
@@ -259,6 +270,7 @@ class ParentBudgetError(ValueError):
         counts = report['summary']
         super().__init__(f"Cumulative child budgets exceeded or incomplete: "
                          f"output={counts['output_violations']}, trade={counts['trade_violations']}, "
+                         f"producer_exports={counts['producer_export_violations']}, "
                          f"incomplete_output_groups={counts['incomplete_output_groups']}"
                          + (f". Report: {path}" if path else ''))
 

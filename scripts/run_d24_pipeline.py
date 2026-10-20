@@ -29,7 +29,8 @@ from entice_inventory.core.paths import project_data_root, data_path, PROJECT_RO
 from entice_inventory.core.baseline import load_baseline
 from entice_inventory.core.geography import configured_geography
 from entice_inventory.core.disaggregation import prepare_inputs, read_output_references
-from entice_inventory.core.parent_budgets import ParentBudgets, read_child_targets, require_parent_budgets
+from entice_inventory.core.parent_budgets import ParentBudgets, read_child_targets, require_parent_budgets, evaluate_parent_budgets
+import json
 from entice_inventory.core.paths import local_config
 
 # --- Paths (all derived from BASE) ----------------------------------------- #
@@ -84,13 +85,21 @@ updated_files = update_trades_in_exported_inventories(
     purdue_trade_path=str(PURDUE_TRADE),
 )
 
-# Both budgets cover all children together, regardless of future sector groups.
+# Capacity checks cover all children together, regardless of future sector groups.
 targets = read_child_targets(sorted(D24_INVENTORIES.glob('*.xlsx')),
                              output_references=read_output_references(MARIO_INVENTORIES))
 geography = configured_geography()
 if geography is not None:
     parent_budgets, targets = parent_budgets.aggregate(geography), targets.aggregate(geography)
-require_parent_budgets(parent_budgets, targets, report_path=D24_WORK / 'parent_budgets.json')
+cleaning_policy=local_config().get('disaggregation',{}).get('cleaning_policy')
+if isinstance(cleaning_policy,str):
+    policy_path=Path(cleaning_policy).expanduser()
+    cleaning_policy=policy_path if policy_path.is_absolute() else BASE/policy_path
+if cleaning_policy:
+    # Raw diagnostics remain visible; mandatory acceptance runs after reconciliation.
+    (D24_WORK/'raw_parent_budgets.json').write_text(json.dumps(evaluate_parent_budgets(parent_budgets,targets),indent=2))
+else:
+    require_parent_budgets(parent_budgets, targets, report_path=D24_WORK / 'parent_budgets.json')
 
 #%%
 # 6. QA plot: X / VA disaggregation of each split parent sector.
@@ -111,7 +120,7 @@ plot_d24_split.plot_sector_split(
 # boundary is available directly to Camilla's already resolved inventories via
 # scripts/run_disaggregation.py; this step does not solve the split model.
 geography = configured_geography()
-if geography is not None:
+if geography is not None or cleaning_policy:
     prepare_inputs(D24_INVENTORIES, D24_WORK / 'disaggregation', geography=geography,
                    steps=local_config().get('disaggregation', {}).get('steps'),
-                   output_reference_dir=MARIO_INVENTORIES)
+                   output_reference_dir=MARIO_INVENTORIES,cleaning_policy=cleaning_policy)

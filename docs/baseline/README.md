@@ -10,9 +10,9 @@ The [full inventory regeneration](#full-d24-inventory-regeneration) completed on
 
 The [all-sector split-readiness audit](#all-sector-split-readiness-audit-12-october-2026) now covers those 67 distinct regenerated sectors, all 68 MARIO intermediates, 36 partner templates and the complete native GTAP reference. It identifies joint production, trade and fixed-profile conflicts and source-definition/unit risks before `split=True`. This is read-only evidence, not an adopted correction or a solver certification. All 187 numerical/configuration source files used were rehashed unchanged; production code and source workbooks remain untouched.
 
-Following the target simulation, the owner selected warning plus proportional reduction of child output targets whenever their regional sum exceeds the supplied parent's output. APS REST OF EUROPE excludes GBR; SDG GLOBAL means the rest of the world. These are adopted planning decisions, not implemented transformations. A subsequent direct GDX/API check confirms that REPOUT stores only positive records and in-domain omissions read as zero in the delivered sparse numerical parameter. This source-level meaning does not independently certify empirical production; partner coverage omissions remain distinct.
+Following the target simulation, the owner selected warning plus proportional reduction of child output targets whenever their regional sum exceeds the supplied parent's output. APS REST OF EUROPE excludes GBR; SDG GLOBAL means the rest of the world. These were initially planning decisions; the [20 October reconciliation implementation](#implemented-inventory-reconciliation-20-october-2026) now applies them under a versioned policy. A subsequent direct GDX/API check confirms that REPOUT stores only positive records and in-domain omissions read as zero in the delivered sparse numerical parameter. This source-level meaning does not independently certify empirical production; partner coverage omissions remain distinct.
 
-The 14 October discussion clarified that a binding proportional cap assigns the original parent's entire output to its children and leaves zero output for the residual parent in the split database. This assumes that the children exhaust the parent's activities. A positive residual, where justified by activity coverage, would require reserving a supported output amount before fitting the children. No residual reserve has been selected, and the cap remains pending implementation and coverage review.
+The 14 October discussion clarified that a binding proportional cap assigns the original parent's entire output to its children and leaves zero output for the residual parent in the split database. This assumes that the children exhaust the parent's activities. A positive residual, where justified by activity coverage, would require reserving a supported output amount before fitting the children. No residual reserve has been selected; the implemented cap retains this coverage assumption.
 
 The [joint target simulation](#joint-output-and-trade-target-simulation-13-october-2026) now applies those decisions across all 67 activities and compares matched May27/June1 Purdue deliveries. All 69 over-budget parent-region groups are reduced proportionally, but output-only trade preparation still leaves 7,538–7,542 conditional parent-route excesses. Under the unharmonized native monetary-envelope assumption, the maximum-retention benchmark requires about 10.9% less selected trade. This is a measure of candidate-data incompatibility under specified constraints, not an adopted empirical trade correction. Source scope/valuation, 17 composite trade allocations, 41 unknown output cells, 57 positive outputs lacking released profiles and full MRIO feasibility remain open.
 
@@ -24,7 +24,7 @@ The remaining work is implementation and controlled verification. The order belo
 |---|---|---|
 | 1. Reproducible build | Implemented: pinned installer, compatibility patches, native HYE replay, representative end-to-end check and all-sector D2.4 inventory regeneration. Remaining: full split acceptance with the baseline preserved. | All 67 regenerated inventories reproduce reference coefficients, outputs and trades exactly. The earlier reconciled diagnostic remains historical evidence only. No new baseline closure is allowed. |
 | 2. Canonical sector and region registry | Implemented: three purpose-specific JSON files, Python API, CLI, explicit scope/alias warnings and canonical geography in the template importer. Classification review remains partial. | 88 identities, including 67 published records; 25 have reviewed activity definitions/options. Ambiguous aliases never select a first row. HYE regeneration restores MRT and records its estimated output. |
-| 3. Transformations and diagnostics | Implement the agreed optional warning policy; make trade-source selection and normalisation/caps/factor completion traceable. Repair cluster allocation after defining units, overlaps and direct-observation precedence. | Warnings and skipped checks visible; input-to-output changes traceable; targeted regression comparisons, including HVC cluster totals and production/trade screening. |
+| 3. Transformations and diagnostics | Implemented: versioned source selection, geographic fitting, collective output caps, bounded trade fitting, profile donors and signed factor balancing. Capacity checks block acceptance. Classification/valuation assumptions and full MRIO feasibility remain open. | 67-sector/13-region preparation, read-back checks and traceable source-to-prior records; see the reconciliation section and technical guide. |
 | 4. Guided Excel pilot | Build one compact HYE workbook on the existing SharePoint, with filterable tables for metadata/sources, cost inputs, production and trade. Preserve unavailable original observations as unavailable and identify inherited baseline values. | A colleague can edit an observation in Excel; a recorded snapshot can be validated and that sector regenerated; the numerical change and any warnings can be reviewed. Assess layout/usability before migrating all sectors. |
 | 5. Extend and clean | Apply the tested model to the other sectors, expose the same operations for T2.6, then trial another MRIO. Perform broad file cleanup after replacements and provenance are verified. | Reusable source data and target adapters; a two-target comparison explaining mapping, geography and valuation differences; obsolete files identified against working replacements. |
 
@@ -156,6 +156,78 @@ regional aggregation, missing-output propagation and edited-workbook guards.
 A real preparation from all 67 snapshots and the actual GTAP parquet baseline
 also stopped before profile processing, reporting the expected 6 output and 13
 trade violations plus 12 incomplete output groups. No real-data split solver was run.
+
+## Implemented inventory reconciliation: 20 October 2026
+
+The owner approved a cleaning stage using existing data and explicit assumptions.
+The implementation lives in `entice_inventory.reconciliation`, selected through
+`disaggregation.cleaning_policy` or `--cleaning-policy`. The
+[technical guide](../reconciliation.md) specifies source recipes, equations,
+weights, donor hierarchies, failure conditions, configuration, commands and replay
+artifacts. `config/cleaning-policy.json` explicitly covers all 67 released sectors.
+This is implemented code and real preparation evidence, superseding the earlier
+simulation-only status for these transformations. It does not certify a solved MRIO.
+
+The stage reads original observations alongside resolved D2.4 technologies. It
+uses the configured June1 paired REPOUT/BLTTRD delivery for its Purdue activities,
+explicit partner monetary columns for other activities, and separately labelled
+NTSCIF/composite/parent trade priors. Source layout checks stop if selected headers
+change. Literal USD scales, monetary versus physical columns, conflicting year
+labels, fractional parent shares and sparse-domain parameter zeros all have
+explicit policy decisions. Geographic totals are fitted jointly as soft priors;
+inclusive and residual groups retain their declared meanings. Missing values
+are estimated and tagged rather than read as observed zeros.
+
+Scope choices retain explicit conditional status. GAR, NMC and PLR change parent
+to NFM, EEQ and WTR respectively; their new-parent technology priors are rebuilt.
+PLR/PLSR share one output observation under an explicit 50/50 allocation convention.
+This is a modelling assumption about unavailable separate compatible values,
+not a claim that equal source values prove duplication. Monetary profiles borrow
+same-child regional/global donors or parent technology as needed, retain signed
+negative factors and balance positive components with declared weights.
+
+All siblings are reconciled before any sequential split. The output cap is
+proportional within the selected parent/region. A separable convex trade fit
+then enforces parent-route deliveries and each producer's export/output budget,
+with paired/direct/composite/imputed weights. It cannot increase output to
+accommodate trade. GTAP matrices, raw files and canonical registry remain unchanged.
+The producer-export constraint is now a third mandatory acceptance check, alongside
+the two requested cumulative parent checks; it also guards edited/resumed inputs.
+
+The real 67-sector preparation completed with the Camilla 163-to-13 partition,
+writing **871 region-specific profiles** and a MARIO-readable merged workbook:
+
+| Check | Raw written targets, with explicit output references | Reconciled Excel read-back |
+|---|---:|---:|
+| Parent/region cumulative output excesses | 6 | 0 |
+| Parent/origin/destination cumulative trade excesses | 13 | 0 |
+| Child/producer foreign exports above known output | 154 | 0 |
+| Missing native output cells | 31 | 0 (explicit estimates) |
+| Incomplete parent/region output groups | 12 | 0 |
+
+The producer-export raw count excludes unknown/incomplete producer outputs.
+The before/after columns describe different explicitly recorded source recipes
+and estimates, not empirical certification of the original observations. Trade
+calibration recorded 48 optimal QPs and 95 already-feasible groups. Original
+source hashes, policy, registry/code/runtime fingerprints, per-record changes,
+profile lineage and target tables are retained privately under
+`build/qa_reconciliation_20261020/`; no numerical payload is committed to Git.
+The prepared workbook retains the editable `Intermediate steps` plan.
+
+All 64 ENTICE tests pass with producer integration enabled; `pip check` passes.
+A separate ZIP/OOXML reader with `math.fsum` independently verified all three
+capacity constraints and all 871 monetary profiles against the saved regional
+baseline (maximum profile residual 6.89e-15). The 174 recorded inputs and all 38
+original shared partner/Purdue sources were rehashed unchanged. Two preparations
+produced identical output/trade/sector audit tables. Evidence is in
+`build/qa_reconciliation_20261020/verification.json`; the final prepared run is
+`prepared13_verified` within that directory.
+
+No real MRIO split was solved in this work. Cumulative technology-input feasibility,
+the relative-entropy treatment of signed Tax/TTM priors and native baseline
+accounting residuals remain model concerns. Passing the preprocessing checks
+does not establish those properties. Baseline residuals must still be reported
+separately; baseline closure remains outside the inventory task.
 
 ## Repository integration and publication
 
