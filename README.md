@@ -146,6 +146,86 @@ python -m entice_inventory.export.build_d24_inventories --help
 python -m entice_inventory.inventory.template_to_inventory --help
 ```
 
+## Configurable geography and sequential MRIO splits
+
+The final geography is selected in ENTICE preprocessing. The same partition
+aggregates the GTAP baseline, output targets, resolved cost profiles and trade.
+Use `geography: null` for the native geography, or add this to the local config:
+
+```json
+"geography": {
+  "name": "ENTICE13",
+  "mapping": "/path/to/GTAP region to 13.xlsx"
+},
+"disaggregation": {
+  "inventories": "Inventories/20261001",
+  "steps": null
+}
+```
+
+The mapping is a complete source-to-target partition. XLSX contains two
+columns after the header; CSV/TSV have the same layout; JSON is a source-to-target
+object. Relative mapping and inventory paths are resolved from `data_root`.
+The 13-region map supplied with Camilla's pipeline is supported without making
+13 a fixed number. Missing/duplicate region assignments are rejected.
+Its versioned JSON copy is `data/geographies/gtap13.json` (163 source regions).
+
+Use the MARIO `codex/intermediate-sector-steps` worktree based on
+`dev_SUT_disag`, with CVXLAB 1.1.0 in the `mario` environment. Prepare without
+solving:
+
+```bash
+python scripts/run_disaggregation.py \
+  --inventories '/path/to/resolved/native/inventories' \
+  --mapping '/path/to/GTAP region to 13.xlsx' \
+  --intermediate-steps --output build/disaggregation/trial01
+```
+
+Edit `add_sectors.xlsx` in the prepared directory: rename the columns in
+`Intermediate steps` and distribute every sector exactly once. Alternatively
+provide `--steps groups.json`, whose keys are custom group names and whose
+values are ordered sector lists. Omit the plan and `--intermediate-steps` for a
+oneshot workbook. Then explicitly solve the prepared inputs:
+
+```bash
+python scripts/run_disaggregation.py \
+  --prepared build/disaggregation/trial01 --solve
+```
+
+The runner reads the plan actually present in the edited workbook. Each
+accepted group saves a reloadable database and remaining template under
+`checkpoints`. Resume after revising the remaining groups:
+
+```bash
+python scripts/run_disaggregation.py --solve \
+  --resume build/disaggregation/trial01/checkpoints/001_Mining \
+  --workbook '/path/to/revised_remaining.xlsx' \
+  --output build/disaggregation/trial01/checkpoints
+```
+
+This adapter consumes **resolved native profiles**, the boundary used by
+Camilla's shortcut. The original D2.4 generation runner now also calls it after
+resolving/exporting its native profiles when a geography is configured. It does
+not average unresolved partial overrides or treat unknown production as zero.
+Sparse export coverage is completed from explicitly stored `Total outputs` in
+the original MARIO inputs (`paths.mario_inventories`, or `--output-references`).
+The manifest records which observations and reference files were used; absent
+native observations still cause an error.
+Missing rows of a resolved sparse profile mean zero; a positive output without
+a profile is an error. Zero-output groups retain an unweighted reference profile
+with a warning. Nonempty structural exclusions require a separate aggregation
+policy; origin clusters partly covering a target region must first be resolved
+into origin flows. Sources are never edited, and each preparation requires a
+new output directory. Missing split-support tabs are generated explicitly
+(empty Exclusions; delta/eps zero); existing settings are retained.
+
+Parquet flows are aggregated in column batches before constructing the smaller
+database. No baseline closure or artificial zero-output epsilon is applied.
+Production and interregional trade totals are sums; costs are output-weighted
+averages. Within-group trade is absent from interregional targets and remains
+inside the aggregated baseline. Parent output/trade feasibility still needs
+review: geographic aggregation is not numerical certification of `split=True`.
+
 ## Canonical registry
 
 Three editable JSON files have distinct roles: `sectors.json` holds activity

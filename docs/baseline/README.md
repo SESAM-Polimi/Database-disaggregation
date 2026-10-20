@@ -1,6 +1,6 @@
 # ENTICE inventory: reconstruction and implementation plan
 
-Updated 14 October 2026. This is the single maintained report for the D2.4 reconstruction, consistency findings, agreed decisions and work towards D2.8 and T2.6. Update it in place; do not create separate follow-up, decision or audit Markdown reports. The [repository README](../../README.md) is the installation and usage guide. CSV/JSON evidence and manifests retain their separate purpose: reproducible records that this report references. Links under `build/` refer to retained local audit artifacts; that ignored directory is outside the published Git history.
+Updated 20 October 2026. This is the single maintained report for the D2.4 reconstruction, consistency findings, agreed decisions and work towards D2.8 and T2.6. Update it in place; do not create separate follow-up, decision or audit Markdown reports. The [repository README](../../README.md) is the installation and usage guide. CSV/JSON evidence and manifests retain their separate purpose: reproducible records that this report references. Links under `build/` refer to retained local audit artifacts; that ignored directory is outside the published Git history.
 
 ## Current status and next steps
 
@@ -33,6 +33,70 @@ The registry now provides a common basis for the guided Excel pilot and T2.6. Ne
 The owner has now selected the project SharePoint for operational data and editing: `Data split/Inventory generation`. Git holds code, schemas, mappings/configuration and manifests. MARIO/CVXLAB is the selected implementation. Diagnostics are optional, with clear warnings and visible skipped checks; the final MRIO must still satisfy accounting identities within reported numerical tolerances.
 
 Navigate to [baseline and source chain](#the-release-reference), [recovery](#why-zir-failed-and-what-was-recovered), [classification](#nace-led-parent-definitions), [consistency](#production-and-trade-consistency), [environment](#producer-environment-and-representative-verification), [Excel and T2.6](#portability-excel-and-t26), [single-sector export](#regenerating-one-sector), or [decision register](#decision-register).
+
+## Configurable regional preprocessing and sequential splits: 20 October 2026
+
+The owner selected option 2: retain the MRIO implementation, configure the final
+geographic partition in ENTICE preprocessing and introduce custom sector groups
+sequentially. Earlier results are preserved at their achieved resolution.
+Development uses isolated `codex/configurable-regions` (ENTICE_inventory, from
+`codex/split-diagnostics-2026-10-14`) and `codex/intermediate-sector-steps` (MARIO,
+from `dev_SUT_disag`, base `2de17ed`). Existing checkouts and shared source data
+remain unchanged. This is implementation and small-model verification, not a
+certified 67-sector GTAP split.
+
+The geography adapter now shares one partition between baseline flows, child
+output, resolved profiles and bilateral targets. Parquet input is aggregated in
+column batches, with no baseline closure or artificial output epsilon. The
+versioned Camilla map has 163 sources and 13 targets. Geographic aggregation is
+applied after native profile resolution, either to the existing D2.4 inventories
+or after the original generation/export runner. It is not an arithmetic average
+of unresolved partial inventory overrides. Sparse final output coverage can be
+completed only from explicit output observations in the original MARIO inputs.
+Source snapshots and reference observations retain hashes and provenance.
+
+MARIO now has an optional `Intermediate steps` sheet and requires
+`save_intermediates` when sequential execution is enabled. Future sector inputs
+project to their current residual parent. Previously introduced buyers retain
+canonical inventories; their finer supplier observations return as conditional
+CE priors when those suppliers are introduced. Accepted results must aggregate
+back to the preceding Z/Y/V/E/X/EY/VY, and new child columns must balance.
+Checkpoints store reloadable flows, pending and projected workbooks, completed
+sector fingerprints, conditional references, numerical diagnostics and runtime
+versions. A failure leaves the preceding checkpoint intact. Remaining groups
+can be edited; changes to completed observations or parent correspondences
+require an earlier starting point. The first implementation supports IOT split
+workbooks with fixed parent labels; SUT step orchestration and parent renaming
+are outside this implementation. MARIO implementation commit: `f9a71ab`.
+
+The `mario` environment uses CVXLAB 1.1.0. Its pandas 2.3.3 requirement conflicts
+with MARIO's former exact pandas 3.0.2 declaration; the development branch now
+allows pandas >=2.3.3,<3.1 and its environment files select 2.3.3. `pip check`
+passes. Solver statuses, including `optimal_inaccurate`, remain visible;
+accounting and preservation checks are independent of solver status.
+
+Verification: 36 ENTICE tests pass with producer integration enabled; 19 focused
+MARIO tests pass, including actual CLARABEL solves, two groups sharing a parent,
+a deliberately failing second group, checkpoint reload, revised pending inputs,
+deferred supplier details, signed final-demand cells and `inplace=False`. Staged
+models constrain each child final-demand cell to its preceding cell's sign
+domain; negative stock changes remain permissible. The broader 148-test MARIO
+regression selection has 137 passes, one skip and ten failures; the same ten
+failure IDs and counts were independently reproduced from unmodified base
+`2de17ed` in the same environment. No new failures were observed in that
+selection. Full-scale performance and numerical acceptance remain open.
+
+The representative real-data AGT aggregation matches Camilla's output and trade
+records exactly; 1,197 compared coefficients differ by at most 1.11e-16. The
+source hash is unchanged. Evidence is retained in
+`build/qa_regionalization/AGT_comparison.json`. This does not certify all sectors.
+The inspected Camilla HYE copy omits MRT output coverage. For CPP, original
+output references expose positive COG/TZA production without corresponding
+resolved profiles in the final copy. These source limitations are reported;
+no coefficients, output values or trade targets were invented to bypass them.
+A full 67-workbook preflight was interrupted while a native output-reference
+file read remained blocked in OneDrive. It produced no complete all-sector
+validation report and is not counted among the successful checks above.
 
 ## Repository integration and publication
 

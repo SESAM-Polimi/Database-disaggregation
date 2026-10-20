@@ -26,6 +26,9 @@ from entice_inventory.export.build_d24_inventories import (
 from entice_inventory.export import plot_d24_split
 from entice_inventory.core.paths import project_data_root, data_path, PROJECT_ROOT
 from entice_inventory.core.baseline import load_baseline
+from entice_inventory.core.geography import configured_geography
+from entice_inventory.core.disaggregation import prepare_inputs
+from entice_inventory.core.paths import local_config
 
 # --- Paths (all derived from BASE) ----------------------------------------- #
 BASE = project_data_root(required=True)
@@ -91,3 +94,13 @@ plot_d24_split.plot_sector_split(
     save_path="X_VA.png",
     sharey=True,
 )
+
+#%%
+# 7. Optional shared final geography, after native profile resolution. The same
+# boundary is available directly to Camilla's already resolved inventories via
+# scripts/run_disaggregation.py; this step does not solve the split model.
+geography = configured_geography()
+if geography is not None:
+    prepare_inputs(D24_INVENTORIES, D24_WORK / 'disaggregation', geography=geography,
+                   steps=local_config().get('disaggregation', {}).get('steps'),
+                   output_reference_dir=MARIO_INVENTORIES)

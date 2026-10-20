@@ -1,6 +1,11 @@
 {
   "data_root": "/path/to/Data split/Inventory generation",
   "baseline_format": "mario_parquet",
+  "geography": null,
+  "disaggregation": {
+    "inventories": "Inventories/20261001",
+    "steps": null
+  },
   "paths": {
     "baseline": "Database/GTAP Power 2023/Cache",
     "gtap_totals": "Database/GTAP Power 2023/Cache/GTAP12_X.xlsx",
