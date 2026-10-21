@@ -29,9 +29,9 @@ python scripts/run_disaggregation.py \
   --output build/scalability/my_exio49/prepared
 python scripts/run_model_trial.py \
   --prepared build/scalability/my_exio49/prepared \
-  --options config/model-trials/quadratic.json \
-  --solver CLARABEL \
-  --solver-options config/model-trials/scalability-clarabel.json \
+  --options config/model-trials/quadratic-gurobi.json \
+  --solver GUROBI \
+  --solver-options config/model-trials/gurobi.json \
   --stop-after-step "Pilot MCU"
 ```
 
@@ -41,10 +41,11 @@ ore mining)**; 66 children remain pending. The baseline has 76 sectors per
 region (3,724 sector/region coordinates); an accepted pilot has 77 (3,773).
 
 The quadratic formulation uses inherited accounting, Capital/Labor ≥ 0,
-signed Tax/TTM, exact preceding aggregates and deferred E recalculation. It
-matches `config/model-trials/quadratic.json`; the two-thread and 1,800-second
-CLARABEL controls are resource settings, not changes to the constraints or loss.
-The independent HiGHS affine feasibility check remains enabled. Source data and
+signed Tax/TTM, exact preceding aggregates and deferred E recalculation. Its normalized objective/accounting options match the previous quadratic
+policy; the new policy selects Gurobi for the affine feasibility check as well
+as the QP. The two-thread, 1,800-second controls and tight solver tolerances do
+not change the constraints, objective or independent acceptance criteria.
+The feasibility probe retains the same absolute numerical envelope as before. Source data and
 the native baseline are preserved; geography changes always start from scratch.
 
 Record preparation and trial wall times separately, solver times, model variable

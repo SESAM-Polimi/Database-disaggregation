@@ -192,8 +192,9 @@ configuration resolve from `data_root`.
 ```bash
 python scripts/run_model_trial.py \
   --prepared build/disaggregation/my_regions_01 \
-  --options config/model-trials/quadratic.json \
-  --solver CLARABEL \
+  --options config/model-trials/quadratic-gurobi.json \
+  --solver GUROBI \
+  --solver-options config/model-trials/gurobi.json \
   --stop-after-step Mining
 ```
 
