@@ -83,7 +83,8 @@ an input change aborts publication.
   per cell fail the nonnegativity check. Gross sums can exceed 1 USD despite
   every constituent cell falling within tolerance; both views are reported.
 - Traverse the published run's predecessor chain and inspect only each stage's
-  applied `step_sectors` in its paired `add_sectors.xlsx`. Recheck every listed
+  applied `step_sectors` in its paired `step_add_sectors.xlsx` (falling back to
+  `add_sectors.xlsx` for legacy incremental packages). Recheck every listed
   output and bilateral trade observation, including explicit zero targets.
   Unlisted routes are unobserved, not zero. Target adherence concerns the
   **prepared** data and is not independent validation. A missing published chain

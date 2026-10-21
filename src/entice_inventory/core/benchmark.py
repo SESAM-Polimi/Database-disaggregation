@@ -272,7 +272,10 @@ def prepared_targets(final, state):
         seen.add(current)
         run = json.loads((current / 'run.json').read_text())
         step = json.loads((current / 'state.json').read_text())
-        workbook = (current / run['inventory_directory'] / 'add_sectors.xlsx').resolve()
+        inventory = (current / run['inventory_directory']).resolve()
+        workbook = inventory / 'step_add_sectors.xlsx'
+        if not workbook.is_file():
+            workbook = inventory / 'add_sectors.xlsx'  # Legacy incremental package.
         digest = sha256(workbook)
         sources.append(dict(path=str(workbook), sha256=digest, step_sectors=step['step_sectors']))
         for name, keys, store, field in (

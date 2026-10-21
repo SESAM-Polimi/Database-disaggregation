@@ -97,7 +97,14 @@ def publish_trial(trial, *, inventory_root=None, database_root=None):
                 source_checkpoint=str(source) if previous else None,
                 source_run_manifest=manifest)
     try:
-        _copy(applied,invstage/'add_sectors.xlsx')
+        if state:
+            from entice_inventory.core.inventory_history import checkpoint_history, assemble_inventory_history
+            _copy(applied,invstage/'step_add_sectors.xlsx')
+            coverage=assemble_inventory_history(checkpoint_history(step),invstage/'add_sectors.xlsx')
+            (invstage/'inventory_manifest.json').write_text(json.dumps(coverage,indent=2,allow_nan=False))
+            record['inventory_format']='cumulative-with-executed-plan-v1'
+        else:
+            _copy(applied,invstage/'add_sectors.xlsx')
         _copy(trial/'add_sectors.xlsx',invstage/'source_add_sectors.xlsx')
         if step and (step/'remaining_add_sectors.xlsx').is_file():
             _copy(step/'remaining_add_sectors.xlsx',invstage/'remaining_add_sectors.xlsx')
@@ -123,6 +130,19 @@ def publish_trial(trial, *, inventory_root=None, database_root=None):
         if step:
             for name_in in ('feasibility.json','model_solution.json','split_model_options.json'):
                 for path in step.rglob(name_in):_copy(path,diagnostics/name_in)
+        if previous and (source/'run.json').is_file():
+            record['source_database_directory']=os.path.relpath(source,database)
+        if state:
+            (invstage/'README.md').write_text(
+                f'# {name} — MARIO inputs\n\n'
+                '`add_sectors.xlsx` contains cumulative inputs and the editable `Intermediate steps` plan, '
+                'including pending sectors from the latest source where applicable. The folder name counts '
+                'completed children; see `inventory_manifest.json` for complete coverage and stage checks.\n\n'
+                '`step_add_sectors.xlsx` is the exact compiled workbook of the last accepted step. '
+                '`source_add_sectors.xlsx` is that trial’s original source, which may contain only pending children. '
+                '`remaining_add_sectors.xlsx` contains only work still to do and is empty at completion.\n\n'
+                'The cumulative workbook is assembled from accepted stages; no new model was solved. '
+                'For exact historical replay retain the original stage workbooks and the recorded code revision.\n')
         for folder in (invstage,dbstage):
             (folder/'run.json').write_text(json.dumps(record,indent=2,allow_nan=False))
         (dbstage/'README.md').write_text(

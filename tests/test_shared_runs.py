@@ -10,6 +10,9 @@ from entice_inventory.core.shared_runs import publish_trial, remaining_workbook,
 
 
 def trial_fixture(tmp_path,status='accepted'):
+    from test_inventory_history import make_trial, payload
+    if status == 'accepted':
+        return make_trial(tmp_path, payload(('New',)), active=['New'], completed=['New'], index=1)[0]
     from test_parent_budgets import _baseline
     _baseline(tmp_path)
     trial=tmp_path/'trial';trial.mkdir()
@@ -17,15 +20,6 @@ def trial_fixture(tmp_path,status='accepted'):
     pd.DataFrame({'Sector':['New']}).to_excel(source,sheet_name='Master',index=False)
     manifest=dict(status=status,started_at='2026-10-21T04:55:00+00:00',source_preparation=str(tmp_path),
                   accepted_checkpoints=[])
-    if status=='accepted':
-        checkpoint=trial/'checkpoints/001_Test';checkpoint.mkdir(parents=True)
-        shutil.copytree(tmp_path/'baseline',checkpoint/'database')
-        for name in ('step_add_sectors.xlsx','remaining_add_sectors.xlsx'):shutil.copy2(source,checkpoint/name)
-        state=dict(format='mario-sector-steps-v1',status='complete',completed_sectors=['New'],
-                   files={str(p.relative_to(checkpoint)):hashlib.sha256(p.read_bytes()).hexdigest()
-                          for p in (checkpoint/'database').rglob('*') if p.is_file()})
-        (checkpoint/'state.json').write_text(json.dumps(state))
-        manifest['accepted_checkpoints']=[str(checkpoint)]
     (trial/'trial.json').write_text(json.dumps(manifest))
     return trial
 
@@ -39,7 +33,14 @@ def test_publication_pairs_names_and_preserves_inputs_and_matrices(tmp_path,stat
     inventory=Path(result['inventory'])
     database=tmp_path/'Database'/result['name']
     assert inventory.name==database.name=='20261021 0655 - 3 regions and 1 sectors'
-    assert (inventory/'add_sectors.xlsx').read_bytes()==(trial/'add_sectors.xlsx').read_bytes()
+    assert (inventory/'source_add_sectors.xlsx').read_bytes()==(trial/'add_sectors.xlsx').read_bytes()
+    if status=='accepted':
+        checkpoint=Path(json.loads((trial/'trial.json').read_text())['accepted_checkpoints'][-1])
+        assert (inventory/'step_add_sectors.xlsx').read_bytes()==(checkpoint/'step_add_sectors.xlsx').read_bytes()
+        assert pd.read_excel(inventory/'add_sectors.xlsx',sheet_name='Master').Sector.nunique()==1
+        assert 'Intermediate steps' in pd.ExcelFile(inventory/'add_sectors.xlsx').sheet_names
+    else:
+        assert (inventory/'add_sectors.xlsx').read_bytes()==(trial/'add_sectors.xlsx').read_bytes()
     assert (database/'flows').exists()==(status=='accepted')
     if status=='accepted':
         assert result['database']==str(database)

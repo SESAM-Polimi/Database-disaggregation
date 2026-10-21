@@ -157,6 +157,13 @@ def test_listed_zero_trade_target_is_checked_and_missing_route_is_not_zero(pair)
     assert checks[0]['passed']
     assert not checks[1]['passed'] and checks[1]['failed_cells'] == 1
     assert len(sources) == 1
+    # A new cumulative reference may differ; audit the exact archived step.
+    import shutil
+    shutil.copy2(inv / 'add_sectors.xlsx', inv / 'step_add_sectors.xlsx')
+    (inv / 'add_sectors.xlsx').write_bytes(b'Not the historical step workbook')
+    _, repeated, _, recorded = prepared_targets(Flows.read(fp), state)
+    assert repeated == summary
+    assert recorded[0]['path'].endswith('/step_add_sectors.xlsx')
 
 
 def test_geography_or_parent_mismatch_is_not_silently_filled(pair):

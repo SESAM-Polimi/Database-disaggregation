@@ -136,6 +136,100 @@ partition; duplicate or missing source assignments are rejected.
 `geography: null` retains the native geography. The disaggregation inventory
 directory is configured separately and is relative to `data_root`.
 
+## Run the MRIO pipeline with another regional aggregation
+
+Use **this branch (`codex/configurable-regions`)** and MARIO
+`codex/mrio-model-improvements`, with its dependencies installed. Run the commands
+from the repository root. Select the intended MARIO checkout explicitly if your
+environment already has another editable MARIO installation:
+
+```bash
+conda activate mario
+export MARIO_SOURCE="/path/to/MARIO/checkout-on-codex-mrio-model-improvements"
+export PYTHONPATH="$MARIO_SOURCE:$PWD/src"
+```
+
+1. Set your SharePoint `data_root` in `paths.local.json` (or select your own JSON
+   with `ENTICE_CONFIG`). Keep the preparation baseline pointed at the **native
+   GTAP cache**, `Database/_GTAP Power 2023/Cache`; do not replace it with a saved
+   13-region result or the 13-region benchmark baseline.
+2. Copy `data/geographies/gtap13.json` to a new mapping, such as
+   `data/geographies/my_regions.json`, and edit its target labels. The JSON maps
+   **all 163 source GTAP region codes to target region names**, one assignment
+   per source. For example, changing `"ITA": "EU27"` to `"ITA": "Italy"` separates
+   Italy from EU27 and creates a 14th region. Keep every other assignment; missing,
+   duplicate and unknown source codes are rejected. CSV/TSV/XLSX with two columns
+   (source, target) and a header row are also accepted.
+3. Prepare a **new** working directory. This command aggregates the baseline and
+   inventories, applies the reconciliation policy, checks cumulative budgets and
+   writes the editable workbook; it **does not solve the model**:
+
+```bash
+python scripts/run_disaggregation.py \
+  --mapping data/geographies/my_regions.json \
+  --cleaning-policy config/cleaning-policy.json \
+  --intermediate-steps \
+  --output build/disaggregation/my_regions_01
+```
+
+`--mapping` overrides the geography in `paths.local.json`. Alternatively set
+`geography.mapping` to the new file with `mapping_base: "repository"`, then omit
+`--mapping`. Set `geography` to `null` to retain all native regions. Command-line
+relative paths resolve from your current directory; dataset paths in the user
+configuration resolve from `data_root`.
+
+4. Open `build/disaggregation/my_regions_01/add_sectors.xlsx` and edit the
+   **`Intermediate steps`** sheet. Each column is an ordered group; every `Master`
+   sector must occur exactly once. Without a `--steps` JSON, preparation creates
+   one column named `Step 1` containing all children. It does **not** automatically
+   create a Mining group. For a staged trial, split this column into the intended
+   groups and name the first one `Mining` if you use the example below. Instead
+   of editing Excel you can pass `--steps config/my_steps.json` at preparation,
+   with an ordered object such as `{"Mining": ["CHR", "COB", "..."], "Next": ["..."]}`;
+   replace the illustrative lists with the complete sector plan.
+5. Run a controlled first group, using the quadratic model policy:
+
+```bash
+python scripts/run_model_trial.py \
+  --prepared build/disaggregation/my_regions_01 \
+  --options config/model-trials/quadratic.json \
+  --solver CLARABEL \
+  --stop-after-step Mining
+```
+
+The fresh controlled runner currently defaults to stopping after `Mining`;
+**supply the real group name explicitly**. If you kept the single `Step 1`
+column, `--stop-after-step "Step 1"` solves all its children together. To execute
+all groups in a fresh trial, name the last column as the stopping group.
+Model choice is in the options JSON; omitting `--options` selects the historical
+reference formulation, not this quadratic experiment.
+
+6. To continue a newly accepted checkpoint with the **same geography and model**,
+   use its database path printed by the runner:
+
+```bash
+python scripts/run_model_trial.py --resume "/path/to/accepted/checkpoint-or-shared-database"
+```
+
+Resume inherits the saved model options and runs all pending groups when no
+stopping group is supplied. To revise pending inputs, pass `--workbook` with an
+edited copy of `remaining_add_sectors.xlsx`. The completed-sector fingerprints
+remain protected. The historical 21 October checkpoints predate MARIO's new
+Capital/Labor domains: they remain readable but cannot resume under that changed
+model. A fresh experiment must start before the completed steps.
+
+Changing geography always requires a new preparation from the native baseline;
+it cannot reuse a checkpoint from another partition. A new aggregation can expose
+different target conflicts, so a successful 13-region trial is not a guarantee
+of feasibility for another map.
+
+The controlled runner records inputs/code and automatically publishes paired
+inventory/database folders to SharePoint. `build/` is temporary computational
+storage. Accepted input packages now expose the cumulative workbook and its step
+plan as `add_sectors.xlsx`; the exact last-step input is retained separately as
+`step_add_sectors.xlsx`. The `remaining_...` file is a resume aid and is empty
+when there is nothing left to split.
+
 ## Shared inputs and outputs
 
 The maintained [Data split guide](docs/shared-data/README.md) explains the
@@ -202,5 +296,5 @@ build/                        ignored computational work and diagnostics
 Historical audit records identify the code and files used at the time; they
 are not rewritten to claim that an old run used today's configuration.
 Structural checks and successful optimisation do not by themselves validate
-economic assumptions. Benchmarking and sensitivity analysis are still to be
-designed with the project team.
+economic assumptions. The first offline benchmark is available; economic review
+thresholds and sensitivity experiments still need agreement with the project team.
