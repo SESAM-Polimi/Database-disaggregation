@@ -26,15 +26,24 @@ includes a concrete command. The export-only dependencies are pinned in
 
 ## Shared data structure (21 October 2026)
 
-The WSP `Data split/README.md` is the shared folder guide; its maintained copy
-is [here](docs/shared-data/README.md). Partner templates are directly in
-`Inventory generation/Data collection`; generated inputs are under
-`Inventories/D2.4 inventories` and `Inventories/D2.8 inventories`. Databases
-are grouped under `Database/D2.4` and `Database/D2.8`. D2.8 input/result folders share the original run name
+The operational root is the WSP `Data split` directory. The shared folder guide
+is maintained [here](docs/shared-data/README.md). `Classifications`, `Database`
+and `Inventories` are directly under that root; `_others/FNAM split` holds
+alternative-method reference material.
+
+Selected inputs are in `Data collection/Final`: partner templates and VA.xlsx
+at its top level, and Purdue `Cost structures`, `Output and trade targets` and
+`Trades` under `PURDUE/Shared material`. Other deliveries and historical versions
+are in `Data collection/Raw data`. Source selection and file contents are unchanged.
+
+Generated inputs are under `Inventories/D2.4 inventories` and
+`Inventories/D2.8 inventories`; databases are grouped under `Database/D2.4` and
+`Database/D2.8`. D2.8 input/result folders share the original run name
 `YYYYMMDD HHMM - N regions and M sectors`. The complete current monetary result
 is `20261021 0655 - 13 regions and 67 sectors`; E is pending recalculation.
 Configure personal paths via `config/paths.example.json` and `paths.local.json`.
-Historical paths elsewhere in the report describe earlier storage layouts.
+Historical audit paths can be located with `manifests/current_data_layout.json`;
+those source records retain their captured paths and hashes.
 
 ## Layout
 
@@ -88,7 +97,7 @@ parent" residual clusters), `core.matching_utils` (read `GTAP12_matching.xlsx`).
 
 ## Running it
 
-Copy `config/paths.example.json` to ignored `paths.local.json`, set `data_root` to your WSP `Data split/Inventory generation` directory, then run the `#%%` cells in `scripts/run_d24_pipeline.py` in order.
+Copy `config/paths.example.json` to ignored `paths.local.json`, set `data_root` to your WSP `Data split` directory, then run the `#%%` cells in `scripts/run_d24_pipeline.py` in order.
 
 The modules with a `__main__` block can also be run from the command line, e.g.:
 
