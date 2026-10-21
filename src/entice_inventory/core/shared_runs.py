@@ -128,8 +128,24 @@ def publish_trial(trial, *, inventory_root=None, database_root=None):
                 if path.is_file() and path.suffix in ('.json','.csv','.py','.log'):
                     _copy(path,diagnostics/'trade_reconciliation'/path.name)
         if step:
-            for name_in in ('feasibility.json','model_solution.json','split_model_options.json'):
+            for name_in in ('feasibility.json','model_solution.json','split_model_options.json','entropy_support.json'):
                 for path in step.rglob(name_in):_copy(path,diagnostics/name_in)
+        # Keep attempt diagnostics apart: a solver or objective fallback must
+        # remain auditable after publication, without copying computational caches.
+        if (trial/'attempts').is_dir():
+            for path in (trial/'attempts').rglob('*'):
+                if path.is_file() and (path.name in {'feasibility.json','model_solution.json','split_model_options.json','entropy_support.json','model_definition.json'} or path.suffix == '.log'):
+                    _copy(path,diagnostics/'attempts'/path.relative_to(trial/'attempts'))
+        accepted_attempts = [a for a in manifest.get('model_attempts', [])
+                             if a.get('status') == 'accepted' and state and a.get('step_index') == state['step_index']]
+        if accepted_attempts:
+            accepted_work = Path(accepted_attempts[-1]['work_directory'])
+            for name_in in ('feasibility.json','model_solution.json','split_model_options.json','entropy_support.json','model_definition.json'):
+                matches = list(accepted_work.rglob(name_in))
+                if len(matches) > 1:
+                    raise ValueError(f'Ambiguous accepted attempt diagnostic: {name_in}')
+                if matches:
+                    _copy(matches[0],diagnostics/name_in)
         if previous and (source/'run.json').is_file():
             record['source_database_directory']=os.path.relpath(source,database)
         if state:

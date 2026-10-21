@@ -187,14 +187,12 @@ configuration resolve from `data_root`.
    of editing Excel you can pass `--steps config/my_steps.json` at preparation,
    with an ordered object such as `{"Mining": ["CHR", "COB", "..."], "Next": ["..."]}`;
    replace the illustrative lists with the complete sector plan.
-5. Run a controlled first group, using the quadratic model policy:
+5. Run a controlled first group, using the **entropy-first policy**:
 
 ```bash
 python scripts/run_model_trial.py \
   --prepared build/disaggregation/my_regions_01 \
-  --options config/model-trials/quadratic-gurobi.json \
-  --solver GUROBI \
-  --solver-options config/model-trials/gurobi.json \
+  --policy config/model-trials/entropy-first.json \
   --stop-after-step Mining
 ```
 
@@ -202,22 +200,51 @@ The fresh controlled runner currently defaults to stopping after `Mining`;
 **supply the real group name explicitly**. If you kept the single `Step 1`
 column, `--stop-after-step "Step 1"` solves all its children together. To execute
 all groups in a fresh trial, name the last column as the stopping group.
-Model choice is in the options JSON; omitting `--options` selects the historical
-reference formulation, not this quadratic experiment.
+The controlled runner now defaults to this policy when no fixed `--options` or
+`--historical-model` is supplied. It tries **KL for the first group**, then
+**partial entropy with signed KL for subsequent groups**. For each entropy model,
+solver order is **MOSEK → Clarabel → SCS**. Only after those attempts fail does it
+try the named **quadratic** model, with **Gurobi → MOSEK → Clarabel → OSQP**.
+The feasibility preflight uses **Gurobi → HiGHS → Clarabel** for installation,
+licence or numerical failures; a mathematical infeasibility stops that preflight.
 
-6. To continue a newly accepted checkpoint with the **same geography and model**,
+Every attempt starts from the same preceding accepted database. The policy
+requires a finite evaluated objective and retains all independent acceptance checks and records unsuccessful attempts and
+model changes in `model_attempts.json` and checkpoint `model_history`. Schema,
+input-integrity and programming errors stop the run instead of triggering an
+objective change. Solver settings and order are editable in the policy JSON.
+MOSEK and Gurobi need their Python packages and valid licences. Open solvers remain
+supported, and unavailable commercial solvers are logged and skipped.
+
+Entropy support is no longer a fixed `1e-8`: each step computes
+`10 ** (floor(log10(min(abs(nonzero monetary prior)))) - 4)` across the references
+in enabled entropy terms, before numerical scaling. For example, a minimum of
+`0.03` gives `1e-6`. Zeros, masks, controls and disabled losses are excluded; signed
+values use their absolute magnitude. `entropy_support.json` records the inputs,
+coefficient and scaled coefficient. Quadratic normalisation keeps its separate
+floor. See [model and solver policy](docs/model-policy.md) for details.
+
+For a fixed formulation/solver without automatic fallback, keep using `--options`,
+`--solver` and `--solver-options`. For the historical formulation use
+`--historical-model --solver MOSEK`. MARIO's direct `add_sectors` call remains an
+explicit single-model operation; the pipeline orchestrates the policy.
+
+6. To continue a newly accepted checkpoint with the **same geography and policy**,
    use its database path printed by the runner:
 
 ```bash
 python scripts/run_model_trial.py --resume "/path/to/accepted/checkpoint-or-shared-database"
 ```
 
-Resume inherits the saved model options and runs all pending groups when no
-stopping group is supplied. To revise pending inputs, pass `--workbook` with an
+Resume runs all pending groups when no stopping group is supplied. With the
+default policy, it selects the subsequent-insertion entropy model. Fixed-model
+replays must supply the matching `--options` and solver arguments explicitly.
+To revise pending inputs, pass `--workbook` with an
 edited copy of `remaining_add_sectors.xlsx`. The completed-sector fingerprints
-remain protected. The historical 21 October checkpoints predate MARIO's new
-Capital/Labor domains: they remain readable but cannot resume under that changed
-model. A fresh experiment must start before the completed steps.
+remain protected. Checkpoints written before the adaptive-entropy-support
+revision remain readable,
+but cannot resume under this changed formulation. Start a fresh experiment, or
+use the recorded historical code and configuration for an exact replay.
 
 Changing geography always requires a new preparation from the native baseline;
 it cannot reuse a checkpoint from another partition. A new aggregation can expose

@@ -7,7 +7,7 @@ Use a fresh output directory for every experiment.
 import argparse
 from datetime import datetime, timezone
 import hashlib
-from importlib.metadata import version
+from importlib.metadata import version, PackageNotFoundError
 import inspect
 import json
 from pathlib import Path
@@ -49,12 +49,21 @@ def main():
     parser.add_argument('--workbook', type=Path, help='Remaining workbook override; requires --resume.')
     parser.add_argument('--output', type=Path, help='Local work directory; generated under build/model_trials if omitted.')
     parser.add_argument('--no-publish',action='store_true',help='Keep an explicitly private/CI trial local; otherwise publish paired WSP inputs/results.')
-    parser.add_argument('--options', type=Path, help='MARIO split_model_options JSON; omit for the unchanged model.')
+    selection = parser.add_mutually_exclusive_group()
+    selection.add_argument('--policy', type=Path, help='Model/solver policy JSON; default: config/model-trials/entropy-first.json.')
+    selection.add_argument('--options', type=Path, help='One fixed MARIO split_model_options JSON, bypassing the model policy.')
+    selection.add_argument('--historical-model', action='store_true', help='Use the historical formulation without the entropy-first policy.')
     parser.add_argument('--solver-options', type=Path)
-    parser.add_argument('--solver', default='CLARABEL')
+    parser.add_argument('--solver', help='Solver for a fixed --options / --historical-model run.')
     parser.add_argument('--stop-after-step', help='Defaults to Mining for a fresh preparation; resume runs all pending groups.')
     args = parser.parse_args()
     started_at=datetime.now(timezone.utc)
+    policy_path = args.policy or (Path(__file__).resolve().parents[1]/'config/model-trials/entropy-first.json' if not args.options and not args.historical_model else None)
+    policy = json.loads(policy_path.read_text()) if policy_path else None
+    if policy is not None and (args.solver or args.solver_options):
+        parser.error('A model policy contains its solver order/options; use --options for a fixed solver run.')
+    if policy is None and args.solver is None:
+        args.solver = 'MOSEK'
     options = json.loads(args.options.read_text()) if args.options else None
     solver_options = json.loads(args.solver_options.read_text()) if args.solver_options else None
     if args.workbook and not args.resume:
@@ -67,7 +76,7 @@ def main():
     if args.resume:
         if not (source/'state.json').is_file():
             parser.error('Expected state.json in --resume.')
-        if args.options is None:
+        if args.options is None and policy is None and not args.historical_model:
             options = json.loads((source/'state.json').read_text()).get('split_model_options')
         from entice_inventory.core.shared_runs import remaining_workbook
         workbook = (args.workbook or remaining_workbook(source)).resolve()
@@ -94,11 +103,23 @@ def main():
                 'runtime': {p: version(p) for p in ('mariopy','cvxlab','cvxpy','numpy','pandas','clarabel')},
                 'code': {name: code_identity(module) for name,module in
                          [('mario',mario),('cvxlab',cvxlab),('entice_inventory',entice_inventory)]}}
+    for package in ('Mosek', 'gurobipy', 'scs', 'osqp', 'highspy'):
+        try:
+            manifest['runtime'][package] = version(package)
+        except PackageNotFoundError:
+            pass
+    if policy is not None:
+        manifest['solver_selection'] = 'policy'
+        manifest['model_policy'] = policy
+        manifest['model_policy_source'] = str(policy_path.resolve())
+        manifest['model_policy_sha256'] = hashlib.sha256(policy_path.read_bytes()).hexdigest()
     path = output/'trial.json'
     path.write_text(json.dumps(manifest, indent=2))
     started = time.monotonic()
     exit_code = 1
     try:
+        if policy is not None and 'allow_model_change' not in inspect.signature(mario.Database.add_sectors).parameters:
+            raise RuntimeError('The entropy-first policy requires the matching MARIO model-policy checkout.')
         if options is not None and 'split_model_options' not in inspect.signature(mario.Database.add_sectors).parameters:
             raise RuntimeError('The selected MARIO checkout does not support split_model_options.')
         if args.resume:
@@ -118,7 +139,16 @@ def main():
                       stop_after_step=stop_after_step, solver=args.solver, solver_parameters=solver_options)
         if options is not None:
             kwargs['split_model_options'] = options
-        db.add_sectors('inventories', **kwargs)
+        if policy is None:
+            db.add_sectors('inventories', **kwargs)
+        else:
+            from entice_inventory.core.model_policy import run_model_policy
+            db = run_model_policy(db, output/'add_sectors.xlsx', output, policy, stop_after_step=stop_after_step)
+            manifest['split_model_options'] = db._intermediate_steps_state['split_model_options']
+            manifest['model_history'] = db._intermediate_steps_state.get('model_history', [])
+            accepted_attempts = [a for a in json.loads((output/'model_attempts.json').read_text()) if a['status'] == 'accepted']
+            manifest['solver'] = accepted_attempts[-1]['solver']
+            manifest['solver_options'] = accepted_attempts[-1]['solver_options']
         manifest.update(status='accepted', completed_sectors=db._intermediate_steps_state['completed_sectors'],
                         pending_recalculations=db._intermediate_steps_state.get('pending_recalculations',[]))
         exit_code = 0
@@ -127,6 +157,8 @@ def main():
         traceback.print_exc()
     finally:
         manifest['elapsed_seconds'] = time.monotonic()-started
+        if (output/'model_attempts.json').is_file():
+            manifest['model_attempts'] = json.loads((output/'model_attempts.json').read_text())
         manifest['source_baseline_unchanged'] = fingerprints(source if args.resume else source/'baseline') == baseline_hashes
         manifest['source_workbook_unchanged'] = hashlib.sha256(workbook.read_bytes()).hexdigest() == workbook_hash
         manifest['working_baseline_unchanged'] = (True if args.resume else fingerprints(output/'baseline') == baseline_hashes)

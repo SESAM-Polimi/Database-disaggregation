@@ -15,6 +15,10 @@ in the consolidated classification workbook. The EXIOBASE axis is described at
 
 ## Reproduce the one-sector test
 
+These commands describe the recorded quadratic pilot below. New experiments
+now default to the [entropy-first model/solver policy](model-policy.md); keep the
+explicit quadratic arguments only to reproduce that formulation.
+
 Select MARIO `codex/mrio-model-improvements` and this repository's
 `codex/configurable-regions` branch; configure your own `data_root`. From this
 repository root, with the MARIO environment activated:
