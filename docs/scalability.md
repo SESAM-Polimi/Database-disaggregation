@@ -143,3 +143,97 @@ The accepted database includes the dashboard (`benchmarking.html`), report JSON,
 sector CSV, and `diagnostics/scalability/summary.json` with resource logs,
 preparation audit and attempt history. The 66 pending children were not solved;
 this result establishes only the feasibility of this one-child, 49-region pilot.
+
+## KL/MOSEK comparison and factor-prior sensitivity — 21 October 2026
+
+**No KL database was accepted.** The original-prior attempt stopped during model
+construction; two further attempts on explicitly corrected priors passed affine
+feasibility, but MOSEK ended with `UNKNOWN`. This is not a proof of mathematical
+infeasibility. No solver/model fallback or post-hoc matrix correction was used in
+these fixed-model trials.
+
+The source MCU/Brazil inventory has negative Capital and Labor priors. Following
+explicit approval, `scripts/reconcile_factor_priors.py` created a separate
+preparation with Capital/Labor ≥0, preserving net V in each affected profile.
+The weighted minimum-distance projection also adjusts the signed Tax/TTM rows.
+Only eight numeric cells changed: four in MCU/Brazil and four in MCU/Lithuania,
+where MCU output is zero. All other XLSX members, monetary intermediate priors,
+output, trade, tolerances, exclusions, stage plan and baseline are unchanged.
+Original sources and the previous quadratic database were hash-verified unchanged.
+The regular preparation policy is unchanged; this remains an opt-in experiment.
+
+The corrected input SHA256 is
+`6235bf912e433c86064a1389538c6a912470af2c97fad11c39cd733047bdacec`.
+Both new formulations use exactly that workbook, inherited accounting, weights
+Y=0.1/supply=1, scale=1000, two solver threads, a 1,800-second native limit and
+strict finite-objective verification. Gurobi performs affine feasibility.
+
+| Trial | Outcome | Native optimiser | Before publication | Including publication | Peak sampled RSS |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Original quadratic/Gurobi | Accepted | 6.33 s | 544.30 s | 746.82 s | 3.59 GiB |
+| Corrected-prior quadratic/Gurobi | Accepted | 3.75 s | 303.47 s | 418.91 s | 5.53 GiB |
+| Corrected-prior direct KL/MOSEK | UNKNOWN, rejected | 71.58 s | 316.23 s | 319.90 s | 5.09 GiB |
+| Corrected-prior equivalent KL/MOSEK | UNKNOWN, rejected | 66.30 s | 316.63 s | 321.41 s | 4.43 GiB |
+
+Failed times describe aborted attempts, not time to an accepted solution. Failed
+publication saves inputs only; successful quadratic publication also saves a
+database. Preparation is excluded. The objective, solver and numerical
+representation differ between some cases, and these are individual executions,
+so this is not an isolated solver-speed or statistically replicated benchmark.
+RSS is sampled process-tree RSS and can double-count shared pages.
+
+For fixed positive references, KL is exactly
+`-entr(x) - (log(q)+1)*x + q`, including at x=0. MARIO revision `5f03354` uses
+this representation to avoid tiny prior values as exponential-cone coordinates.
+It resolves a small reproducible failure and preserves objective values, domains,
+weights, support and physical constraints, with 116 relevant tests passing. It
+**did not resolve this full MRIO case**. The coefficient still follows the literal
+minimum-prior rule: minimum nonzero 4.079e-18 M USD, coefficient 1e-22 M USD
+(1e-25 in scaled units). No clipping or numerical-floor increase was applied.
+Original quadratic used MARIO `90da5c8`; corrected quadratic used `0f94b42`;
+equivalent KL used `5f03354`. The quadratic expression/physical constraints are
+unchanged across these revisions. Pipeline trial code was `5bf7c18`.
+
+### Economic interpretation
+
+The corrected quadratic database passes all **11 hard checks**, including all
+49 output targets and 346 selected trade observations. It has 86 economic review
+flags across 46 coordinates, versus 85 across 45 in the old quadratic. Capital,
+Labor, Y and Z satisfy their nonnegative domains. Gross Z inputs in regions with
+effectively zero output remain about 0.01616 M USD; E remains pending. These
+issues were not patched after solving.
+
+The material sensitivity is MCU/Brazil: net V/output changes from **71.8% to
+0.68%** in the two quadratic results, despite identical output and trade targets.
+The source negative Capital/Labor almost cancelled positive Tax/TTM, so the
+sign-constrained, net-preserving projection moved all four priors near zero.
+This is an assumption, not independent evidence for the true factor composition.
+The new result should be treated as a sensitivity experiment. Review or rebuild
+the affected V priors using defensible source information before adopting them;
+a successful solver or stable aggregate Leontief diagnostics cannot establish
+that either VA composition is empirically correct. With KL still uncertified,
+there is no accepted KL-versus-quadratic economic comparison.
+
+### Published files
+
+Under the configured `data_root`, the accepted corrected quadratic result is:
+
+- `Database/D2.8/20261021 2044 - 49 regions and 1 sectors`
+- `Inventories/D2.8 inventories/20261021 2044 - 49 regions and 1 sectors`
+
+The database includes `comparison-models.html`, `comparison-models.md`, complete
+`comparison-models.json`, a 49-region MCU CSV, a performance PNG and the
+`benchmarking.html` baseline dashboard. `diagnostics/model-comparison/` retains
+all attempt logs, resource profiles, the eight-cell reconciliation audit,
+reconciliation code, the equivalent-KL patch and reproducible report driver.
+The HTML links/structure were checked statically and the PNG visually inspected;
+the internal browser disallowed local-file preview.
+
+Failed input-only folders are preserved under `Inventories/D2.8 inventories/`:
+
+- `20261021 2018 - 49 regions and 1 sectors`: original signs rejected before solving.
+- `20261021 2038 - 49 regions and 1 sectors`: corrected priors, direct KL UNKNOWN.
+- `20261021 2052 - 49 regions and 1 sectors`: corrected priors, equivalent KL UNKNOWN.
+
+No corresponding failed database folders were created. The earlier accepted
+`20261021 1741 - 49 regions and 1 sectors` database remains unchanged.
