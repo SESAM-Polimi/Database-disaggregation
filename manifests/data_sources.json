@@ -725,7 +725,7 @@
       "all_saved_cells_match_generated_view": true
     },
     {
-      "path": "Inventory generation/Database/GTAP Power 2023/Original/2023_csv.zip",
+      "path": "Inventory generation/Database/_GTAP Power 2023/Original/2023_csv.zip",
       "role": "Original licensed GTAP Power 2023 CSV archive",
       "state": "preserved_original",
       "use": "Native MARIO parsing available; numerical equivalence to D2.4 cache not yet verified",
@@ -833,5 +833,6 @@
       ]
     }
   ],
-  "cloud_read_status": "All seven initially unavailable inspection sources became readable after the OneDrive reopen command. Remote synchronisation not verified."
+  "cloud_read_status": "All seven initially unavailable inspection sources became readable after the OneDrive reopen command. Remote synchronisation not verified.",
+  "storage_review_date": "2026-10-21"
 }
