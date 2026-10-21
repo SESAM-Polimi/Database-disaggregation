@@ -10,7 +10,7 @@ from openpyxl import load_workbook
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
 from entice_inventory.core.registry import Registry
-from entice_inventory.core.paths import project_data_root
+from entice_inventory.core.paths import project_data_root, data_path
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--output-dir',type=Path,default=ROOT/'build/classifications')
 args=parser.parse_args()
@@ -62,7 +62,7 @@ target_sheet['note']+=' Reviewed scopes are a partial bridge, not a complete NAC
 # Partner templates also contain classifications and custom input/region groups.
 # Preserve distinct rows with source IDs rather than selecting one template.
 vocabulary=defaultdict(list);partner_sources=[]
-for index,p in enumerate(sorted((root/'Data collection/Inventory cleaning/Partner inventories').glob('*.xlsx')),1):
+for index,p in enumerate(sorted(data_path('partner_templates',required=True).glob('*.xlsx')),1):
  source_id=f'P{index:02d}'
  partner_sources.append([source_id,'Partner inventories/'+p.name,'Preserved D2.4 template dictionaries; current partner submissions may differ'])
  w=load_workbook(p,read_only=True,data_only=True)
