@@ -122,3 +122,36 @@ MOSEK's entropy/exponential-cone support is described in the
 [MOSEK modelling cookbook](https://docs.mosek.com/modeling-cookbook/expo.html).
 The current CVXPY solver compatibility is documented in its
 [solver feature table](https://www.cvxpy.org/tutorial/solvers/index.html).
+
+### Explicit factor-prior reconciliation for controlled trials
+
+Entropy requires admissible Capital/Labor priors, in addition to constraints on
+optimized values. The ordinary preparation currently preserves existing negative
+factor observations, so it can expose a genuine source conflict here. Do not take
+absolute values or use the earlier optimized quadratic result as a new prior.
+
+For an explicitly authorized experiment, create a separate preparation:
+
+```sh
+PYTHONPATH=src python scripts/reconcile_factor_priors.py \
+  --prepared path/to/original/prepared \
+  --output path/to/new/prepared --sectors MCU
+```
+
+Only selected-sector profiles with negative nonnegative-domain factors are
+changed. The rule minimizes `sum((v-q)^2/abs(q))`, preserves total net V and imposes
+nonnegativity on all factors except Tax/TTM. For a zero prior the variance is the
+smallest nonzero absolute factor prior. Intermediate inputs, output, trade,
+exclusions, tolerances, stage plan and baseline remain unchanged. Unchanged XLSX
+members are verified byte for byte; `reconciliation.json` records the changed
+cells, original/reconciled values, source hashes and interpretation. The baseline
+is copied and verified, and the source is immutable.
+
+This is a prior assumption, not empirical evidence for the true VA composition.
+If negative Capital/Labor almost cancel positive Tax/TTM in the source, preserving
+net V can yield zero Capital/Labor and near-zero signed factors. Report that
+explicitly. The regular preparation policy is not changed by this opt-in tool.
+Run **both** KL/MOSEK and quadratic/Gurobi on this same transformed workbook;
+compare them primarily with each other and use the old quadratic run separately
+to assess the effect of the input transformation. The fixed quadratic/Gurobi
+configuration also requires a finite objective, as does the fixed KL trial.

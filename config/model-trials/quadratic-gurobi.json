@@ -7,5 +7,6 @@
   "feasibility_solver": "GUROBI",
   "compact_constraints": true,
   "defer_satellite_recalculation": true,
-  "scale": 1000.0
+  "scale": 1000.0,
+  "require_finite_objective": true
 }
