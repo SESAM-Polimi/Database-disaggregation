@@ -30,8 +30,10 @@ Data split/
         ├── _GTAP Power 2023/
         │   ├── Original/                 Original licensed GTAP archive
         │   └── Cache/                    Baseline matrices and GTAP12_X.xlsx
-        ├── 20260630 - D2.4 database/       Historical result of split=False
-        └── <same run name>/               D2.8 result, state and diagnostics
+        ├── D2.4/
+        │   └── 20260630/                 Historical result of split=False
+        └── D2.8/
+            └── <same run name>/           MRIO result, state and diagnostics
 ```
 
 The two `Data collection` directories have different roles: the top-level one
@@ -75,7 +77,7 @@ from mario.ops.add_sector_steps import load_checkpoint
 
 root = Path("/your/local/Data split/Inventory generation")
 name = "20261021 0655 - 13 regions and 67 sectors"
-db = load_checkpoint(root / "Database" / name)
+db = load_checkpoint(root / "Database" / "D2.8" / name)
 ```
 
 Use checkpoint loading for these inherited-accounting runs: it retains the
