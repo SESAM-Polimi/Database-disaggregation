@@ -524,3 +524,12 @@ reached CLARABEL with all 17 mining sectors on 13 regions, then terminated with
 V0 references and a negative fixed parent Tax total expose an entropy-domain
 contradiction. The report distinguishes that structural certificate from the
 full solver status and records negative Capital/Labor priors for separate review.
+
+
+## Review of invalid nonnegative-factor priors
+
+The [MCU source-prior review](prior-review.md) traces Capital/Labor conflicts to
+EXIOIOT and exports two explicit parent-factor scenarios with joint Z/V
+reconciliation. It also flags broader technology concerns. These are data-only
+proposals; the ordinary preparation and input workbooks are unchanged. A sign
+repair should not be mistaken for independent economic validation.
