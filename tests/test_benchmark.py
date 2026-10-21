@@ -204,3 +204,14 @@ def test_dashboard_dom_interactions(pair, tmp_path):
     result = subprocess.run(['node', str(Path(__file__).with_name('benchmark_dashboard_smoke.cjs')), str(target)],
                             text=True, capture_output=True)
     assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_partial_checkpoint_benchmarks_completed_children_only(pair):
+    bp, fp = pair
+    state = json.loads((fp / 'state.json').read_text())
+    state['sector_parents']['Future child'] = 'Q'
+    (fp / 'state.json').write_text(json.dumps(state))
+    report = build_report(bp, fp, system=False)
+    assert report['summary']['hard_checks_passed']
+    assert report['summary']['new_sectors'] == 1
+    assert all(not row['is_residual'] for row in report['sectors'] if row['sector'] == 'Q')

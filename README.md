@@ -230,6 +230,8 @@ plan as `add_sectors.xlsx`; the exact last-step input is retained separately as
 `step_add_sectors.xlsx`. The `remaining_...` file is a resume aid and is empty
 when there is nothing left to split.
 
+For a concrete larger-geography example, see the [49-region MCU scalability pilot](docs/scalability.md).
+
 ## Shared inputs and outputs
 
 The maintained [Data split guide](docs/shared-data/README.md) explains the

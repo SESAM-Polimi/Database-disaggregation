@@ -333,7 +333,11 @@ def build_report(baseline, database, *, system=True):
         raise ValueError('This first benchmark version requires checkpoint accounting="inherit".')
     if state.get('tolerances') != {'absolute': ATOL, 'relative': RTOL}:
         raise ValueError('Checkpoint tolerances differ from the audited benchmark policy.')
-    parents = state['sector_parents']
+    completed = state['completed_sectors']
+    if len(set(completed)) != len(completed) or set(completed) - state['sector_parents'].keys():
+        raise ValueError('Invalid completed-sector mapping in checkpoint.')
+    # Partial checkpoints also retain parent mappings for future planned children.
+    parents = {sector: state['sector_parents'][sector] for sector in completed}
     mapped = mapping_to_baseline(base, final, parents)
     for relative, digest in state['files'].items():
         p = (final.root / relative).resolve()
