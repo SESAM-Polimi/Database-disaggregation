@@ -17,7 +17,7 @@ from typing import Iterable
 from openpyxl import load_workbook
 
 from entice_inventory.core.matching_utils import load_parent_map
-from entice_inventory.core.paths import DATA_DIR, PROJECT_ROOT, project_data_root, data_path
+from entice_inventory.core.paths import DATA_DIR, PROJECT_ROOT, project_data_root, data_path, local_config
 from entice_inventory.core.baseline import load_baseline
 
 
@@ -29,7 +29,7 @@ DEFAULT_PURDUE_SPLITARGS_PATH = data_path('purdue_split_targets')
 DEFAULT_PURDUE_TRADE_PATH = data_path('purdue_trade')
 DEFAULT_GTAP_SECTORS_PATH = data_path('gtap_sector_names')
 DEFAULT_MATCHING_PATH = DATA_DIR / "GTAP12_matching.xlsx"
-DEFAULT_MARIO_SRC = Path.home() / "Documents/GitHub/MARIO"
+DEFAULT_MARIO_SRC = Path(local_config().get("mario_source") or Path.home() / "Documents/GitHub/MARIO").expanduser()
 REPORT_FILENAME = "export_d24_report.txt"
 DEFAULT_INVENTORY_SUM_CHECK_TOLERANCE = 1e-3
 STATIC_SHEETS = {
