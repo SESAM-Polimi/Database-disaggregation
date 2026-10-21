@@ -1,5 +1,5 @@
 {
-  "data_root": "/path/to/Data split/Inventory generation",
+  "data_root": "/path/to/Data split",
   "baseline_format": "mario_parquet",
   "paths": {
     "baseline": "Database/_GTAP Power 2023/Cache",
@@ -7,19 +7,19 @@
     "classifications": "Classifications/ENTICE classifications.xlsx",
     "mario_inventories": "Inventories/D2.4 inventories/MARIO inventories/20260630",
     "inventory_runs": "Inventories/D2.4 inventories",
-    "purdue_trade": "../Data collection/PURDUE/Shared material/Trades/trade.xlsx",
-    "purdue_split_targets": "../Data collection/PURDUE/Shared material/Output and trade targets/splttargs.xlsx",
-    "partner_templates": "Data collection",
+    "purdue_trade": "Data collection/Final/PURDUE/Shared material/Trades/trade.xlsx",
+    "purdue_split_targets": "Data collection/Final/PURDUE/Shared material/Output and trade targets/splttargs.xlsx",
+    "partner_templates": "Data collection/Final",
     "reference_inventories": "Inventories/D2.4 inventories",
     "resolved_inventories": "Inventories/D2.4 inventories/Regenerated 20261001",
     "split_inventory_runs": "Inventories/D2.8 inventories",
     "database_runs": "Database/D2.8",
     "reference_coefficients": "Database/D2.4/20260630/coefficients",
-    "value_added": "Data collection/VA.xlsx",
+    "value_added": "Data collection/Final/VA.xlsx",
     "gtap_sector_names": "Classifications/_sources/Purdue/GTAP sectors H5.xlsx",
-    "exioiot": "../Data collection/PURDUE/Shared material/Cost structures/EXIOIOT.csv",
-    "copcosts": "../Data collection/PURDUE/Shared material/Cost structures/COPCOSTS.csv",
-    "copper_sectors": "../Data collection/PURDUE/Shared material/Cost structures/COPSEC.csv",
+    "exioiot": "Data collection/Final/PURDUE/Shared material/Cost structures/EXIOIOT.csv",
+    "copcosts": "Data collection/Final/PURDUE/Shared material/Cost structures/COPCOSTS.csv",
+    "copper_sectors": "Data collection/Final/PURDUE/Shared material/Cost structures/COPSEC.csv",
     "d24_database_runs": "Database/D2.4"
   }
 }
