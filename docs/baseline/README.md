@@ -1,4 +1,4 @@
-# ENTICE inventory: reconstruction and implementation plan
+# Database disaggregation: reconstruction and implementation plan
 
 Updated 21 October 2026. This is the single maintained report for the D2.4 reconstruction, consistency findings, agreed decisions and work towards D2.8 and T2.6. Update it in place; do not create separate follow-up, decision or audit Markdown reports. The [repository README](../../README.md) is the installation and usage guide. CSV/JSON evidence and manifests retain their separate purpose: reproducible records that this report references. Links under `build/` refer to retained local audit artifacts; that ignored directory is outside the published Git history.
 
@@ -653,13 +653,13 @@ in both); those pre-existing SUT failures are not repaired by this IOT experimen
 
 ## Repository integration and publication
 
-Publication completed on 1 October 2026: [ENTICE_inventory](https://github.com/SESAM-Polimi/ENTICE_inventory) is the public code repository; [ENTICE_inventory_archive](https://github.com/SESAM-Polimi/ENTICE_inventory_archive) retains the original private history. A fresh clone from GitHub was checked before changing visibility. Its complete reachable history excludes the three file names listed below, including both historical locations of the licensed totals workbook.
+Publication completed on 1 October 2026: [Database disaggregation](https://github.com/SESAM-Polimi/Database-disaggregation) is the public code repository; [ENTICE_inventory_archive](https://github.com/SESAM-Polimi/ENTICE_inventory_archive) retains the original private history. A fresh clone from GitHub was checked before changing visibility. Its complete reachable history excludes the three file names listed below, including both historical locations of the licensed totals workbook.
 
 The original private repository integrates all reconstruction and registry changes in merge `b5382268ccc051cac222116e7e62eb1af40ff17e`. Its first parent is the original main `14fc2bf52802ca1572efd557de15c15cf4abf77d`, also preserved by the annotated tag `backup/main-before-registry-2026-10-01`. Verified Git bundles preserve the complete history before and after integration, alongside the pre-merge working tree and staged/unstaged patches.
 
 The public code history excludes both historical paths of the numerical `GTAP12_X.xlsx` workbook and the personal `Run.py`/`paths.yml` files. The original history remains in the private archive repository and on SharePoint. Public commit identifiers differ from the original private identifiers; a backup tag in the filtered history represents the corresponding code state without excluded files. The original main has not been lost or overwritten.
 
-The [GTAP 12 terms, section 3](https://www.gtap.agecon.purdue.edu/databases/documents/GTAP12DataBase_TermsConditions.pdf) restrict redistribution of database values and large aggregations. Public code therefore uses externally supplied licensed inputs. The working files and historical text were checked for common credential/private-key patterns, with no matches; this is a limited check, not an exhaustive security certification. Ignored numerical data, private configuration and archived evidence are not published on GitHub.
+The [GTAP 12 terms, section 3](https://www.gtap.agecon.purdue.edu/databases/documents/GTAP12DataBase_TermsConditions.pdf) restrict redistribution of database values and large aggregations. Public code therefore uses externally supplied licensed inputs. The working files and historical text were checked for common credential/private-key patterns, with no matches; this is a limited check, not an exhaustive security certification. Numerical data and archived evidence remain separate from the code. On 21 October the repository was renamed Database disaggregation and paths.local.json was versioned at the owner's request; config/paths.example.json remains the generic alternative.
 
 ### Project SharePoint organisation
 

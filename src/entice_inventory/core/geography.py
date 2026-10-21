@@ -11,7 +11,7 @@ import json
 from io import BytesIO
 from pathlib import Path
 
-from entice_inventory.core.paths import local_config, project_data_root
+from entice_inventory.core.paths import PROJECT_ROOT, local_config, project_data_root
 
 
 @dataclass(frozen=True)
@@ -75,9 +75,13 @@ def configured_geography():
         return None
     if not isinstance(config, dict) or not config.get("mapping"):
         raise ValueError("geography must contain a mapping file path.")
+    mapping_base = config.get("mapping_base", "data_root")
+    if mapping_base not in {"data_root", "repository"}:
+        raise ValueError("geography.mapping_base must be 'data_root' or 'repository'.")
     path = Path(config["mapping"]).expanduser()
     if not path.is_absolute():
-        path = project_data_root(required=True) / path
+        base = PROJECT_ROOT if mapping_base == "repository" else project_data_root(required=True)
+        path = base / path
     return Geography.read(path, name=config.get("name"), sheet=config.get("sheet", 0))
 
 

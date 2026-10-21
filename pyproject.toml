@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "entice-inventory"
 version = "0.1.0"
-description = "GTAP12 disaggregation toolkit for ENTICE deliverable D2.4 (enhanced GTAP database)"
+description = "Data preparation and GTAP database disaggregation workflows for ENTICE with MARIO/CVXLab"
 requires-python = ">=3.10"
 dependencies = [
     "openpyxl",

@@ -63,6 +63,30 @@ def test_camilla_partition_covers_the_canonical_gtap_universe():
     assert len(geo.regions) == 13
 
 
+@pytest.mark.parametrize('mapping_base,expected', [(None, 'DATA'), ('data_root', 'DATA'), ('repository', 'REPO')])
+def test_configured_mapping_distinguishes_data_from_repository(tmp_path, monkeypatch, mapping_base, expected):
+    from entice_inventory.core import geography
+    repository, shared = tmp_path / 'relocated repository', tmp_path / 'Data split'
+    for base, target in [(repository, 'REPO'), (shared, 'DATA')]:
+        base.mkdir()
+        (base / 'mapping.json').write_text(json.dumps({'R1': target}))
+    config = {'name': 'Configured', 'mapping': 'mapping.json'}
+    if mapping_base is not None:
+        config['mapping_base'] = mapping_base
+    monkeypatch.setattr(geography, 'PROJECT_ROOT', repository)
+    monkeypatch.setattr(geography, 'project_data_root', lambda **kwargs: shared)
+    monkeypatch.setattr(geography, 'local_config', lambda: {'geography': config})
+    assert geography.configured_geography().mapping == {'R1': expected}
+
+
+def test_configured_mapping_rejects_an_unknown_base(monkeypatch):
+    from entice_inventory.core import geography
+    monkeypatch.setattr(geography, 'local_config', lambda: {
+        'geography': {'mapping': 'mapping.json', 'mapping_base': 'automatic'}})
+    with pytest.raises(ValueError, match='mapping_base'):
+        geography.configured_geography()
+
+
 def test_chunked_baseline_matches_flow_aggregation(tmp_path):
     geo = Geography({'R1': 'G', 'R2': 'G', 'R3': 'H'})
     axis = pd.MultiIndex.from_product([['R1', 'R2', 'R3'], ['Sector'], ['P', 'Q']], names=['Region', 'Level', 'Item'])

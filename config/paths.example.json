@@ -27,5 +27,6 @@
     "copcosts": "Data collection/Final/PURDUE/Shared material/Cost structures/COPCOSTS.csv",
     "copper_sectors": "Data collection/Final/PURDUE/Shared material/Cost structures/COPSEC.csv",
     "d24_database_runs": "Database/D2.4"
-  }
+  },
+  "mario_source": null
 }
