@@ -29,7 +29,7 @@ Add the following fields to the existing local configuration:
     "mapping": "/absolute/path/to/data/geographies/gtap13.json"
   },
   "disaggregation": {
-    "inventories": "Inventories/20261001",
+    "inventories": "Inventories/D2.4 inventories/Regenerated 20261001",
     "cleaning_policy": true,
     "steps": null
   }

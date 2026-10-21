@@ -1,0 +1,2390 @@
+{
+  "date": "2026-10-21",
+  "source_root_role": "eNextGen WP2 GTAP disaggregation archive",
+  "target_root": "WSP Data split",
+  "scope": "Raw Data collection (excluding generated Inventory cleaning/Inventories 13reg), Shared material, Sectors list and region_clustering.xlsx; program/cache/temporary files excluded.",
+  "existing_files_overwritten": false,
+  "source_files_preserved": true,
+  "records": [
+    {
+      "source": "Data collection/New sectors classification.xlsx",
+      "destination": "Data collection/eNextGen sources/New sectors classification.xlsx",
+      "status": "copied_verified",
+      "bytes": 62836,
+      "sha256": "3d9ef34a633b3a023e43eeac3a75a3f6baa6b699fd3050846d7fc5166e66ffb5"
+    },
+    {
+      "source": "Data collection/New sectors supply chains.xlsx",
+      "destination": "Data collection/eNextGen sources/New sectors supply chains.xlsx",
+      "status": "copied_verified",
+      "bytes": 45956,
+      "sha256": "6af4ed3a794d9f20395481c2d75dc63c071e7583ee71de23a959c8a68f92a2f7"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Aluminum ORDECYSvsCANADASUT.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Aluminum ORDECYSvsCANADASUT.xlsx",
+      "status": "copied_verified",
+      "bytes": 18822,
+      "sha256": "5c964bc00825895f988884c6aac42f39f4286cbabc1077d1155e1babc116e926"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/BEV example/Batteries inventories.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/BEV example/Batteries inventories.xlsx",
+      "status": "copied_verified",
+      "bytes": 22462,
+      "sha256": "6a4c01abec1a69344459fb9814cfc4bbd4d6ddcd2daca0db3e5211eea4fb85b6"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/BEV example/Data collection template - december BEV.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/BEV example/Data collection template - december BEV.xlsx",
+      "status": "copied_verified",
+      "bytes": 966664,
+      "sha256": "e28db5fb800320412abd0b4b3d4e0f248c9e541a8f3bfcb05338752ded6e4481"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/BEV example/IEDC tests/3_MC_VehicleArchetypes_Wolfram_2020.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/BEV example/IEDC tests/3_MC_VehicleArchetypes_Wolfram_2020.xlsx",
+      "status": "copied_verified",
+      "bytes": 41663,
+      "sha256": "3d46b6d1c5b6b7cd8e51b3e2856d40a767814d49358ed0313a9ef484c3c8084d"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/BEV example/IEDC tests/3_MC_Vehicles_CIRCOMOD.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/BEV example/IEDC tests/3_MC_Vehicles_CIRCOMOD.xlsx",
+      "status": "copied_verified",
+      "bytes": 135757,
+      "sha256": "1962e23fa92aa439cc8665022abecd4e92f3eb91f548b9c2b010abf0cf66d5d0"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/BEV example/Inventories - Arlango thesis.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/BEV example/Inventories - Arlango thesis.xlsx",
+      "status": "copied_verified",
+      "bytes": 117372,
+      "sha256": "44522c4c404a1467401cedb270891f6dda1cd3f92fd308f45385704f0e7a09e7"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/BEV example/Konig2021_An Overview of Parameter and Cost for Battery Electric Vehicles.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/BEV example/Konig2021_An Overview of Parameter and Cost for Battery Electric Vehicles.pdf",
+      "status": "copied_verified",
+      "bytes": 4563454,
+      "sha256": "47b7a7aa818fe1a954217ddd79f5a9133c435a832013a9e6c2a66b8f49acb456"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/BEV example/Koroma2022_Life cycle assessment of battery electric vehicles Implications of future.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/BEV example/Koroma2022_Life cycle assessment of battery electric vehicles Implications of future.pdf",
+      "status": "copied_verified",
+      "bytes": 1657313,
+      "sha256": "7430c30f04a28ad33c10454dc3eba9cadc96dcd021b2ee6c13b250d5c106dc43"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/BEV example/Master Thesis Enrico Arlango.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/BEV example/Master Thesis Enrico Arlango.pdf",
+      "status": "copied_verified",
+      "bytes": 6417466,
+      "sha256": "0697c7d4aeb51a13327bd430fe9c5b7b16241ed0c529f19e4e4430a440714a5b"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/BEV example/Philippot2019.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/BEV example/Philippot2019.pdf",
+      "status": "copied_verified",
+      "bytes": 1775409,
+      "sha256": "a14cb32d86e33692474d761e89f4d0dcbd173c6b302a9a9c34f9faa5d8f53ba1"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/BEV example/master_base_scenario - Rossi thesis.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/BEV example/master_base_scenario - Rossi thesis.xlsx",
+      "status": "copied_verified",
+      "bytes": 92482,
+      "sha256": "2e6fe4c5496f9626e02cf8ab7ab0e2c8c4a0fe741f18f1d6909ddae99a1f73c0"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Batteries/Battery production Y23.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Batteries/Battery production Y23.xlsx",
+      "status": "copied_verified",
+      "bytes": 84984,
+      "sha256": "ba7a85036fae2a755e1270fb2e308c2adcf6f4f442a3506e1533e15cbc51cff1"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Batteries/DataCollectionTemplate_Batteries.docx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Batteries/DataCollectionTemplate_Batteries.docx",
+      "status": "copied_verified",
+      "bytes": 2053668,
+      "sha256": "7945b216090007b6126ba2e4407a53cda3e8d1fa67e5bbbaf68c6e64954166a4"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Batteries/Inventory_Manufacture of Batteries.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Batteries/Inventory_Manufacture of Batteries.xlsx",
+      "status": "copied_verified",
+      "bytes": 922579,
+      "sha256": "58bfc52050c63c20500d9aff13227e27c5f8cc1ed666ca1c4a104fe80e81d676"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Batteries/Inventory_Manufacture of LCO batteries.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Batteries/Inventory_Manufacture of LCO batteries.xlsx",
+      "status": "copied_verified",
+      "bytes": 915051,
+      "sha256": "79681e6ecc071b0a8a36736de7ddc4cfcedb7925efe0700bf06273b4cc194c65"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Batteries/Inventory_Manufacture of LFP batteries.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Batteries/Inventory_Manufacture of LFP batteries.xlsx",
+      "status": "copied_verified",
+      "bytes": 915511,
+      "sha256": "afef5e851580feb6622b752d2fd90d3822b019dcb3026746f3e0351cc7ec8ad7"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Batteries/Inventory_Manufacture of LMO batteries.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Batteries/Inventory_Manufacture of LMO batteries.xlsx",
+      "status": "copied_verified",
+      "bytes": 914405,
+      "sha256": "c7f4c5170ca53fb8c88bffa51aa74945dee07de602b54e2275f52582450206ea"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Batteries/Inventory_Manufacture of NCA batteries.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Batteries/Inventory_Manufacture of NCA batteries.xlsx",
+      "status": "copied_verified",
+      "bytes": 915432,
+      "sha256": "69b538eeb08499719982c72c71174e368c22246ea69885ed9e8d4dff2071ee81"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Batteries/Inventory_Manufacture of NMC batteries.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Batteries/Inventory_Manufacture of NMC batteries.xlsx",
+      "status": "copied_verified",
+      "bytes": 917331,
+      "sha256": "afd3cbca1386422d2034c1dd9db335fce5c774a9ccca7a8db08a8da6ffe18545"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Batteries/Trade LiB.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Batteries/Trade LiB.xlsx",
+      "status": "copied_verified",
+      "bytes": 301604,
+      "sha256": "2636400ec58ec7854e1c4e54ba6185c15fba1c06cd21798feaa779010dfcfffc"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Batteries/battery_production_value_2023.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Batteries/battery_production_value_2023.xlsx",
+      "status": "copied_verified",
+      "bytes": 24051,
+      "sha256": "53555e38f7118b4d07287193bfc651e125fbef851880d2c5f10afd03792cc6ca"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/GTAP_transport_sectors.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/GTAP_transport_sectors.xlsx",
+      "status": "copied_verified",
+      "bytes": 1767779,
+      "sha256": "60e94d62093bf1888797693716fdf3f0d37fbcd87fb4f37c4f5f7d029fbc00ee"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Inventories visualization.pbix",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Inventories visualization.pbix",
+      "status": "copied_verified",
+      "bytes": 220632,
+      "sha256": "997b4e20a822820699e9158276979674b93e803aefcb73619ed208cd534d1ffe"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/Aggregations to GTAP entice.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/Aggregations to GTAP entice.xlsx",
+      "status": "copied_verified",
+      "bytes": 100886,
+      "sha256": "267aa1d8e9a74a92ccfd71040136a4856be71ae982759aaaa981678692694a63"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/BEA US SUT/BEA IOT.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/BEA US SUT/BEA IOT.xlsx",
+      "status": "copied_verified",
+      "bytes": 4551259,
+      "sha256": "46dcaa3716ee796bfdace892d6b96c3b24f36132f8f7d872b647578175f31d9f"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/BEA US SUT/BEA SUT.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/BEA US SUT/BEA SUT.xlsx",
+      "status": "copied_verified",
+      "bytes": 4148551,
+      "sha256": "ef22df73510c3a836a3dddc8bd4011884a9734662d86521993d640c3c45b16a6"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/BEA US SUT/Supply_Detail.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/BEA US SUT/Supply_Detail.xlsx",
+      "status": "copied_verified",
+      "bytes": 1607057,
+      "sha256": "1b81c7525360590c2e03a29ef64439489286cd667ddd5e95a14803dd5414e62e"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/BEA US SUT/US BEA activity aggregation.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/BEA US SUT/US BEA activity aggregation.xlsx",
+      "status": "copied_verified",
+      "bytes": 39347,
+      "sha256": "3ac6a3a55972b7d4f9642ab27c969bd053306ad64df31e82b4cfe225a614a607"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/BEA US SUT/US vehicles.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/BEA US SUT/US vehicles.xlsx",
+      "status": "copied_verified",
+      "bytes": 66235,
+      "sha256": "6ce56ac0a7fc07fff7905d124976ccde5c0e3f5c98456881ad441eadf5046904"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/BEA US SUT/Use_Detail.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/BEA US SUT/Use_Detail.xlsx",
+      "status": "copied_verified",
+      "bytes": 2125920,
+      "sha256": "849bdd5af70aa225e7ce991cc5d8a3d093ae8ec982bc1e3bed1e9b5b6f55b93d"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2017/CA_SUT_C2017_D.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2017/CA_SUT_C2017_D.xlsx",
+      "status": "copied_verified",
+      "bytes": 5371290,
+      "sha256": "2c89a8d768113981c2feeda0682063257ae3e1d87a345faa68ecf4c892f7a678"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2017/Canada IOT2017 Mario Aggr.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2017/Canada IOT2017 Mario Aggr.xlsx",
+      "status": "copied_verified",
+      "bytes": 251538,
+      "sha256": "d215e20c727e7dc535ed6e6ecd54cab5a345af40256fd4b3b5222fc4c3c7f0c4"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2017/Canada IOT2017 Mario.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2017/Canada IOT2017 Mario.xlsx",
+      "status": "copied_verified",
+      "bytes": 1613499,
+      "sha256": "f31689225cca7309b840d2d7b4a300057cadfe8d452660e8d791f3328a52368d"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2017/Canada SUT2017 Mario.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2017/Canada SUT2017 Mario.xlsx",
+      "status": "copied_verified",
+      "bytes": 2836730,
+      "sha256": "5b82c415c7dde4fa354920293a95630409c391993acd68cd66423820cfdc10fc"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2017/add_sectors_canada_2017.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2017/add_sectors_canada_2017.xlsx",
+      "status": "copied_verified",
+      "bytes": 26491,
+      "sha256": "e2a0acc3958490e70416efceffcdfb6889c7a6c8e207042e02a10be9a8e6cf77"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2017/aggr_canada_2017.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2017/aggr_canada_2017.xlsx",
+      "status": "copied_verified",
+      "bytes": 27032,
+      "sha256": "1c0921936dd6927d81e45dd66172df50e281a9f8701c33186350ce371657f493"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2022/CANADA SUT classification.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2022/CANADA SUT classification.xlsx",
+      "status": "copied_verified",
+      "bytes": 56848,
+      "sha256": "9a97428215e1bba53417e38f396d8cba55b82168b1f5ea202d759dcb33dfc1be"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2022/CA_MarginsAndTaxes_C2022_D.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2022/CA_MarginsAndTaxes_C2022_D.xlsx",
+      "status": "copied_verified",
+      "bytes": 37607571,
+      "sha256": "50d64afa92b5c9b9fee0d785ad51467d136b75ff7dc00cfc321f6c96fd09d3a2"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2022/CA_SUT_C2022_D.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2022/CA_SUT_C2022_D.xlsx",
+      "status": "copied_verified",
+      "bytes": 4783046,
+      "sha256": "99cb3ad1d344ffd0bf9bef31b29ef8206adba65552cf0b1cafbb8d35f4e44985"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2022/Canada IOT Mario Aggr.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2022/Canada IOT Mario Aggr.xlsx",
+      "status": "copied_verified",
+      "bytes": 170824,
+      "sha256": "41a108378fe22a673264af8272c5143e45c89ad7c8754bce650fdaf7631f8cb3"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2022/Canada IOT Mario.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2022/Canada IOT Mario.xlsx",
+      "status": "copied_verified",
+      "bytes": 1404924,
+      "sha256": "8535940bc45fe60f64ae4fe48d67b094c9cbe1cd000f233f2470406cb40f544a"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2022/Canada SUT2022 Mario.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2022/Canada SUT2022 Mario.xlsx",
+      "status": "copied_verified",
+      "bytes": 4427191,
+      "sha256": "c3ac582aeaedfdbf0491e6e5eab8588e83d3e499e9ba1e76091790739893498c"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2022/aggregate_2022canada_ixi.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/Canada SUT/2022/aggregate_2022canada_ixi.xlsx",
+      "status": "copied_verified",
+      "bytes": 29084,
+      "sha256": "1eaef795c3012cc41e8de4dc2fcec7963c530a35f8e03736a548bc4211dc01c9"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/China IOT/Aggregated China2017CEEIOT.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/China IOT/Aggregated China2017CEEIOT.xlsx",
+      "status": "copied_verified",
+      "bytes": 231484,
+      "sha256": "506f9f2d419099ac1a805244107cfa9b9063babaa13fad7d80d4641af3432fb5"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/China IOT/Aggregations for China2017.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/China IOT/Aggregations for China2017.xlsx",
+      "status": "copied_verified",
+      "bytes": 27389,
+      "sha256": "68bad0f7e6caaeda4100a77bf90415f05bbf4eb0c1254dc5a2379639e91af5a7"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/China IOT/Aggregations for China2020.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/China IOT/Aggregations for China2020.xlsx",
+      "status": "copied_verified",
+      "bytes": 26989,
+      "sha256": "1a441f12228aa7995e9d942312bc3d6eef3c46916798918196c14e792b0adc9b"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/China IOT/China IOT 2017 CEEIOT.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/China IOT/China IOT 2017 CEEIOT.xlsx",
+      "status": "copied_verified",
+      "bytes": 391839,
+      "sha256": "6ccd5de348d59693df9ca9479a968aef294944980d819035526143cddd34937b"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/China IOT/China IOT 2020 CEEIOT.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/China IOT/China IOT 2020 CEEIOT.xlsx",
+      "status": "copied_verified",
+      "bytes": 401548,
+      "sha256": "b02b49ae9756b12da780c32278caeac3f0fe31a5fca902b578957cb30515304b"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/Japan SUT/Env extensions 2020 JP IOT.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/Japan SUT/Env extensions 2020 JP IOT.xlsx",
+      "status": "copied_verified",
+      "bytes": 2151891,
+      "sha256": "70704beb063d5cb5b6bf4637a79774e55d81cdacb4809b1c24cb7cae357fac33"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/Japan SUT/IOT_JP_Basic sector_2020.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/Japan SUT/IOT_JP_Basic sector_2020.xlsx",
+      "status": "copied_verified",
+      "bytes": 26900501,
+      "sha256": "011d3085d7f9164878c05b06db2c0d3189a94fe5b4f6400c0077709e395a4c43"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/Japan SUT/JAPAN vehicles.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/Japan SUT/JAPAN vehicles.xlsx",
+      "status": "copied_verified",
+      "bytes": 79346,
+      "sha256": "3564ae408588c941720a93defea5656d3d5c325057e7a245e63e4ab4dbf65561"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/National SUTs/Japan SUT/Japan_GTAP_Mapping.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/National SUTs/Japan SUT/Japan_GTAP_Mapping.xlsx",
+      "status": "copied_verified",
+      "bytes": 31715,
+      "sha256": "29ebc79baf805e95f082cd8f4ea0830fc9600803c99fdd6a8407b329fbcdd2fb"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Other transport split classification.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Other transport split classification.xlsx",
+      "status": "copied_verified",
+      "bytes": 15890,
+      "sha256": "21756dc9991aad2b660cf0efc4555501af98d3c2d75a55e3af845d674d1b571a"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/Degen2023_Energy consumption of current and future production of lithium-ion and.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/Degen2023_Energy consumption of current and future production of lithium-ion and.pdf",
+      "status": "copied_verified",
+      "bytes": 2949833,
+      "sha256": "f72457074b85bec5bb66d868a701bd9770546a5226122602bafa8045e79d63a7"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/DelDuce2014_Electric passenger car transport and passenger car life cycle inve.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/DelDuce2014_Electric passenger car transport and passenger car life cycle inve.pdf",
+      "status": "copied_verified",
+      "bytes": 980269,
+      "sha256": "9f4ff1a47d4195327a665901d8bb9c583e01fc49c5f2e0ef7dffffb9e8460f41"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/GlobalEVOutlook2024.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/GlobalEVOutlook2024.pdf",
+      "status": "copied_verified",
+      "bytes": 5227203,
+      "sha256": "21ef29ff66c6e13d705e041caafdb755f17f5b0194793fbc8023bb2c79229438"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/Heavy duty LCI.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/Heavy duty LCI.xlsx",
+      "status": "copied_verified",
+      "bytes": 23641,
+      "sha256": "4990b5e0922f41276fa301f0ebd3ceaa062aed16d7b22fb309a654626267ffa7"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/Hoekstra2025_Using lerning curves to guide_heavy electric trucks.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/Hoekstra2025_Using lerning curves to guide_heavy electric trucks.pdf",
+      "status": "copied_verified",
+      "bytes": 819050,
+      "sha256": "6384858fdb5b75a710653611609985e51488e087603f722576f4ee9066594f9e"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/Hoekstra2025_trucks.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/Hoekstra2025_trucks.xlsx",
+      "status": "copied_verified",
+      "bytes": 299352,
+      "sha256": "34293ef73f98a02257f46b024af174e330cd953f61024cf3f29bd70fa3a43a8b"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/Hoekstra202_trucks.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/Hoekstra202_trucks.pdf",
+      "status": "copied_verified",
+      "bytes": 946196,
+      "sha256": "d1e0a10bd44bc233326c40ae7ffb38b9d5246004103f965b5f303a7e3bef8a91"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/ICCT2019_EV_cost_2020_2030.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/ICCT2019_EV_cost_2020_2030.pdf",
+      "status": "copied_verified",
+      "bytes": 385442,
+      "sha256": "17cd765251964598aedcee5450df83ec9b2f0b082ddc684aa7d4c0f970c9f243"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/ICCT2022_ev-cost-benefits-2035.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/ICCT2022_ev-cost-benefits-2035.pdf",
+      "status": "copied_verified",
+      "bytes": 1674472,
+      "sha256": "d1e727dbe0bde0ecd847d89b263c27af94afbf21aa2992dd9dccd7a2f0cef5cd"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/IEA_Regional EV lithium-ion battery manufacturing capacity by manufacturer headquarters2023.html",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/IEA_Regional EV lithium-ion battery manufacturing capacity by manufacturer headquarters2023.html",
+      "status": "copied_verified",
+      "bytes": 318995,
+      "sha256": "6c1369af4686e3c3bf5573d7998b974a80376790e8606cc29e2454d5d839b891"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/Koroma2022_Life cycle assessment of battery electric vehicles Implications of .pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/Koroma2022_Life cycle assessment of battery electric vehicles Implications of .pdf",
+      "status": "copied_verified",
+      "bytes": 1657313,
+      "sha256": "3d33116da2ac8e633d23b363a269a5934f80a26f02ef176511eda0df5fe39046"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/LIBs-LCA Supplmentary tables_final_final.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/LIBs-LCA Supplmentary tables_final_final.xlsx",
+      "status": "copied_verified",
+      "bytes": 608822,
+      "sha256": "8843d55d56895271127287bb51f5003628705eb3fabd7ff01d32bf1cd40b0d33"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/Material production shares.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/Material production shares.xlsx",
+      "status": "copied_verified",
+      "bytes": 42275,
+      "sha256": "8702136381b4a125724ff59f45d8a97670fa21c9f78524332f5a65ae749e1ec2"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/Oda2022_Review of life cycle assessment for automobiles A meta-analysis-based approach.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/Oda2022_Review of life cycle assessment for automobiles A meta-analysis-based approach.pdf",
+      "status": "copied_verified",
+      "bytes": 4890158,
+      "sha256": "a28d84f2ef2ab24206c8ac15ea01cdaf3c8e95466c447ad6c8de3d35d91322af"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/PV_merletti_Add_sectors.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/PV_merletti_Add_sectors.xlsx",
+      "status": "copied_verified",
+      "bytes": 451811,
+      "sha256": "fc7dce34665437460c36f4157dd4d33f2ce3342079d13670c57721dd7c8d98e3"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/Peisler2024_Carbon footprint distributions of lithium-ion batteries and their materials.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/Peisler2024_Carbon footprint distributions of lithium-ion batteries and their materials.pdf",
+      "status": "copied_verified",
+      "bytes": 2595110,
+      "sha256": "84f7011036bd09a9abf62e78c020f2d95eeeb0eb47662b4bcc7b29a5b413f4c4"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/Purdue_Orangi2022_supplementary.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/Purdue_Orangi2022_supplementary.pdf",
+      "status": "copied_verified",
+      "bytes": 235707,
+      "sha256": "313079e07f8071a83ab24e6626518fea8b4c7f83d5d1083d7726202657760201"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/Purdue_Sun2022_Surging lithium price will not impede the electric vehicle boom.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/Purdue_Sun2022_Surging lithium price will not impede the electric vehicle boom.pdf",
+      "status": "copied_verified",
+      "bytes": 1081035,
+      "sha256": "154f3b3eeaea1e0532e29ca630de7a17b2f5ec202ef377008ab354e6fc96a7b6"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/SCANIA_life-cycle-assessment-of-long-haulage-trucks_battery-electric-vs-internal-combustion-engine.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/SCANIA_life-cycle-assessment-of-long-haulage-trucks_battery-electric-vs-internal-combustion-engine.pdf",
+      "status": "copied_verified",
+      "bytes": 1203916,
+      "sha256": "74a1d480db8a83ef12b69aad943fed54011e21706979142e3b4d2ebe51e03e2a"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/Tamba2022_Economy-wide impacts of road transport electrification in the EU.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/Tamba2022_Economy-wide impacts of road transport electrification in the EU.pdf",
+      "status": "copied_verified",
+      "bytes": 1267736,
+      "sha256": "11288fd50902c022900e763276b37fbbb0a7e7c952f5e8a0ce3457e3d93947cf"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/Wolff2020_Scalable Life-Cycle Inventory for Heavy-Duty Vehicle Production.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/Wolff2020_Scalable Life-Cycle Inventory for Heavy-Duty Vehicle Production.pdf",
+      "status": "copied_verified",
+      "bytes": 2846057,
+      "sha256": "7135f4f305dedbc0272922b9ee709d92bfaa1f5fe5a9abb816befe6380b32318"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/Xiang2022-BuildingPracticalHighVoltageCathodeMaterialsforLithiumIonBatteries.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/Xiang2022-BuildingPracticalHighVoltageCathodeMaterialsforLithiumIonBatteries.pdf",
+      "status": "copied_verified",
+      "bytes": 2942956,
+      "sha256": "20746b9ceb012cdb271536f636807847e81fd709679b30832c41cf34c4848a1a"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/Zhang2025_The impact of BEV manufacturing on China\u2019s economy and environment.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/Zhang2025_The impact of BEV manufacturing on China\u2019s economy and environment.pdf",
+      "status": "copied_verified",
+      "bytes": 2279948,
+      "sha256": "939bf6d7b487856101d7259835db8f873cc5c3fb3ba2766ead426cce9358290d"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Sources/roland_berger_fuel_cells_hydrogen_trucks.pdf",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Sources/roland_berger_fuel_cells_hydrogen_trucks.pdf",
+      "status": "copied_verified",
+      "bytes": 3462874,
+      "sha256": "cae48b9bfb8e41241fa81b1dd1de260071610541b46aa2736350dcba9068bf75"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Trades/_sets.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Trades/_sets.xlsx",
+      "status": "copied_verified",
+      "bytes": 15466,
+      "sha256": "6a4b7826e6a28ff5ed20fa5f0b2bfc88f10da0ae8a555655d7b395f0f3046d66"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Trades/all_data copy.csv",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Trades/all_data copy.csv",
+      "status": "copied_verified",
+      "bytes": 56476898,
+      "sha256": "5c5b19169c1b1546d9f86da7f7f2687f6fed7d03bbe84431a292ca141609f9d4"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Trades/all_data.csv",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Trades/all_data.csv",
+      "status": "copied_verified",
+      "bytes": 55593674,
+      "sha256": "27543a67c3a55e929028cfdf53b09e0d8cb78dc1ab2de3f82233315bb6ab6e81"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Trades/datasplit.pbix",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Trades/datasplit.pbix",
+      "status": "copied_verified",
+      "bytes": 13060,
+      "sha256": "8087bcb1a6fec2bbd74c5c13c51b348d7a637c6d7da8b36229cb925677e5cbc7"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Trades/raw data/Heavy duty trucks | BEV+FCEV.csv",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Trades/raw data/Heavy duty trucks | BEV+FCEV.csv",
+      "status": "copied_verified",
+      "bytes": 826818,
+      "sha256": "05b6eeea669d3366a69470ea0b7c2ce7c918b07d4bc9d6d0029c5813b569cdd1"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Trades/raw data/Heavy duty trucks | ICEV+HEV.csv",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Trades/raw data/Heavy duty trucks | ICEV+HEV.csv",
+      "status": "copied_verified",
+      "bytes": 27888481,
+      "sha256": "88e7af52fd4cead162dd7e4d7d62429781485107f80f1eb5b361da2d44e9f583"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Trades/raw data/Passenger cars | BEV+FCEV.csv",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Trades/raw data/Passenger cars | BEV+FCEV.csv",
+      "status": "copied_verified",
+      "bytes": 3392995,
+      "sha256": "22ada879621d65cbf24fc0add55a664dd453ea03febb7951b66dc8528b808784"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Trades/raw data/Passenger cars | HEV.csv",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Trades/raw data/Passenger cars | HEV.csv",
+      "status": "copied_verified",
+      "bytes": 11283752,
+      "sha256": "c614ae90fa43a3c10cc48a859646f527d2fec0994a8d5ba03e298df0339d62ce"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Trades/raw data/Passenger cars | ICEV.csv",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Trades/raw data/Passenger cars | ICEV.csv",
+      "status": "copied_verified",
+      "bytes": 25764881,
+      "sha256": "449328a45bee546ac4f8e7f1a2031d329d801b4227752c3968a714cfc16cd019"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Vehicles/DataCollectionTemplate_additional_info.docx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Vehicles/DataCollectionTemplate_additional_info.docx",
+      "status": "copied_verified",
+      "bytes": 1202487,
+      "sha256": "6a2e4aba3fd45a93afbf692de748b4b71bc2a5e461a83179898862eb2ebc0cb4"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Vehicles/Inventory_Manufacture of heavy duty BEV.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Vehicles/Inventory_Manufacture of heavy duty BEV.xlsx",
+      "status": "copied_verified",
+      "bytes": 911175,
+      "sha256": "d0bdb33759ead60307eefbfa9ac4d275a77f582d688695d2b2166940edf1406a"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Vehicles/Inventory_Manufacture of heavy duty ICEV.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Vehicles/Inventory_Manufacture of heavy duty ICEV.xlsx",
+      "status": "copied_verified",
+      "bytes": 1193604,
+      "sha256": "2592589fac22431a6aafda24f1b75a16eab39cc7b5ee62e25a14077371db0540"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Vehicles/Inventory_Manufacture of light duty BEV.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Vehicles/Inventory_Manufacture of light duty BEV.xlsx",
+      "status": "copied_verified",
+      "bytes": 907917,
+      "sha256": "541d152ab74d54ca0feb88eb358961c46791185aec2668c37ccdea43165a3b17"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Vehicles/Inventory_Manufacture of light duty HEV.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Vehicles/Inventory_Manufacture of light duty HEV.xlsx",
+      "status": "copied_verified",
+      "bytes": 1271340,
+      "sha256": "7cde4294a2e730fe9a4d0fae5c21eb073a270e0f51f08c836d3b792c4860df0d"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Vehicles/Inventory_Manufacture of light duty ICEV.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Vehicles/Inventory_Manufacture of light duty ICEV.xlsx",
+      "status": "copied_verified",
+      "bytes": 968879,
+      "sha256": "b13f479e66075167ac3e9c6393193dd2cee01b97b3d9ae029865e1275ccec55e"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Vehicles/Vehicles median FOB-based export price.csv",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Vehicles/Vehicles median FOB-based export price.csv",
+      "status": "copied_verified",
+      "bytes": 40320,
+      "sha256": "e3f4a4232fe8e43e3856d93d0a1c206f1e20a46b962d7cd9e2616e66f27f6b95"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/Vehicles/Y23 - Vehicle production by powertrain and country.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Vehicles/Y23 - Vehicle production by powertrain and country.xlsx",
+      "status": "copied_verified",
+      "bytes": 249124,
+      "sha256": "d50806752381b464a09d84082a516e0bb3b2d22abaaee984493e6dc3a479d262"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/visuals/_sets.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/visuals/_sets.xlsx",
+      "status": "copied_verified",
+      "bytes": 17353,
+      "sha256": "39cc3da8c92e50bee7a989171cab7b5d27b454e88873299b8012c24fcb7167f8"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/visuals/all_data.csv",
+      "destination": "Data collection/POLIMI & ENEXTGEN/visuals/all_data.csv",
+      "status": "copied_verified",
+      "bytes": 63010106,
+      "sha256": "ef127b6fa0ab38114fbdf42af89a7fe4e2255d2dfa4aaef4fcbce904664b1730"
+    },
+    {
+      "source": "Data collection/POLIMI & ENEXTGEN/visuals/datasplit.pbix",
+      "destination": "Data collection/POLIMI & ENEXTGEN/visuals/datasplit.pbix",
+      "status": "copied_verified",
+      "bytes": 6525464,
+      "sha256": "78da0a0778db406e2cf45f4562566775b3a131d708d6162ec9c1b6301193e0dc"
+    },
+    {
+      "source": "Data collection/Sectoral_codes_mappings_H5.xlsx",
+      "destination": "Data collection/eNextGen sources/Sectoral_codes_mappings_H5.xlsx",
+      "status": "copied_verified",
+      "bytes": 551906,
+      "sha256": "d17c1af1455feead31e0eba7f7596fd4d4c81506609fe894dd8875674a50aab1"
+    },
+    {
+      "source": "Data collection/Sectors allocation for data collection.xlsx",
+      "destination": "Data collection/eNextGen sources/Sectors allocation for data collection.xlsx",
+      "status": "copied_verified",
+      "bytes": 29565,
+      "sha256": "aa2373c8a52d22d24139c246b33e121b3c09b3b543d6b0e8298a60c4721f0367"
+    },
+    {
+      "source": "Data collection/Shared sources.xlsx",
+      "destination": "Data collection/eNextGen sources/Shared sources.xlsx",
+      "status": "copied_verified",
+      "bytes": 32781,
+      "sha256": "1075cf89bc8f2d557e64b3efb28d97c32065031f625a2dc29b855498b451a259"
+    },
+    {
+      "source": "Data collection/Y25M12 Shared Updates meeting sumup.docx",
+      "destination": "Data collection/eNextGen sources/Y25M12 Shared Updates meeting sumup.docx",
+      "status": "copied_verified",
+      "bytes": 26871,
+      "sha256": "c1472475f4cb9cd2828fbca5b09ea27d6cd895638896dfb48be4ee6c2e68a847"
+    },
+    {
+      "source": "Data collection/_old/Data collection template v1.0.xlsx",
+      "destination": "Data collection/Templates/_old/Data collection template v1.0.xlsx",
+      "status": "copied_verified",
+      "bytes": 994933,
+      "sha256": "21a38507af8ad9601f4e8df19d0136271ba53f8d7aa52ac82b2955c0fe2cca7b"
+    },
+    {
+      "source": "Data collection/_old/Data collection template v1.0_unlocked.xlsx",
+      "destination": "Data collection/Templates/_old/Data collection template v1.0_unlocked.xlsx",
+      "status": "copied_verified",
+      "bytes": 998296,
+      "sha256": "7493af530c43da3d1f74a93fef14f922d907cd8784f877b4c3db2adac5e9dd7a"
+    },
+    {
+      "source": "Data collection/_old/Data collection template v1.1 - Cement.xlsx",
+      "destination": "Data collection/Templates/_old/Data collection template v1.1 - Cement.xlsx",
+      "status": "copied_verified",
+      "bytes": 893580,
+      "sha256": "a4aeddf0a464be23e78aee129b1b8bad11df71b82561cdedf6f9190b76b25aec"
+    },
+    {
+      "source": "Data collection/_old/Data collection template v1.1_unlocked.xlsx",
+      "destination": "Data collection/Templates/_old/Data collection template v1.1_unlocked.xlsx",
+      "status": "copied_verified",
+      "bytes": 1011311,
+      "sha256": "d44e7aaf9a71622dcf28649ae7e4927904417b32bf776d8df11083c695f6d042"
+    },
+    {
+      "source": "Data collection/_old/Data collection template v2.0 - BEV.xlsx",
+      "destination": "Data collection/Templates/_old/Data collection template v2.0 - BEV.xlsx",
+      "status": "copied_verified",
+      "bytes": 964990,
+      "sha256": "c5e25aa56ea63a23c3e584a5730268e504af39fbbf1a301711bf4d7c2d43883c"
+    },
+    {
+      "source": "Data collection/_old/Data collection template v2.0.xlsx",
+      "destination": "Data collection/Templates/_old/Data collection template v2.0.xlsx",
+      "status": "copied_verified",
+      "bytes": 982470,
+      "sha256": "b4a9a7f092e088cf6c6c06a9f4f9fd30a0d7a23b70760d43ee07a0b6beae649d"
+    },
+    {
+      "source": "Data collection/_old/Data collection template v2.1 - empty.xlsx",
+      "destination": "Data collection/Templates/_old/Data collection template v2.1 - empty.xlsx",
+      "status": "copied_verified",
+      "bytes": 902978,
+      "sha256": "765353b1ec655a0669c31a0e03db521d7d7dcd018dc19a523d5ee3d2fb8b8413"
+    },
+    {
+      "source": "Data collection/_old/Data collection template v2.1 - simplified bev.xlsx",
+      "destination": "Data collection/Templates/_old/Data collection template v2.1 - simplified bev.xlsx",
+      "status": "copied_verified",
+      "bytes": 905000,
+      "sha256": "7a023be394172af0b18b16e7415eef3191def68b04f5868450c77f6d3f9d1d09"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/CMCC/DataCollectionTemplate_additional_info.docx",
+      "destination": "Data collection/Templates/_old/provided to partners/CMCC/DataCollectionTemplate_additional_info.docx",
+      "status": "copied_verified",
+      "bytes": 1202487,
+      "sha256": "9224f99a3c21a52bc3fd406e72175f0f42d6551a420da934d31680a3b87747ad"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/CMCC/Inventory_Cultivation of barley.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/CMCC/Inventory_Cultivation of barley.xlsx",
+      "status": "copied_verified",
+      "bytes": 903792,
+      "sha256": "58f805b9db6d62e4cdef8a14d8b55451a90127488bd16454d0afd98e0b06e46f"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/CMCC/Inventory_Cultivation of corn.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/CMCC/Inventory_Cultivation of corn.xlsx",
+      "status": "copied_verified",
+      "bytes": 903796,
+      "sha256": "ccd4a3ddacaba9e93a17c09cf42df754627ae528c8cab6fdd7189f3796791d1d"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/CMCC/Inventory_Cultivation of feed rice.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/CMCC/Inventory_Cultivation of feed rice.xlsx",
+      "status": "copied_verified",
+      "bytes": 903801,
+      "sha256": "10279a30e983217962f184ea67dab390cf7f1817ae9baeaee9b07693005b449e"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/CMCC/Inventory_Cultivation of food rice.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/CMCC/Inventory_Cultivation of food rice.xlsx",
+      "status": "copied_verified",
+      "bytes": 903795,
+      "sha256": "aafe7b79d2d1c17cc3f3dbc3e8a23714c96a768f020b504d020e19379a432f63"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/CMCC/Inventory_Cultivation of sorghum.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/CMCC/Inventory_Cultivation of sorghum.xlsx",
+      "status": "copied_verified",
+      "bytes": 903797,
+      "sha256": "3c3af27e32862606e23a4fc0d98075c2a4b9391f0e935c92e95dd82523968ab2"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/CMCC/Inventory_Cultivation of soy.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/CMCC/Inventory_Cultivation of soy.xlsx",
+      "status": "copied_verified",
+      "bytes": 903793,
+      "sha256": "836c0a576519145f6a0dc3f8a5a918dba97702e92f3d0159a21eb0460ead6ec2"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/E3M/DataCollectionTemplate_additional_info.docx",
+      "destination": "Data collection/Templates/_old/provided to partners/E3M/DataCollectionTemplate_additional_info.docx",
+      "status": "copied_verified",
+      "bytes": 1202487,
+      "sha256": "4538e23405d1aa804ce34da76f0feb1c7f74a0b3b280db8138d516ba82cfad44"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/E3M/Inventory_Freight international shipping service.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/E3M/Inventory_Freight international shipping service.xlsx",
+      "status": "copied_verified",
+      "bytes": 903799,
+      "sha256": "2c697ca9c8ec5692afc70fbc03a8780e418101713685251fa3998719725a0bc0"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/E3M/Inventory_Freight national shipping service.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/E3M/Inventory_Freight national shipping service.xlsx",
+      "status": "copied_verified",
+      "bytes": 903798,
+      "sha256": "8cd32276ae47d5a84acdbb927480f43ea2a1f97cbc0934f3099b76ac31f41956"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/E3M/Inventory_Manufacture of solar panels.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/E3M/Inventory_Manufacture of solar panels.xlsx",
+      "status": "copied_verified",
+      "bytes": 903806,
+      "sha256": "d94ee9e8d35975e450bb7c11094626e7f67687151312b3836f126d385ec22b84"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/E3M/Inventory_Manufacture of wind turbines.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/E3M/Inventory_Manufacture of wind turbines.xlsx",
+      "status": "copied_verified",
+      "bytes": 903812,
+      "sha256": "7380990f2c3c9dfd4a95c37b983c93ada5ec4dd2f94c7fac9ef85b32b80c01ba"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/E3M/Inventory_Mining of silicon.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/E3M/Inventory_Mining of silicon.xlsx",
+      "status": "copied_verified",
+      "bytes": 903802,
+      "sha256": "0ba135169d50e3b781dccfbea0965dad545d1aa84f95a6bbb0474360a1b51239"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/E3M/Inventory_Passenger water transport service.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/E3M/Inventory_Passenger water transport service.xlsx",
+      "status": "copied_verified",
+      "bytes": 903798,
+      "sha256": "68e677af7d0e24ba809171cc8bfb5974905dc5503a36cf2fbd11e9390e211810"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/E3M/Inventory_Transport via pipeline service.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/E3M/Inventory_Transport via pipeline service.xlsx",
+      "status": "copied_verified",
+      "bytes": 903959,
+      "sha256": "9edd6e064c0190293840abc10f44a1c11cb63f94a817ecb92cfe7e857d8dbddb"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/ICCS/DataCollectionTemplate_additional_info.docx",
+      "destination": "Data collection/Templates/_old/provided to partners/ICCS/DataCollectionTemplate_additional_info.docx",
+      "status": "copied_verified",
+      "bytes": 1202487,
+      "sha256": "7ebd1350f36519fdaf2bd97ba02129f6f94f9eb01b6a20263a2cdffcc7418935"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/ICCS/Inventory_Manufacture of ammonia.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/ICCS/Inventory_Manufacture of ammonia.xlsx",
+      "status": "copied_verified",
+      "bytes": 903795,
+      "sha256": "5ef9af7ca4ef4e059db07badd7f339730af59130cb7ba55c19e44b5d3fe043c3"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/ICCS/Inventory_Manufacture of cement with CCS.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/ICCS/Inventory_Manufacture of cement with CCS.xlsx",
+      "status": "copied_verified",
+      "bytes": 903945,
+      "sha256": "1a683226e6595031df8ab39777f4df40624280ba1ada5725f265ad556314af7b"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/ICCS/Inventory_Manufacture of electrolyzers.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/ICCS/Inventory_Manufacture of electrolyzers.xlsx",
+      "status": "copied_verified",
+      "bytes": 903801,
+      "sha256": "95c78b07f44be0e729c39932328904e101a9c7599dd92974746ba23b147e7ede"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/ICCS/Inventory_Manufacture of hydrogen via electrolysis.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/ICCS/Inventory_Manufacture of hydrogen via electrolysis.xlsx",
+      "status": "copied_verified",
+      "bytes": 903794,
+      "sha256": "152b038263cbddd02446bf3cf8555dfc76d1fdbfb0bd4952830b58f045893969"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/ICCS/Inventory_Manufacture of hydrogen via steam reforming.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/ICCS/Inventory_Manufacture of hydrogen via steam reforming.xlsx",
+      "status": "copied_verified",
+      "bytes": 903800,
+      "sha256": "9ef29042f1e225dc608314ce32c31072b96215dc7d5b9b6fbe20d838fd1fdb2a"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/ICCS/Inventory_Manufacture of traditional cement.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/ICCS/Inventory_Manufacture of traditional cement.xlsx",
+      "status": "copied_verified",
+      "bytes": 909158,
+      "sha256": "bc6388e7131c0c59533d47507513999b3efa3ca3b7a0bc5aff5ac236457ee163"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/ORDECSYS/DataCollectionTemplate_additional_info.docx",
+      "destination": "Data collection/Templates/_old/provided to partners/ORDECSYS/DataCollectionTemplate_additional_info.docx",
+      "status": "copied_verified",
+      "bytes": 1202487,
+      "sha256": "599837b300770348ad3754dad298420924690243eb1dabd88583be137350ea81"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/ORDECSYS/Inventory_Manufacture of coal products.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/ORDECSYS/Inventory_Manufacture of coal products.xlsx",
+      "status": "copied_verified",
+      "bytes": 903801,
+      "sha256": "09b1626cb8456a1541c5fcdb20056f6dbf1e1eb91b0a72bb65b408b39e2e9032"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/ORDECSYS/Inventory_Manufacture of petroleum products.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/ORDECSYS/Inventory_Manufacture of petroleum products.xlsx",
+      "status": "copied_verified",
+      "bytes": 903802,
+      "sha256": "33a61b9b322fe80ace00d7000d94fa89fd5ad0d1f5968ac6023b9cf42384d567"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/ORDECSYS/Inventory_Manufacture of primary aluminum.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/ORDECSYS/Inventory_Manufacture of primary aluminum.xlsx",
+      "status": "copied_verified",
+      "bytes": 903805,
+      "sha256": "623dd66f64691ad9ea83b78f8d2c506157de1e7ce3ad38c5683b1816d9cc562f"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/ORDECSYS/Inventory_Manufacture of secondary aluminum.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/ORDECSYS/Inventory_Manufacture of secondary aluminum.xlsx",
+      "status": "copied_verified",
+      "bytes": 903804,
+      "sha256": "f2ddab7d030a529839ca9ee6a794116b48f00b56edb61da077f5881dd7e73e3c"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/ORDECSYS/Inventory_Recycling of aluminum.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/ORDECSYS/Inventory_Recycling of aluminum.xlsx",
+      "status": "copied_verified",
+      "bytes": 903804,
+      "sha256": "06a18697fab9a785e5352d1e3f241a2c9b3df93e3b57b67ea0ff41e09e953b1f"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/DataCollectionTemplate_additional_info.docx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/DataCollectionTemplate_additional_info.docx",
+      "status": "copied_verified",
+      "bytes": 1202487,
+      "sha256": "f2edefb1a62f4165c487d864927f7a6bab5d2af2d670dd5d3ad0c001b9fa5caa"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Casting of other non-ferrous metals.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Casting of other non-ferrous metals.xlsx",
+      "status": "copied_verified",
+      "bytes": 903807,
+      "sha256": "9a2ce0d5e75b10056fcbee2bd6696139eb04c7e4e55eb0879f6ffec4c483bdae"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Manufacture of artificial graphite.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Manufacture of artificial graphite.xlsx",
+      "status": "copied_verified",
+      "bytes": 903802,
+      "sha256": "445c0938bb6f7ac72fc6211b7b4658660c2f4bf0cc091c96718f4c5d9a5eba5d"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Manufacture of magnesium.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Manufacture of magnesium.xlsx",
+      "status": "copied_verified",
+      "bytes": 903799,
+      "sha256": "e8a0c1d595bd0c140df9f97dcd7a2f62a309bea3572362b0a103caaab8f8fd84"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Manufacture of nitrogen fertilizer.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Manufacture of nitrogen fertilizer.xlsx",
+      "status": "copied_verified",
+      "bytes": 903803,
+      "sha256": "8e2589633a6d3377526c42ded4b2ab14d22049aea65c9714c00dd45c53ee356c"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Manufacture of phosphorus fertilizer.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Manufacture of phosphorus fertilizer.xlsx",
+      "status": "copied_verified",
+      "bytes": 903802,
+      "sha256": "15e14b85d7a28b8885999c2f7cbd9babc2aed2c7ed7799142bb0624ca636cabd"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Manufacture of potassium fertilizer.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Manufacture of potassium fertilizer.xlsx",
+      "status": "copied_verified",
+      "bytes": 903800,
+      "sha256": "6cb3776975040227e1e6c7321046f443c7a45919e0e9c53b691fa2b428de8733"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Manufacture of refined chromium.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Manufacture of refined chromium.xlsx",
+      "status": "copied_verified",
+      "bytes": 903806,
+      "sha256": "aaee19acc2e51eb770074784f09e264b6ab5d68ad4705a3fe0c0687253f379ee"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Manufacture of refined cobalt.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Manufacture of refined cobalt.xlsx",
+      "status": "copied_verified",
+      "bytes": 903806,
+      "sha256": "5153719110e044a087a2757e14b857e12e306af51d77b583f956c469ecc9c9d2"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Manufacture of refined gallium.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Manufacture of refined gallium.xlsx",
+      "status": "copied_verified",
+      "bytes": 903798,
+      "sha256": "f7b0e5369b2dd1b9f716540c9f0a4ff45a46e77e2eb0111d04c29151b5b95107"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Manufacture of refined lithium.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Manufacture of refined lithium.xlsx",
+      "status": "copied_verified",
+      "bytes": 903806,
+      "sha256": "5739240c039b62588c1f5bd1dc318f98b449e1c454d8da589965a73f32a36a79"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Manufacture of refined magnesium.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Manufacture of refined magnesium.xlsx",
+      "status": "copied_verified",
+      "bytes": 903798,
+      "sha256": "55dd9dafa490f6f93539a555916e38c26132446b35c7b5095b36d96cbab8a4cb"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Manufacture of refined manganese.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Manufacture of refined manganese.xlsx",
+      "status": "copied_verified",
+      "bytes": 903806,
+      "sha256": "ac94211b88bbe5752f1e62bc6d667e0a7bd1baac17712edcbd5b055ff320a44d"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Manufacture of refined nickel.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Manufacture of refined nickel.xlsx",
+      "status": "copied_verified",
+      "bytes": 903804,
+      "sha256": "9eefc53112c2fe31e27e166c6a9a98d2083fff4e24a979d7cbaea88132ce6e69"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Manufacture of refined rare earths.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Manufacture of refined rare earths.xlsx",
+      "status": "copied_verified",
+      "bytes": 903804,
+      "sha256": "dbb13e040458f3aa618d45ad5a5ebfb19e79e233cb4ca53f352eae4e8fd21643"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Manufacture of refined silver.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Manufacture of refined silver.xlsx",
+      "status": "copied_verified",
+      "bytes": 903800,
+      "sha256": "ca349beea46f620d0688e50a9d9b53aa1b97e816ac01a6d282f5110f21f654c0"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Manufacture of refined titanium.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Manufacture of refined titanium.xlsx",
+      "status": "copied_verified",
+      "bytes": 903798,
+      "sha256": "c2557ec02b5b59328e219f9ead7d74e72c5d64469644c7d624ee2d46a6a47418"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Manufacture of refined zinc.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Manufacture of refined zinc.xlsx",
+      "status": "copied_verified",
+      "bytes": 903803,
+      "sha256": "1a171259b292acb756e2e3955d4b403fa319fee33540ae4148d617fb32113966"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Manufacture of semi-manufactured platinum metals.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Manufacture of semi-manufactured platinum metals.xlsx",
+      "status": "copied_verified",
+      "bytes": 903800,
+      "sha256": "d0f9c6ef71e832b1a11e3aca646234b3d5a3c4a8955a7cb497c7504ba896bf77"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of aluminum ores.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of aluminum ores.xlsx",
+      "status": "copied_verified",
+      "bytes": 903803,
+      "sha256": "4077c4e9e2ca826393f2826a1d7173e207081d40738ea5b4f8b4a15c9073a93b"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of chromium.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of chromium.xlsx",
+      "status": "copied_verified",
+      "bytes": 903805,
+      "sha256": "cd31bcd483c70c0c63d0575c2a00d2897403dd6979e07fa3a5bd5dce6b263fae"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of cobalt ores and concentrates.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of cobalt ores and concentrates.xlsx",
+      "status": "copied_verified",
+      "bytes": 903807,
+      "sha256": "f190c77489b10a75d9eafc43920d07d2939dc06b5ff747ce078b928fe9e3e227"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of copper ores.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of copper ores.xlsx",
+      "status": "copied_verified",
+      "bytes": 903802,
+      "sha256": "937e068963bcb98705ad9d5e77e3d00ad47fc9c73f38649b29526664b211e279"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of iron ores.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of iron ores.xlsx",
+      "status": "copied_verified",
+      "bytes": 903805,
+      "sha256": "59aa46fc55c8651c6d482929db7caf9e8c21e2de50c57e2cdbb4e19d1a41eaad"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of lithium.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of lithium.xlsx",
+      "status": "copied_verified",
+      "bytes": 903805,
+      "sha256": "446bbc0c96b290c342de352dc6ad1d8bdb6640f8292caa24a5cdf4d239dd3b22"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of manganese ores and concentrates.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of manganese ores and concentrates.xlsx",
+      "status": "copied_verified",
+      "bytes": 903806,
+      "sha256": "a065034a7615dc6bb8ed45c209b4ab0cdb96b5841cc50e5016cf75234dcdef52"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of natural graphite.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of natural graphite.xlsx",
+      "status": "copied_verified",
+      "bytes": 903806,
+      "sha256": "116d4611d3c9d7fd7a60270058a0585eb46e2833b6e0ede6f52eef284a81c5d9"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of natural magnesium.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of natural magnesium.xlsx",
+      "status": "copied_verified",
+      "bytes": 903801,
+      "sha256": "6cd2294f49d233ef116883d6eade5c4cb5f360b7e2a1b41634a57c2054104475"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of nickel ores and concentrates.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of nickel ores and concentrates.xlsx",
+      "status": "copied_verified",
+      "bytes": 903806,
+      "sha256": "19899d742e09eb9e111deff9506085bcc5f48723a7e94fe9d92febae54de166c"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of niobium.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of niobium.xlsx",
+      "status": "copied_verified",
+      "bytes": 903803,
+      "sha256": "b1f73aa9f13db807f1d71db5e16082d1cbdd2f2dddd2589faa5df60b5e1280a5"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of other metallic ores.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of other metallic ores.xlsx",
+      "status": "copied_verified",
+      "bytes": 903808,
+      "sha256": "d8ef404646dceac61678ae7e750afea60bd52222214e5ffa8d647f03294add28"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of other non-metallic minerals ores.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of other non-metallic minerals ores.xlsx",
+      "status": "copied_verified",
+      "bytes": 903803,
+      "sha256": "18763173ef1f11563392003ce43396f4e8f8a94bee7e4ae216c64c455d274bed"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of phosphates (ca, al) and phosphatic chalk.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of phosphates (ca, al) and phosphatic chalk.xlsx",
+      "status": "copied_verified",
+      "bytes": 903802,
+      "sha256": "c64a1342d3aa9076fd1718b0dc6fcf145e5baac24658784c5f75692a6df74b0a"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of plantinum group metals.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of plantinum group metals.xlsx",
+      "status": "copied_verified",
+      "bytes": 903802,
+      "sha256": "c35ab1d572f0b38930fb2af02148962d558dbe76851ffd2544767aa60df4ec28"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of rare earth elements.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of rare earth elements.xlsx",
+      "status": "copied_verified",
+      "bytes": 903807,
+      "sha256": "29d18d783fcc85a1255a776e21c254ad2555752a61544e37afc8a131bff1743c"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of silver.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of silver.xlsx",
+      "status": "copied_verified",
+      "bytes": 903805,
+      "sha256": "34034d63fb0a5a84a5f3a3a3dff6ebf161aacd21e8932a698409bbb4e5ca9888"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of titanium.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of titanium.xlsx",
+      "status": "copied_verified",
+      "bytes": 903805,
+      "sha256": "c0f872ec2a84d5f876a8b713009e9b0d2ab2274820d6f019892f6b76b8844946"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of uranium.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of uranium.xlsx",
+      "status": "copied_verified",
+      "bytes": 903807,
+      "sha256": "b5cf788f3c3cab70d03a931c3e630b08354539c1fb8103a23d16a92ac6371c0f"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Mining of zinc.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Mining of zinc.xlsx",
+      "status": "copied_verified",
+      "bytes": 903806,
+      "sha256": "e37b495429f68f31a190b78ccf9324488aa3591774acff98d89092a44e1e07f2"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of beef cattle, Grazing.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of beef cattle, Grazing.xlsx",
+      "status": "copied_verified",
+      "bytes": 903793,
+      "sha256": "37fea20a7cc85faa4a2c38867649caf15021035c2cf3551f408ff92bac278604"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of beef cattle, Industrial.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of beef cattle, Industrial.xlsx",
+      "status": "copied_verified",
+      "bytes": 903792,
+      "sha256": "a9eefa45c003cc0e47c3377642fcfa285ce1f8c71596978e29df4058447a437d"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of beef cattle, Mixed.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of beef cattle, Mixed.xlsx",
+      "status": "copied_verified",
+      "bytes": 903795,
+      "sha256": "950e5a806ad2fd3fc5683e4309c9aa98d41d15513161eb19f3548dec297d8819"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of dairy cows producing meat, Grazing.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of dairy cows producing meat, Grazing.xlsx",
+      "status": "copied_verified",
+      "bytes": 903794,
+      "sha256": "884008bec9cc8ddf0010907f90cf461db1c8678119c00a659c56c7c8254f12d6"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of dairy cows producing meat, Industrial.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of dairy cows producing meat, Industrial.xlsx",
+      "status": "copied_verified",
+      "bytes": 903793,
+      "sha256": "ef84d7ed0a39972b2a6b8a608f58457be217aace92804c4e2fdcd594032d13f5"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of dairy cows producing meat, Mixed.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of dairy cows producing meat, Mixed.xlsx",
+      "status": "copied_verified",
+      "bytes": 903796,
+      "sha256": "1fc7e691c7b85a3da4ace6af1e040ef6e4b22322778ab0ee92bd790b29ca6d0c"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of dairy cows producing milk, Grazing.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of dairy cows producing milk, Grazing.xlsx",
+      "status": "copied_verified",
+      "bytes": 903948,
+      "sha256": "f678b2cc6276ac51acc97c11415f37a90307a61e6ed758029eb2deaa04240f25"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of dairy cows producing milk, Industrial.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of dairy cows producing milk, Industrial.xlsx",
+      "status": "copied_verified",
+      "bytes": 903951,
+      "sha256": "51cf5ae9e7bc87f591464fa573fd835d7a4f40d9880cb6058c586a53ef46a447"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of dairy cows producing milk, Mixed.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of dairy cows producing milk, Mixed.xlsx",
+      "status": "copied_verified",
+      "bytes": 903953,
+      "sha256": "85118b5f5fa2b620bb6c7df0421be338fa75a100a4ebdff465847f3c05d085a9"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of other dairy producing meat, Grazing.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of other dairy producing meat, Grazing.xlsx",
+      "status": "copied_verified",
+      "bytes": 903794,
+      "sha256": "d27acca33a60faf3b86978e7bf7885cd1e5761831b2148ef48db1fe27a027d93"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of other dairy producing meat, Industrial.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of other dairy producing meat, Industrial.xlsx",
+      "status": "copied_verified",
+      "bytes": 903803,
+      "sha256": "97f8ff660ce66545ae57f6a7c03dbd2febdb23828667827b2c80aca1d8e4822f"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of other dairy producing meat, Mixed.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of other dairy producing meat, Mixed.xlsx",
+      "status": "copied_verified",
+      "bytes": 903796,
+      "sha256": "2bec9128120b8aa0bc5d9bbb72c5e7b707de70ed1e5ee78c57cf0c013e151b0f"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of other dairy producing milk, Grazing.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of other dairy producing milk, Grazing.xlsx",
+      "status": "copied_verified",
+      "bytes": 903954,
+      "sha256": "13c8d293ef7772ceb0681cd7deb2519c9ac96f9d7aea8e5a4b73a4123a52c7ae"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of other dairy producing milk, Industrial.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of other dairy producing milk, Industrial.xlsx",
+      "status": "copied_verified",
+      "bytes": 903806,
+      "sha256": "78b195bc8430e313d098e780043c80baa29c0ad469ed329bbecc0d68bd8e4390"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of other dairy producing milk, Mixed.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of other dairy producing milk, Mixed.xlsx",
+      "status": "copied_verified",
+      "bytes": 903954,
+      "sha256": "b4b9982845767e3ad54e87786b47f81ac79950308e7a542c8ad864e569781953"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of other ruminants, Grazing.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of other ruminants, Grazing.xlsx",
+      "status": "copied_verified",
+      "bytes": 903795,
+      "sha256": "66c4e368a68e51c28471431555338e415aa7df108bdabfd2ebba77f45fc0f67e"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of other ruminants, Industrial.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of other ruminants, Industrial.xlsx",
+      "status": "copied_verified",
+      "bytes": 903795,
+      "sha256": "10ae1c052e73f4480918d667573e608aceba60ac14f521fca742c672a4caee00"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of other ruminants, Mixed.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of other ruminants, Mixed.xlsx",
+      "status": "copied_verified",
+      "bytes": 903797,
+      "sha256": "cf4d3546fe0bb319edddd1dbdbf51a3c62932d8d70508d542d13c8a6fefce17b"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of pigs, Backyard.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of pigs, Backyard.xlsx",
+      "status": "copied_verified",
+      "bytes": 903802,
+      "sha256": "863a62f4bc831ba5f9120474f39cf40167688c79f7e1103aaa7673cbb874546b"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of pigs, Industrial.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of pigs, Industrial.xlsx",
+      "status": "copied_verified",
+      "bytes": 903801,
+      "sha256": "43de98c2bc60a2011bbf8d46c8a997d8af1020c38467577772e70999aecb2928"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of poultry (eggs), Backyard.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of poultry (eggs), Backyard.xlsx",
+      "status": "copied_verified",
+      "bytes": 903799,
+      "sha256": "c7cbbd24b332e0da9b9caf26d64bd8d171dbf62523b9e6e57f84c7768e5f6862"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of poultry (eggs), Industrial.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of poultry (eggs), Industrial.xlsx",
+      "status": "copied_verified",
+      "bytes": 903805,
+      "sha256": "ad24ee9778a7d29a84556696106d771d6564f0e7c43c8fbac4fcac70848d2100"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of poultry (meat), Backyard.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of poultry (meat), Backyard.xlsx",
+      "status": "copied_verified",
+      "bytes": 903953,
+      "sha256": "2e158597481c242f2219ea5ebd6be473874fffe8c373184d95cec54f7c5e3a5e"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/PURDUE/Inventory_Raising of poultry (meat), Industrial.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/PURDUE/Inventory_Raising of poultry (meat), Industrial.xlsx",
+      "status": "copied_verified",
+      "bytes": 903799,
+      "sha256": "1f898d8dac5f15ea91a64332f043c15417439e5ff8bbe6234060b094f669111f"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/SEURECO/DataCollectionTemplate_additional_info.docx",
+      "destination": "Data collection/Templates/_old/provided to partners/SEURECO/DataCollectionTemplate_additional_info.docx",
+      "status": "copied_verified",
+      "bytes": 1202487,
+      "sha256": "e61e3c2cfb339e5f013f1e38af800638453c060dbbd40cba1c1c370fe0955af1"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/SEURECO/Inventory_Manufacture of primary plastic products.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/SEURECO/Inventory_Manufacture of primary plastic products.xlsx",
+      "status": "copied_verified",
+      "bytes": 903801,
+      "sha256": "efce9db6a6e39d114fd1a1649e0cd1947778942c4d459949c11b76960c420240"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/SEURECO/Inventory_Manufacture of rubber products.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/SEURECO/Inventory_Manufacture of rubber products.xlsx",
+      "status": "copied_verified",
+      "bytes": 903801,
+      "sha256": "9d82f393353799b598a1c66dc1d4674250f9a4d7ddfc4258e946129e3bcdaa25"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/SEURECO/Inventory_Manufacture of secondary plastic products.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/SEURECO/Inventory_Manufacture of secondary plastic products.xlsx",
+      "status": "copied_verified",
+      "bytes": 903796,
+      "sha256": "40c00ad3ba7a0c7c588071b39f74e693efaac0dfef2b81360ce1536ddacfe45e"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/SEURECO/Inventory_Recycling of plastics.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/SEURECO/Inventory_Recycling of plastics.xlsx",
+      "status": "copied_verified",
+      "bytes": 903796,
+      "sha256": "0a05dfc338105592ae461817bd9e1d5e74079c8c4e84fc0da8177caf39f3d833"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/UU/DataCollectionTemplate_additional_info.docx",
+      "destination": "Data collection/Templates/_old/provided to partners/UU/DataCollectionTemplate_additional_info.docx",
+      "status": "copied_verified",
+      "bytes": 1202487,
+      "sha256": "7b0df6443ef57004257bc776952230ef5ea7b27cd98d3e4c4a84baa771d2710e"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/UU/Inventory_Manufacture of primary copper.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/UU/Inventory_Manufacture of primary copper.xlsx",
+      "status": "copied_verified",
+      "bytes": 903797,
+      "sha256": "53f7439b86b9372fd053829097f0ec55dd2059c3ed39d96d1c40e439c4addc31"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/UU/Inventory_Manufacture of secondary copper.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/UU/Inventory_Manufacture of secondary copper.xlsx",
+      "status": "copied_verified",
+      "bytes": 903799,
+      "sha256": "cf8ed906f2f150fefb3270032bdfe5afac07d1425ff35d103cb335e68887b298"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/UU/Inventory_Recycling of copper.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/UU/Inventory_Recycling of copper.xlsx",
+      "status": "copied_verified",
+      "bytes": 903798,
+      "sha256": "8945021df34e887ce471221ca398858174ace12047d4b2ffac58e356e6b27ce6"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/WI/DataCollectionTemplate_additional_info.docx",
+      "destination": "Data collection/Templates/_old/provided to partners/WI/DataCollectionTemplate_additional_info.docx",
+      "status": "copied_verified",
+      "bytes": 1202487,
+      "sha256": "7b87ec263ccc4fb84c61405909672c6822790c298e68bb6cba4c4939f36c193e"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/WI/Inventory_Manufacture of high value chemicals.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/WI/Inventory_Manufacture of high value chemicals.xlsx",
+      "status": "copied_verified",
+      "bytes": 903801,
+      "sha256": "6fbf0b2477fd2e87818372b4de80e2cf654d254c232bc7949978f3de47c933fc"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/WI/Inventory_Manufacture of methanol.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/WI/Inventory_Manufacture of methanol.xlsx",
+      "status": "copied_verified",
+      "bytes": 903797,
+      "sha256": "f2f1d0548129d0b495801eb22afed2e8b48f81f738f591425b380520418a17c6"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/WI/Inventory_Manufacture of secondary iron and steel.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/WI/Inventory_Manufacture of secondary iron and steel.xlsx",
+      "status": "copied_verified",
+      "bytes": 903945,
+      "sha256": "aae6358fcd842c51a54003e369c4f9c67d9fee1dd744d936e43062344f1d7120"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/WI/Inventory_Manufacture of steel via BF-BOF coke.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/WI/Inventory_Manufacture of steel via BF-BOF coke.xlsx",
+      "status": "copied_verified",
+      "bytes": 903944,
+      "sha256": "2a9fd617ad8aaecf3844e250e3d47079c65f671a1ceb7c8fb41263bc78a8d84b"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/WI/Inventory_Manufacture of steel via BF-BOF hydrogen.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/WI/Inventory_Manufacture of steel via BF-BOF hydrogen.xlsx",
+      "status": "copied_verified",
+      "bytes": 903956,
+      "sha256": "cf401d64f9139536cec0cbc92f82685d2de5775954f02699091de337e0a8c345"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/WI/Inventory_Manufacture of steel via BF-BOF natural gas.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/WI/Inventory_Manufacture of steel via BF-BOF natural gas.xlsx",
+      "status": "copied_verified",
+      "bytes": 903947,
+      "sha256": "8b56df9aa7e5f1ee9669868727e581ce005e0fbfc9d0dfb8cf3ba265f21ef12f"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/WI/Inventory_Manufacture of steel via Direct Reduction hydrogen.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/WI/Inventory_Manufacture of steel via Direct Reduction hydrogen.xlsx",
+      "status": "copied_verified",
+      "bytes": 903947,
+      "sha256": "3b62d372dd3af0098e5852bb17d9199d0998b8e57facf68842679a1ee53cca93"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/WI/Inventory_Manufacture of steel via Direct Reduction natural gas.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/WI/Inventory_Manufacture of steel via Direct Reduction natural gas.xlsx",
+      "status": "copied_verified",
+      "bytes": 903956,
+      "sha256": "792170603a30c392452a873d1b08abe2daafabfe95aaf97b4289532d2dab7606"
+    },
+    {
+      "source": "Data collection/_old/provided to partners/WI/Inventory_Recycling of iron and steel.xlsx",
+      "destination": "Data collection/Templates/_old/provided to partners/WI/Inventory_Recycling of iron and steel.xlsx",
+      "status": "copied_verified",
+      "bytes": 903800,
+      "sha256": "7f5685ca00b5522023afded22cece738e24e239745bd0aa3b2f41b30da3ffd48"
+    },
+    {
+      "source": "Data collection/_template/Data collection template v2.2.xlsx",
+      "destination": "Data collection/Templates/_template/Data collection template v2.2.xlsx",
+      "status": "copied_verified",
+      "bytes": 901659,
+      "sha256": "2a7d61e4ccdfa0f91f19d4949729ad2cf0e36ab878672ce905f126ee4cfaa059"
+    },
+    {
+      "source": "Data collection/_template/Data collection template.xlsx",
+      "destination": "Data collection/Templates/_template/Data collection template.xlsx",
+      "status": "copied_verified",
+      "bytes": 923531,
+      "sha256": "56befda453f0a38c88367928206115dd6059a150c9e48df3d2f47b0726af9607"
+    },
+    {
+      "source": "Data collection/_template/DataCollectionTemplate_additional_info.docx",
+      "destination": "Data collection/Templates/_template/DataCollectionTemplate_additional_info.docx",
+      "status": "copied_verified",
+      "bytes": 1202480,
+      "sha256": "139b1bedc2823a033a692e092f917c81fb033c31a057cb63966f87a4f8e7c466"
+    },
+    {
+      "source": "Data collection/_template/Supply_exclusions.xlsx",
+      "destination": "Data collection/Templates/_template/Supply_exclusions.xlsx",
+      "status": "copied_verified",
+      "bytes": 22017,
+      "sha256": "24ecede7bbfa823a506c814de3f4aa9b47426a3aeacbe2814f142759555aa002"
+    },
+    {
+      "source": "Data collection/_template/inventory excel handling/New sectors list.xlsx",
+      "destination": "Data collection/Templates/_template/inventory excel handling/New sectors list.xlsx",
+      "status": "copied_verified",
+      "bytes": 23670,
+      "sha256": "2d0ce7d8bc9d3775545cb0eb07ba125c9e98284ba7551097d2e3803b455ec6fa"
+    },
+    {
+      "source": "Data collection/data/Additional_info_Cultivation of barley_25022026_CMCC_AWY.docx",
+      "destination": "Data collection/CMCC/eNextGen sources/Additional_info_Cultivation of barley_25022026_CMCC_AWY.docx",
+      "status": "copied_verified",
+      "bytes": 1207134,
+      "sha256": "b41284db9192c647869d7eef489bce14d0ea8837d21cb3b8a2ef18591f0ab9b8"
+    },
+    {
+      "source": "Data collection/data/Australia_Manufacture of traditional cement.xlsx",
+      "destination": "Data collection/Other partner inputs/eNextGen sources/Australia_Manufacture of traditional cement.xlsx",
+      "status": "copied_verified",
+      "bytes": 893204,
+      "sha256": "4816265c2801de09c60b36675c15150f0ff421e1b4ec0b349e6cd9a96a785450"
+    },
+    {
+      "source": "Data collection/data/Coal and Oil/Aggr_GTAP_to_ex.xlsx",
+      "destination": "Data collection/Other partner inputs/eNextGen sources/Coal and Oil/Aggr_GTAP_to_ex.xlsx",
+      "status": "copied_verified",
+      "bytes": 31441,
+      "sha256": "9888c43e838e2156904ac43914f1f358190e46d7334ed124975101d3b62cf44b"
+    },
+    {
+      "source": "Data collection/data/Coal and Oil/Aggregation_exio_GTAP_P_C.xlsx",
+      "destination": "Data collection/Other partner inputs/eNextGen sources/Coal and Oil/Aggregation_exio_GTAP_P_C.xlsx",
+      "status": "copied_verified",
+      "bytes": 48065,
+      "sha256": "2d1c1aeb26eb86cf21471dabb7bc96be5e93d21c0890e9e844d0d93a0117737f"
+    },
+    {
+      "source": "Data collection/data/Coal and Oil/Aggregation_exio_short.xlsx",
+      "destination": "Data collection/Other partner inputs/eNextGen sources/Coal and Oil/Aggregation_exio_short.xlsx",
+      "status": "copied_verified",
+      "bytes": 47994,
+      "sha256": "87370b1e2dd8f878849fdfb84e00658768cdba014267d0420a94d03c804f6833"
+    },
+    {
+      "source": "Data collection/data/Coal and Oil/Coke oven_UNdata/Cokeoven_UNdata_2023.csv",
+      "destination": "Data collection/Other partner inputs/eNextGen sources/Coal and Oil/Coke oven_UNdata/Cokeoven_UNdata_2023.csv",
+      "status": "copied_verified",
+      "bytes": 3649,
+      "sha256": "f6cb29b1e30e68f79399cc932787c9f7c9e45ccd78197cb2cffaac87afdc347a"
+    },
+    {
+      "source": "Data collection/data/Coal and Oil/Coke oven_UNdata/paesi UN energy stat.xlsx",
+      "destination": "Data collection/Other partner inputs/eNextGen sources/Coal and Oil/Coke oven_UNdata/paesi UN energy stat.xlsx",
+      "status": "copied_verified",
+      "bytes": 16371,
+      "sha256": "611de1c09a06cd482b8aab83225c9c191e58ae3ff35e01593caf9b59552e9fdd"
+    },
+    {
+      "source": "Data collection/data/Coal and Oil/disaggregated_P_C.xlsx",
+      "destination": "Data collection/Other partner inputs/eNextGen sources/Coal and Oil/disaggregated_P_C.xlsx",
+      "status": "copied_verified",
+      "bytes": 4206585,
+      "sha256": "3b3687f2a0bc5daf0ee1da7393afbde7530777434826f31255665446e91ac6fb"
+    },
+    {
+      "source": "Data collection/data/Coal and Oil/exiobase_P_C.xlsx",
+      "destination": "Data collection/Other partner inputs/eNextGen sources/Coal and Oil/exiobase_P_C.xlsx",
+      "status": "copied_verified",
+      "bytes": 6086950,
+      "sha256": "3936c2ae39e676bd7a265db619929ce44e36399cfff7eada4a160732a11e04b7"
+    },
+    {
+      "source": "Data collection/data/Costa Rica_Manufacture of traditional cementManufacture of cement, lime, gypsum and concrete products, cement and gypsum and other non-metallic minerals, n.e.c..xlsx",
+      "destination": "Data collection/Other partner inputs/eNextGen sources/Costa Rica_Manufacture of traditional cementManufacture of cement, lime, gypsum and concrete products, cement and gypsum and other non-metallic minerals, n.e.c..xlsx",
+      "status": "copied_verified",
+      "bytes": 893617,
+      "sha256": "df0047e43d8a8ccb908f50f858e669d6084adb4ea3f912b66d672981f3540d49"
+    },
+    {
+      "source": "Data collection/data/DataCollectionTemplate_additional_info_Primary_Aluminium_ORDECSYS.docx",
+      "destination": "Data collection/ORDECSYS/eNextGen sources/DataCollectionTemplate_additional_info_Primary_Aluminium_ORDECSYS.docx",
+      "status": "copied_verified",
+      "bytes": 2458164,
+      "sha256": "9904401bbf4dc547c963af1a10615a8fb4a163c08b5f644addbd41c98d057a02"
+    },
+    {
+      "source": "Data collection/data/DataCollectionTemplate_additional_info_Recycled_Aluminium_ORDECSYS.docx",
+      "destination": "Data collection/ORDECSYS/eNextGen sources/DataCollectionTemplate_additional_info_Recycled_Aluminium_ORDECSYS.docx",
+      "status": "copied_verified",
+      "bytes": 1674929,
+      "sha256": "46abb70725a7bd1b5fc69d00f36dd19e355427cce93668dd52e9ddb10606f1c8"
+    },
+    {
+      "source": "Data collection/data/DataCollectionTemplate_additional_info_Secondary_Aluminium_ORDECSYS.docx",
+      "destination": "Data collection/ORDECSYS/eNextGen sources/DataCollectionTemplate_additional_info_Secondary_Aluminium_ORDECSYS.docx",
+      "status": "copied_verified",
+      "bytes": 1199148,
+      "sha256": "4da42f03bd929226ad5636895ce6252936aaf8b538fc0e70d642785ff80bcefd"
+    },
+    {
+      "source": "Data collection/data/Emissions_Cultivation of barley_2502205_CMCC_AWY.xlsx",
+      "destination": "Data collection/CMCC/eNextGen sources/Emissions_Cultivation of barley_2502205_CMCC_AWY.xlsx",
+      "status": "copied_verified",
+      "bytes": 30141,
+      "sha256": "8a53782409698aa4e52ebf200530804b719804fca5e6ff50ed8450d9b70e8659"
+    },
+    {
+      "source": "Data collection/data/Full_Manufacture of primary aluminum_ORDECSYS.xlsx",
+      "destination": "Data collection/ORDECSYS/eNextGen sources/Full_Manufacture of primary aluminum_ORDECSYS.xlsx",
+      "status": "copied_verified",
+      "bytes": 919715,
+      "sha256": "8638e83254b93328deeb986f459d4204f0c5050dca3fadea159ef5a272a91cd6"
+    },
+    {
+      "source": "Data collection/data/Indonesia_Manufacture of traditional cement_ICCS.xlsx",
+      "destination": "Data collection/ICCS/eNextGen sources/Indonesia_Manufacture of traditional cement_ICCS.xlsx",
+      "status": "copied_verified",
+      "bytes": 891126,
+      "sha256": "b704aaf0942d28dd2c6a8bc5e6fb53b996ae98edbcb31d3a63f055ab8868ae2a"
+    },
+    {
+      "source": "Data collection/data/Inventory_Cultivation of barley_12022026_CMCC_AWY_.xlsx",
+      "destination": "Data collection/CMCC/eNextGen sources/Inventory_Cultivation of barley_12022026_CMCC_AWY_.xlsx",
+      "status": "copied_verified",
+      "bytes": 907015,
+      "sha256": "a51ac77fc78ecf78ef28376dff102344c0740bb557cbd6043f454073a203c665"
+    },
+    {
+      "source": "Data collection/data/Inventory_Cultivation of corn 12022025_CMCC.xlsx",
+      "destination": "Data collection/CMCC/eNextGen sources/Inventory_Cultivation of corn 12022025_CMCC.xlsx",
+      "status": "copied_verified",
+      "bytes": 907502,
+      "sha256": "1618358b966f187f0214a95929401377a395820f0efda3483905bfadd6bead63"
+    },
+    {
+      "source": "Data collection/data/Inventory_Cultivation of sorghum_12022025_CMCC.xlsx",
+      "destination": "Data collection/CMCC/eNextGen sources/Inventory_Cultivation of sorghum_12022025_CMCC.xlsx",
+      "status": "copied_verified",
+      "bytes": 902950,
+      "sha256": "45ee28b6ecd49d00e81aaa728864df4a9d6c9f43cacd570c5f853d6473661d20"
+    },
+    {
+      "source": "Data collection/data/Inventory_Cultivation of soy_12022026_CMCC.xlsx",
+      "destination": "Data collection/CMCC/eNextGen sources/Inventory_Cultivation of soy_12022026_CMCC.xlsx",
+      "status": "copied_verified",
+      "bytes": 927201,
+      "sha256": "eb5a690b58fc358dbd1278064d4d8b023f3f81fdb9f036ad6c78ee80671bc0ec"
+    },
+    {
+      "source": "Data collection/data/Inventory_Manufacture of ammonia_ICCS.xlsx",
+      "destination": "Data collection/ICCS/eNextGen sources/Inventory_Manufacture of ammonia_ICCS.xlsx",
+      "status": "copied_verified",
+      "bytes": 889786,
+      "sha256": "e5c364dfba0ded2c64cac76de53c7461a2a357cba626e45f611cdaeb014452fc"
+    },
+    {
+      "source": "Data collection/data/Inventory_Manufacture of hydrogen via electrolysis_ICCS.xlsx",
+      "destination": "Data collection/ICCS/eNextGen sources/Inventory_Manufacture of hydrogen via electrolysis_ICCS.xlsx",
+      "status": "copied_verified",
+      "bytes": 896557,
+      "sha256": "022ec7c33b2eabc219f2980acaf8bb33268276ef52ef673a568539fde87178d2"
+    },
+    {
+      "source": "Data collection/data/Inventory_Manufacture of hydrogen via steam reforming_ICCS.xlsx",
+      "destination": "Data collection/ICCS/eNextGen sources/Inventory_Manufacture of hydrogen via steam reforming_ICCS.xlsx",
+      "status": "copied_verified",
+      "bytes": 895052,
+      "sha256": "30f64fcccef473558f5fef01567ebefcf2bad57bdad848a5af70bb897cd2576f"
+    },
+    {
+      "source": "Data collection/data/Inventory_Manufacture of primary aluminum_ORDECSYS.xlsx",
+      "destination": "Data collection/ORDECSYS/eNextGen sources/Inventory_Manufacture of primary aluminum_ORDECSYS.xlsx",
+      "status": "copied_verified",
+      "bytes": 928733,
+      "sha256": "20cb5c4224184296fb70c3b3222b99212799609313d4e90f36c470518b6b40e0"
+    },
+    {
+      "source": "Data collection/data/Inventory_Manufacture of rubber products_rawdata_filled_SEURECO.xlsx",
+      "destination": "Data collection/SEURECO/eNextGen sources/Inventory_Manufacture of rubber products_rawdata_filled_SEURECO.xlsx",
+      "status": "copied_verified",
+      "bytes": 920009,
+      "sha256": "7680c488a4fb485065eb12188d3d31e6b43056e06f2a37c21f54955ae91da7a2"
+    },
+    {
+      "source": "Data collection/data/Inventory_Manufacture of rubber products_share_filled_SEURECO.xlsx",
+      "destination": "Data collection/SEURECO/eNextGen sources/Inventory_Manufacture of rubber products_share_filled_SEURECO.xlsx",
+      "status": "copied_verified",
+      "bytes": 913398,
+      "sha256": "ca6a28ed3944d6dbf27c580903e17a7af90fed14cc3c642ec8884b4404671e2b"
+    },
+    {
+      "source": "Data collection/data/Inventory_Manufacture of secondary aluminum_ORDECSYS.xlsx",
+      "destination": "Data collection/ORDECSYS/eNextGen sources/Inventory_Manufacture of secondary aluminum_ORDECSYS.xlsx",
+      "status": "copied_verified",
+      "bytes": 931472,
+      "sha256": "df228732e95bbfb18a206be07a54d0fae6ca9b01d0f9247f3004f30c04263c1f"
+    },
+    {
+      "source": "Data collection/data/Inventory_Reclycing of Aluminium_ORDECSYS.xlsx",
+      "destination": "Data collection/ORDECSYS/eNextGen sources/Inventory_Reclycing of Aluminium_ORDECSYS.xlsx",
+      "status": "copied_verified",
+      "bytes": 911832,
+      "sha256": "e07bcfc73ee0b63eee827a67cd9a388628a7e7dea741151c3efbf31f779c87a8"
+    },
+    {
+      "source": "Data collection/data/Inventory_Recycling of iron and steel_WI.xlsx",
+      "destination": "Data collection/WI/eNextGen sources/Inventory_Recycling of iron and steel_WI.xlsx",
+      "status": "copied_verified",
+      "bytes": 887233,
+      "sha256": "cc9dd88ab5eb50d3b362b25f240d3b1396de073d555ac525be8119c976e73995"
+    },
+    {
+      "source": "Data collection/data/Japan_Manufacture of traditional cement_ICCS.xlsx",
+      "destination": "Data collection/ICCS/eNextGen sources/Japan_Manufacture of traditional cement_ICCS.xlsx",
+      "status": "copied_verified",
+      "bytes": 898509,
+      "sha256": "955d3f892d376217b888068861321dd8375e0f4e5180ed4da636e240fa46f420"
+    },
+    {
+      "source": "Data collection/data/Panama_Manufacture of traditional cement_manufacture of cement, lime, and gypsum_ICCS.xlsx",
+      "destination": "Data collection/ICCS/eNextGen sources/Panama_Manufacture of traditional cement_manufacture of cement, lime, and gypsum_ICCS.xlsx",
+      "status": "copied_verified",
+      "bytes": 889795,
+      "sha256": "852a86e9b4f6c9aa7ccf4b943490be0a740dd55d3e102232d2dada79956423c2"
+    },
+    {
+      "source": "Data collection/data/Pipeline_Supply_exclusions.xlsx",
+      "destination": "Data collection/Other partner inputs/eNextGen sources/Pipeline_Supply_exclusions.xlsx",
+      "status": "copied_verified",
+      "bytes": 30367,
+      "sha256": "37d28999ed09b0e0216869b9ea2a50a922e7c126d2a5f7448f44118de8440445"
+    },
+    {
+      "source": "Data collection/data/Purdue/Bilat_trade.CSV",
+      "destination": "Data collection/PURDUE/Livestock/Bilat_trade.CSV",
+      "status": "already_on_WSP",
+      "bytes": 10046595,
+      "sha256": "21fd3dbecefb31e5e38b583a011457e681abef22514640c571a3f310fbf2196d"
+    },
+    {
+      "source": "Data collection/data/Purdue/Emission_raw.CSV",
+      "destination": "Data collection/PURDUE/Livestock/Emission_raw.CSV",
+      "status": "already_on_WSP",
+      "bytes": 185564,
+      "sha256": "b22d885ee46eba6b8b90e5ffef8a4493a13ef3e092736f588ef96ebf2f95f930"
+    },
+    {
+      "source": "Data collection/data/Purdue/Feed.CSV",
+      "destination": "Data collection/PURDUE/Livestock/Feed.CSV",
+      "status": "already_on_WSP",
+      "bytes": 1202750,
+      "sha256": "4f605abac3bf187550984dcfc419464ad853e29b44ee700bbba7b38851a2db9b"
+    },
+    {
+      "source": "Data collection/data/Purdue/Output.CSV",
+      "destination": "Data collection/PURDUE/Livestock/Output.CSV",
+      "status": "already_on_WSP",
+      "bytes": 82025,
+      "sha256": "66d22320142cfc9c7d9548517653dd6ab5dc6c9f5453439bedf8a001bb1aa009"
+    },
+    {
+      "source": "Data collection/data/Saudi Arabia_Manufacture of traditional cement_Manufacture of articles of cement, lime, and plaster_ICCS.xlsx",
+      "destination": "Data collection/ICCS/eNextGen sources/Saudi Arabia_Manufacture of traditional cement_Manufacture of articles of cement, lime, and plaster_ICCS.xlsx",
+      "status": "copied_verified",
+      "bytes": 909224,
+      "sha256": "9280c037c8125170601ca83406bc4462144517f73e6956caf5d981c36499e59e"
+    },
+    {
+      "source": "Data collection/data/Saudi Arabia_Manufacture of traditional cement_Manufacture of cement, lime, and plaster_ICCS.xlsx",
+      "destination": "Data collection/ICCS/eNextGen sources/Saudi Arabia_Manufacture of traditional cement_Manufacture of cement, lime, and plaster_ICCS.xlsx",
+      "status": "copied_verified",
+      "bytes": 898561,
+      "sha256": "507f73baf2df39231524b131daa0ae255b512899520c16513b57691789023ab0"
+    },
+    {
+      "source": "Data collection/data/Taiwan_Manufacture of traditional cement_manufacture of cement products_ICCS.xlsx",
+      "destination": "Data collection/ICCS/eNextGen sources/Taiwan_Manufacture of traditional cement_manufacture of cement products_ICCS.xlsx",
+      "status": "copied_verified",
+      "bytes": 909572,
+      "sha256": "b32949df91f9be6e445fe8eb15ffed0242f83956c8cb0f8c30d5c7b9e931a84a"
+    },
+    {
+      "source": "Data collection/data/Taiwan_Manufacture of traditional cement_manufacture of cement_ICCS.xlsx",
+      "destination": "Data collection/ICCS/eNextGen sources/Taiwan_Manufacture of traditional cement_manufacture of cement_ICCS.xlsx",
+      "status": "copied_verified",
+      "bytes": 905415,
+      "sha256": "19ade21bfee517a8cbd42da3378ea8917c88b7ffadff93894937cf8bb85e3f94"
+    },
+    {
+      "source": "Data collection/data/USA_Manufacture of traditional cement_ICCS.xlsx",
+      "destination": "Data collection/ICCS/eNextGen sources/USA_Manufacture of traditional cement_ICCS.xlsx",
+      "status": "copied_verified",
+      "bytes": 907022,
+      "sha256": "24978dd8401c26102bbe09feabb6829ff9b4ebba86c62e7c6a2549b72bb3a6fe"
+    },
+    {
+      "source": "Sectors list/Expected new sectors in models.xlsx",
+      "destination": "Data collection/Source classifications/Expected new sectors in models.xlsx",
+      "status": "copied_verified",
+      "bytes": 31803,
+      "sha256": "960c5688c87e19bf196fcca204491e5f27b1236a067d222fcd9b92ced0796c9f"
+    },
+    {
+      "source": "Sectors list/GTAP HS concordance.xlsx",
+      "destination": "Data collection/Source classifications/GTAP HS concordance.xlsx",
+      "status": "copied_verified",
+      "bytes": 1517548,
+      "sha256": "c8267296f2f832e68060174339ed7ee2a205d32464a7e1177c7cc833ca5a9706"
+    },
+    {
+      "source": "Sectors list/Mapping to other db/Inventory_translation_example.xlsx",
+      "destination": "Data collection/POLIMI & ENEXTGEN/Vehicles/Inventory_Manufacture of heavy duty BEV.xlsx",
+      "status": "already_on_WSP",
+      "bytes": 911175,
+      "sha256": "d0bdb33759ead60307eefbfa9ac4d275a77f582d688695d2b2166940edf1406a"
+    },
+    {
+      "source": "Sectors list/Mapping to other db/Sectors_ENTICE_multiple_db.xlsx",
+      "destination": "Data collection/Source classifications/Mapping to other db/Sectors_ENTICE_multiple_db.xlsx",
+      "status": "copied_verified",
+      "bytes": 570126,
+      "sha256": "3efa8b5300e144e53036515beda1cd3dd762e695edbfdf64b7e8e3e155d1f0b6"
+    },
+    {
+      "source": "Sectors list/Mapping to other db/Steps for inventory translations.txt",
+      "destination": "Data collection/Source classifications/Mapping to other db/Steps for inventory translations.txt",
+      "status": "copied_verified",
+      "bytes": 1940,
+      "sha256": "407184637ac7457856cc034e821f81ede272a5e49855afd79e7b628b5fd1fdb7"
+    },
+    {
+      "source": "Sectors list/Mapping to other db/classification-concordances.xlsx",
+      "destination": "Data collection/Source classifications/Mapping to other db/classification-concordances.xlsx",
+      "status": "copied_verified",
+      "bytes": 10327286,
+      "sha256": "7edb87ddc5c5da1ea167722bacc4cfb4b48d1318f9d73bc69d8e4c98fd0cdf0a"
+    },
+    {
+      "source": "Sectors list/NACERev2_ISIC4_Table.xls",
+      "destination": "Data collection/Source classifications/NACERev2_ISIC4_Table.xls",
+      "status": "copied_verified",
+      "bytes": 317440,
+      "sha256": "c7709c5a24267af3195f71fd053b0dd016de16fa25ad6ddf6eb0584588aa8a98"
+    },
+    {
+      "source": "Sectors list/Regions in models.xlsx",
+      "destination": "Data collection/Source classifications/Regions in models.xlsx",
+      "status": "copied_verified",
+      "bytes": 77783,
+      "sha256": "d3ed7e2d2fdd2e2752a3120efde564f6723be0b5b7d0ab7a5fc1f07352f2080b"
+    },
+    {
+      "source": "Sectors list/Rueda_Cantuche2020_Supplementary_GTAP9_NACE2.docx",
+      "destination": "Data collection/Source classifications/Rueda_Cantuche2020_Supplementary_GTAP9_NACE2.docx",
+      "status": "copied_verified",
+      "bytes": 24788,
+      "sha256": "cd3693a2fad647d8e051567bfe80f5780667e82b7f7c692d11aaa6b4d3cc440c"
+    },
+    {
+      "source": "Sectors list/Sectors list GTAP-NACE-ENTICE.xlsx",
+      "destination": "Data collection/Source classifications/Sectors list GTAP-NACE-ENTICE.xlsx",
+      "status": "copied_verified",
+      "bytes": 60326,
+      "sha256": "7fe864cb7258ec25c90a61a770d076661d9ac447f3506cfeeb52c14d82447906"
+    },
+    {
+      "source": "Sectors list/sectors_of_interest_revPOLIMI.xlsx",
+      "destination": "Data collection/Source classifications/sectors_of_interest_revPOLIMI.xlsx",
+      "status": "copied_verified",
+      "bytes": 45353,
+      "sha256": "ee69d00cbc1b61fb859476d112ed3fe99f6215269bbf1fd3935b0b29bd833e01"
+    },
+    {
+      "source": "Shared material/CM Documentation Draft for Board Members.docx",
+      "destination": "Data collection/Shared material/CM Documentation Draft for Board Members.docx",
+      "status": "copied_verified",
+      "bytes": 331043,
+      "sha256": "ccf586bc09ffa2ce8d2f2d9d773bac05f9b3dc05756717847c32859f3f7e5614"
+    },
+    {
+      "source": "Shared material/Cement_inputs/Cement_cost_structure-Lorenzo\u2019s MacBook Pro.xlsx",
+      "destination": "Data collection/ICCS/Purdue data on traditional cement/Cement_cost_structure-Lorenzo\u2019s MacBook Pro.xlsx",
+      "status": "copied_verified",
+      "bytes": 44189,
+      "sha256": "80a503da7d9ebf3aae5f0bd878c8f25e66af8b8266c2b03a3e1aae8eef39d207"
+    },
+    {
+      "source": "Shared material/Cement_inputs/Cement_cost_structure.xlsx",
+      "destination": "Data collection/ICCS/Purdue data on traditional cement/eNextGen variants/Cement_cost_structure.xlsx",
+      "status": "copied_verified",
+      "bytes": 47200,
+      "sha256": "fa522dd389ed8129a4923121584b70637425a7ddfdc9a1b7a2808704ae26a42f"
+    },
+    {
+      "source": "Shared material/Cement_inputs/Cement_trade_emis_output.xlsx",
+      "destination": "Data collection/ICCS/Purdue data on traditional cement/eNextGen variants/Cement_trade_emis_output.xlsx",
+      "status": "copied_verified",
+      "bytes": 155913,
+      "sha256": "04d08becfb2bb510a4853470c7485140ef6efa41eb64c4513f8d87d894acb8ed"
+    },
+    {
+      "source": "Shared material/Cement_inputs/EMQO.CSV",
+      "destination": "Data collection/ICCS/Purdue data on traditional cement/EMQO.CSV",
+      "status": "copied_verified",
+      "bytes": 12582183,
+      "sha256": "4ee622fc56e6186044befd2c611a53b02f60310223587579a886d5a4b9fd5bce"
+    },
+    {
+      "source": "Shared material/Cement_inputs/OUTV.CSV",
+      "destination": "Data collection/ICCS/Purdue data on traditional cement/OUTV.CSV",
+      "status": "copied_verified",
+      "bytes": 157722,
+      "sha256": "fa6e8c096fcdd075bd8b171a3f1ced700c866150e7d45a785362af999be9a2e6"
+    },
+    {
+      "source": "Shared material/Cement_inputs/TRDV.CSV",
+      "destination": "Data collection/ICCS/Purdue data on traditional cement/TRDV.CSV",
+      "status": "copied_verified",
+      "bytes": 20065065,
+      "sha256": "e60a58b2ccde4a48e098138221c357bf9e6c89e1b941a53f82ff3e21cadd5fe5"
+    },
+    {
+      "source": "Shared material/GTAP_SPLIT.xlsx",
+      "destination": "Data collection/Shared material/GTAP_SPLIT.xlsx",
+      "status": "copied_verified",
+      "bytes": 31821,
+      "sha256": "d34171085f4a0e1a7163031923bc83882b207584afcb265116b49e45bd82fae0"
+    },
+    {
+      "source": "Shared material/GTAP_energy_prices - converted.xlsx",
+      "destination": "Data collection/Shared material/GTAP_energy_prices - converted.xlsx",
+      "status": "copied_verified",
+      "bytes": 303100,
+      "sha256": "a047ff6052f3d2ae3fd3a823ed7a92356caa228d55bb7a2b062578116197f6e2"
+    },
+    {
+      "source": "Shared material/GTAP_energy_prices.xlsx",
+      "destination": "Data collection/Shared material/GTAP_energy_prices.xlsx",
+      "status": "copied_verified",
+      "bytes": 31825,
+      "sha256": "a42a2d71161f61f4c7415a5573cc85ec1448052ef443b046349be5823e4d836c"
+    },
+    {
+      "source": "Shared material/NTUA preliminary Sectoral_coverage_enrichment.xlsx",
+      "destination": "Data collection/Shared material/NTUA preliminary Sectoral_coverage_enrichment.xlsx",
+      "status": "copied_verified",
+      "bytes": 27518,
+      "sha256": "88387df926941e3a780fc2aaf74d3312ba25396e16e04e831505fe2fcefe3a62"
+    },
+    {
+      "source": "Shared material/NTUA_August_sectors_of_interest.xlsx",
+      "destination": "Data collection/Shared material/NTUA_August_sectors_of_interest.xlsx",
+      "status": "copied_verified",
+      "bytes": 33254,
+      "sha256": "e05eeedfe66d5de563dde2388bb69f47f76c19ad922ff166a33596a7291ed3ad"
+    },
+    {
+      "source": "Shared material/Purdue data collection/GTAP_EXIOBASE_maps.xlsx",
+      "destination": "Data collection/PURDUE/Shared material/GTAP_EXIOBASE_maps.xlsx",
+      "status": "copied_verified",
+      "bytes": 35139,
+      "sha256": "9e13fe6f0e973f525b1560a6dad278d837d8f8bec6dc619256294cf4dcdc762e"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/CMDEMD.csv",
+      "destination": "Data collection/PURDUE/Shared material/Cost structures/Supporting data/CMDEMD.csv",
+      "status": "already_on_WSP",
+      "bytes": 2649,
+      "sha256": "d3b6f556222b90079bfc0043cb4e068ce346a2b657457135faba23afb1ae6fe8"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/COPCOSTS.csv",
+      "destination": "Data collection/PURDUE/Shared material/Cost structures/COPCOSTS.csv",
+      "status": "already_on_WSP",
+      "bytes": 475379,
+      "sha256": "40f1a4dffbe371071257a1d39ddd42ff7ad428d738efa6ba4a006319d1d07054"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/COPSEC.csv",
+      "destination": "Data collection/PURDUE/Shared material/Cost structures/COPSEC.csv",
+      "status": "already_on_WSP",
+      "bytes": 63,
+      "sha256": "46c610d3a1b9955ca68db1a85673755f765ebef922fa341b77b8b2aafc76c475"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/CRPSEC.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/CRPSEC.csv",
+      "status": "already_on_WSP",
+      "bytes": 153,
+      "sha256": "9a3ba50a6ee82405d94b8602b2514d4fb4557f1fb3a366e2b8e059e2dbf12e6f"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/EXIOBASE_maps.xlsx",
+      "destination": "Data collection/PURDUE/Shared material/June1/EXIOBASE_maps.xlsx",
+      "status": "copied_verified",
+      "bytes": 70668,
+      "sha256": "d26028bd298b85e1924173aa001686f64f4d994695ed8736e3d0f018d82e74b3"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/EXIOIOT.csv",
+      "destination": "Data collection/PURDUE/Shared material/Cost structures/EXIOIOT.csv",
+      "status": "already_on_WSP",
+      "bytes": 39022126,
+      "sha256": "829a5a98baec516d9392db14f694b8a67bc4b95d58a7611fb96e2830610948c9"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/FRTCOM.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/FRTCOM.csv",
+      "status": "already_on_WSP",
+      "bytes": 63,
+      "sha256": "ff461f6c87601c290c0e4afa7a250857dde6d98040708da44b00f70eb64a2cd6"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/FRTUSESHR.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/FRTUSESHR.csv",
+      "status": "already_on_WSP",
+      "bytes": 131676,
+      "sha256": "ac4a6d85deafb37cb76e11a2056eb12f88e3b55728d3ddacc525b53d7f34e641"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/GCEROWS.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/GCEROWS.csv",
+      "status": "already_on_WSP",
+      "bytes": 1822,
+      "sha256": "cbbc689e69803dbedc73cb4c6397be69b969479b55dfa24231d4a30f4d2fe945"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/GlobalSet.csv",
+      "destination": "Data collection/PURDUE/Shared material/Cost structures/Supporting data/GlobalSet.csv",
+      "status": "already_on_WSP",
+      "bytes": 6681,
+      "sha256": "33188e0515fce069fc423e9e7fc2e428d124fd101886e0d87bb9c77e77f3f9c5"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/KFCOSTS.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/KFCOSTS.csv",
+      "status": "already_on_WSP",
+      "bytes": 189,
+      "sha256": "375f50c1e01556600c765cd8872cb5dbf3ea66bbca03b68be03b755e22846145"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/KFCOSTSHR.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/KFCOSTSHR.csv",
+      "status": "already_on_WSP",
+      "bytes": 261,
+      "sha256": "90fcfaf2bee6ff637e921bb3c730ba4a9dfdeaa836d43692c8d5bb205c5243ff"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/MINMSEC.csv",
+      "destination": "Data collection/PURDUE/Shared material/Cost structures/Supporting data/MINMSEC.csv",
+      "status": "already_on_WSP",
+      "bytes": 279,
+      "sha256": "dce415318a99b159fa4aff0e67ce932af441fc3f9675a07f73a54530668ba238"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/MINSUP.csv",
+      "destination": "Data collection/PURDUE/Shared material/Cost structures/Supporting data/MINSUP.csv",
+      "status": "already_on_WSP",
+      "bytes": 168015,
+      "sha256": "7a3b0744504c41e65c99e556cb0541055fba295a21f8920508d46d3fe6f74a58"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/MUTSEC.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/MUTSEC.csv",
+      "status": "already_on_WSP",
+      "bytes": 1626,
+      "sha256": "ab58c453770f00aee2e83b552c37950c8acb38e3e03b68bddde8096d2d636f0b"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/NFCOSTS.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/NFCOSTS.csv",
+      "status": "already_on_WSP",
+      "bytes": 81,
+      "sha256": "37089d5c7b67da50206092d6ab82e5916e61463f2b0f8153f3534afc68cf720c"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/NFCOSTSHR.csv",
+      "destination": "Data collection/PURDUE/Shared material/Cost structures/Supporting data/NFCOSTSHR.csv",
+      "status": "already_on_WSP",
+      "bytes": 14765,
+      "sha256": "45ddd0c0f95aa90da9b27373560ce0a3f99bf39de48316d57646e6a061aa1d6b"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/PFCOSTS.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/PFCOSTS.csv",
+      "status": "already_on_WSP",
+      "bytes": 101,
+      "sha256": "1019f06b47f382c935bb50dcbcb6d7b3f0cd54701337259ccd4fbd23c17334f3"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/PFCOSTSHR.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/PFCOSTSHR.csv",
+      "status": "already_on_WSP",
+      "bytes": 135,
+      "sha256": "dfc086ca7f902ba4515ac73fbd7b6d1b004f5bb9a814165ae5e2096f27d61e64"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/REG.csv",
+      "destination": "Data collection/PURDUE/Shared material/Cost structures/Supporting data/REG.csv",
+      "status": "already_on_WSP",
+      "bytes": 2943,
+      "sha256": "756defcf2ac3f9189da1207a048cbc3e9ece6fb8f6ba867706567bc46ccd63d0"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/SUPCATS.csv",
+      "destination": "Data collection/PURDUE/Shared material/Cost structures/Supporting data/SUPCATS.csv",
+      "status": "already_on_WSP",
+      "bytes": 373,
+      "sha256": "592164f585582a237ac609413cff119664965fead52c68df163db5a0a55810b0"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/costsup.gdx",
+      "destination": "Data collection/PURDUE/Shared material/Cost structures/costsup.gdx",
+      "status": "already_on_WSP",
+      "bytes": 11940327,
+      "sha256": "a6e444a8f136bfe54ac104237289243561abcde1a74abe5534e1f2a033f073b2"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/costsup.xlsx",
+      "destination": "Data collection/PURDUE/Shared material/June1/costsup.xlsx",
+      "status": "copied_verified",
+      "bytes": 46339,
+      "sha256": "1cd8a5627afede867084fe86f4d30b93fb3b26dceea2daa1f376ee3f25488502"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/splttargs.gdx",
+      "destination": "Data collection/PURDUE/Shared material/Output and trade targets/splttargs.gdx",
+      "status": "already_on_WSP",
+      "bytes": 478911,
+      "sha256": "68c3909c415adeb181bfa14dd9bb14bec6343c8dcf17652378023a5dc78e3dda"
+    },
+    {
+      "source": "Shared material/Purdue data collection/June1/splttargs.xlsx",
+      "destination": "Data collection/PURDUE/Shared material/June1/splttargs.xlsx",
+      "status": "copied_verified",
+      "bytes": 1294134,
+      "sha256": "3a2751029418eee39a83e18589632dffe1816f6f0f9d3e149e28a967706f4f97"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May13/GTAP sectors H5.xlsx",
+      "destination": "Data collection/PURDUE/Shared material/May13/GTAP sectors H5.xlsx",
+      "status": "copied_verified",
+      "bytes": 465396,
+      "sha256": "cbd5fb51e743562e7a15a9773a75c24971cb509d0d4e433484b7c37fd51ecced"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May13/GTAP_HS_mapping.xlsx",
+      "destination": "Data collection/PURDUE/Shared material/May13/GTAP_HS_mapping.xlsx",
+      "status": "copied_verified",
+      "bytes": 1795205,
+      "sha256": "7aa202db4de6e517468126d5de69e5763ece00635d0c93b62d68d0694562b804"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May13/trade.gdx",
+      "destination": "Data collection/PURDUE/Shared material/Trades/trade.gdx",
+      "status": "already_on_WSP",
+      "bytes": 5216384,
+      "sha256": "459bb8decf1ae6ed634f2ad2ef9b67be9ea514f870499d2ac0d7cea561c94507"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May13/trade.xlsx",
+      "destination": "Data collection/PURDUE/Shared material/May13/trade.xlsx",
+      "status": "copied_verified",
+      "bytes": 16859883,
+      "sha256": "e3d67566acfe0c8771a954774ff96463fbaac597f185f049fde293f41495493d"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May27/CRPSEC.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/CRPSEC.csv",
+      "status": "already_on_WSP",
+      "bytes": 153,
+      "sha256": "9a3ba50a6ee82405d94b8602b2514d4fb4557f1fb3a366e2b8e059e2dbf12e6f"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May27/EXIOIOT.csv",
+      "destination": "Data collection/PURDUE/Shared material/Cost structures/EXIOIOT.csv",
+      "status": "already_on_WSP",
+      "bytes": 39022126,
+      "sha256": "829a5a98baec516d9392db14f694b8a67bc4b95d58a7611fb96e2830610948c9"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May27/FRTCOM.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/FRTCOM.csv",
+      "status": "already_on_WSP",
+      "bytes": 63,
+      "sha256": "ff461f6c87601c290c0e4afa7a250857dde6d98040708da44b00f70eb64a2cd6"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May27/FRTUSESHR.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/FRTUSESHR.csv",
+      "status": "already_on_WSP",
+      "bytes": 131676,
+      "sha256": "ac4a6d85deafb37cb76e11a2056eb12f88e3b55728d3ddacc525b53d7f34e641"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May27/GCEROWS.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/GCEROWS.csv",
+      "status": "already_on_WSP",
+      "bytes": 1822,
+      "sha256": "cbbc689e69803dbedc73cb4c6397be69b969479b55dfa24231d4a30f4d2fe945"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May27/KFCOSTS.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/KFCOSTS.csv",
+      "status": "already_on_WSP",
+      "bytes": 189,
+      "sha256": "375f50c1e01556600c765cd8872cb5dbf3ea66bbca03b68be03b755e22846145"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May27/KFCOSTSHR.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/KFCOSTSHR.csv",
+      "status": "already_on_WSP",
+      "bytes": 261,
+      "sha256": "90fcfaf2bee6ff637e921bb3c730ba4a9dfdeaa836d43692c8d5bb205c5243ff"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May27/MUTSEC.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/MUTSEC.csv",
+      "status": "already_on_WSP",
+      "bytes": 1626,
+      "sha256": "ab58c453770f00aee2e83b552c37950c8acb38e3e03b68bddde8096d2d636f0b"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May27/NFCOSTS.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/NFCOSTS.csv",
+      "status": "already_on_WSP",
+      "bytes": 81,
+      "sha256": "37089d5c7b67da50206092d6ab82e5916e61463f2b0f8153f3534afc68cf720c"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May27/NFCOSTSHR.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/NFCOSTSHR.csv",
+      "status": "already_on_WSP",
+      "bytes": 15977,
+      "sha256": "bc21bbcba71afdce884318e23ad3f50607700d0f4b3f03a9ea78c0cda55f1b4a"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May27/PFCOSTS.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/PFCOSTS.csv",
+      "status": "already_on_WSP",
+      "bytes": 101,
+      "sha256": "1019f06b47f382c935bb50dcbcb6d7b3f0cd54701337259ccd4fbd23c17334f3"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May27/PFCOSTSHR.csv",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/PFCOSTSHR.csv",
+      "status": "already_on_WSP",
+      "bytes": 135,
+      "sha256": "dfc086ca7f902ba4515ac73fbd7b6d1b004f5bb9a814165ae5e2096f27d61e64"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May27/costsup.gdx",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/costsup.gdx",
+      "status": "already_on_WSP",
+      "bytes": 11739702,
+      "sha256": "4aac6f304edb9cda9007459a920eefb19277b77ba899f7a7921ee0f0c2e8f974"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May27/splttargs.gdx",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/splttargs.gdx",
+      "status": "already_on_WSP",
+      "bytes": 476550,
+      "sha256": "bc9e0c96c122999cad3bc16cb0c5ac4e8f1c9b64da75dd672be92ac2f7696038"
+    },
+    {
+      "source": "Shared material/Purdue data collection/May27/splttargs.xlsx",
+      "destination": "Data collection/PURDUE/Shared material/_old/May27/eNextGen variants/splttargs.xlsx",
+      "status": "copied_verified",
+      "bytes": 1510919,
+      "sha256": "ee9444fceb1412d5ace3469a1561d18c673255660cd057bee6eb88280df733bb"
+    },
+    {
+      "source": "Shared material/V12APOW.zip",
+      "destination": "Data collection/Shared material/V12APOW.zip",
+      "status": "copied_verified",
+      "bytes": 6983009595,
+      "sha256": "712f51905e82ccebdc8debc422c4d5aa9ec12726c7ec45802aac4563320483b6"
+    },
+    {
+      "source": "Shared material/V12POW.zip",
+      "destination": "Data collection/Shared material/V12POW.zip",
+      "status": "copied_verified",
+      "bytes": 2534385998,
+      "sha256": "187f58d72bd5d732a029390e1ec793c60352017c397011be2fa87e934bc407ba"
+    },
+    {
+      "source": "Shared material/WI_List of sectors and technologies for which the WI has expetise.xlsx",
+      "destination": "Data collection/Shared material/WI_List of sectors and technologies for which the WI has expetise.xlsx",
+      "status": "copied_verified",
+      "bytes": 19702,
+      "sha256": "0fe74f8d9e429ae31b9215bce5263767153624601eca9cb5188acd2f99b05581"
+    },
+    {
+      "source": "Shared material/WI_Sectors list - Final (pre-survey) - comments Wuppertal Institute.xlsx",
+      "destination": "Data collection/Shared material/WI_Sectors list - Final (pre-survey) - comments Wuppertal Institute.xlsx",
+      "status": "copied_verified",
+      "bytes": 95054,
+      "sha256": "32f87f8a96789fc31e36c3615c11943da8edc64eab791e844091a6e6d35b2f2b"
+    },
+    {
+      "source": "region_clustering.xlsx",
+      "destination": "Data collection/Source classifications/region_clustering.xlsx",
+      "status": "copied_verified",
+      "bytes": 24014,
+      "sha256": "34ebb18214328cc168f57838105b4fd8817a0b172bb7282b8c86b5b20adad3f4"
+    }
+  ]
+}

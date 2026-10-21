@@ -5,6 +5,7 @@ source selection, baseline closure or modification of the source run occurs.
 Use a fresh output directory for every experiment.
 """
 import argparse
+from datetime import datetime, timezone
 import hashlib
 from importlib.metadata import version
 import inspect
@@ -46,19 +47,21 @@ def main():
     source_group.add_argument('--prepared', type=Path)
     source_group.add_argument('--resume', type=Path, help='Accepted MARIO intermediate checkpoint.')
     parser.add_argument('--workbook', type=Path, help='Remaining workbook override; requires --resume.')
-    parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--output', type=Path, help='Local work directory; generated under build/model_trials if omitted.')
+    parser.add_argument('--no-publish',action='store_true',help='Keep an explicitly private/CI trial local; otherwise publish paired WSP inputs/results.')
     parser.add_argument('--options', type=Path, help='MARIO split_model_options JSON; omit for the unchanged model.')
     parser.add_argument('--solver-options', type=Path)
     parser.add_argument('--solver', default='CLARABEL')
     parser.add_argument('--stop-after-step', help='Defaults to Mining for a fresh preparation; resume runs all pending groups.')
     args = parser.parse_args()
+    started_at=datetime.now(timezone.utc)
     options = json.loads(args.options.read_text()) if args.options else None
     solver_options = json.loads(args.solver_options.read_text()) if args.solver_options else None
     if args.workbook and not args.resume:
         parser.error('--workbook requires --resume.')
     source = (args.resume or args.prepared).resolve()
     stop_after_step = args.stop_after_step if args.resume else args.stop_after_step or 'Mining'
-    output = args.output.resolve()
+    output = (args.output or Path(__file__).resolve().parents[1]/'build/model_trials'/started_at.strftime('%Y%m%d-%H%M%S')).resolve()
     if output == source or source in output.parents:
         parser.error('The output must be separate from the immutable preparation.')
     if args.resume:
@@ -66,7 +69,8 @@ def main():
             parser.error('Expected state.json in --resume.')
         if args.options is None:
             options = json.loads((source/'state.json').read_text()).get('split_model_options')
-        workbook = (args.workbook or source/'remaining_add_sectors.xlsx').resolve()
+        from entice_inventory.core.shared_runs import remaining_workbook
+        workbook = (args.workbook or remaining_workbook(source)).resolve()
     else:
         workbook = source/'add_sectors.xlsx'
     if not args.resume and (not (source/'baseline'/'flows').is_dir() or not workbook.is_file()):
@@ -81,7 +85,8 @@ def main():
     import cvxlab
     import entice_inventory
     from entice_inventory.core.parent_budgets import ParentBudgets, ChildTargets, require_parent_budgets
-    manifest = {'status': 'running', 'source_checkpoint' if args.resume else 'source_preparation': str(source),
+    manifest = {'status': 'running', 'started_at':started_at.isoformat(),
+                'source_checkpoint' if args.resume else 'source_preparation': str(source),
                 'runner_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                 'source_baseline_sha256': baseline_hashes, 'source_workbook_sha256': workbook_hash,
                 'split_model_options': options, 'solver': args.solver, 'solver_options': solver_options,
@@ -131,6 +136,16 @@ def main():
             manifest.update(status='failed', integrity_error='Input hashes changed during the trial.')
             exit_code = 1
         path.write_text(json.dumps(manifest, indent=2, allow_nan=False))
+        if not args.no_publish:
+            try:
+                from entice_inventory.core.shared_runs import publish_trial
+                manifest['publication']=publish_trial(output)
+                print('Shared results: '+(manifest['publication']['database'] or manifest['publication']['inventory']))
+            except Exception as exc:
+                manifest['publication_error']=str(exc)
+                traceback.print_exc()
+                exit_code=1
+            path.write_text(json.dumps(manifest,indent=2,allow_nan=False))
         print(json.dumps({k: manifest.get(k) for k in ('status','elapsed_seconds','error','completed_sectors',
                                                      'pending_recalculations')}, indent=2))
     return exit_code

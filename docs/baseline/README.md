@@ -1,6 +1,25 @@
 # ENTICE inventory: reconstruction and implementation plan
 
-Updated 20 October 2026. This is the single maintained report for the D2.4 reconstruction, consistency findings, agreed decisions and work towards D2.8 and T2.6. Update it in place; do not create separate follow-up, decision or audit Markdown reports. The [repository README](../../README.md) is the installation and usage guide. CSV/JSON evidence and manifests retain their separate purpose: reproducible records that this report references. Links under `build/` refer to retained local audit artifacts; that ignored directory is outside the published Git history.
+Updated 21 October 2026. This is the single maintained report for the D2.4 reconstruction, consistency findings, agreed decisions and work towards D2.8 and T2.6. Update it in place; do not create separate follow-up, decision or audit Markdown reports. The [repository README](../../README.md) is the installation and usage guide. CSV/JSON evidence and manifests retain their separate purpose: reproducible records that this report references. Links under `build/` refer to retained local audit artifacts; that ignored directory is outside the published Git history.
+
+## WSP storage layout: 21 October 2026
+
+The current folder guide is [Data split README](../shared-data/README.md).
+All 12 controlled model trials have inputs on WSP, with three matching accepted
+database folders. Failed-attempt diagnostics remain with their input workbooks. The
+complete 13-region/67-child result is in `Inventory generation/Database/20261021 0655 - 13 regions and 67 sectors/flows`.
+Its input workbooks are in `Inventories/D2.8 inventories` under the same name.
+The 67 regenerated inventories formerly in `Inventories/20261001` are retained
+as `Inventories/D2.4 inventories/Regenerated 20261001`; the old ambiguous folder
+is removed. Partner templates are directly in `Inventory generation/Data collection`.
+The `_GTAP Power 2023` baseline and `20260630 - D2.4 database` retain their names.
+The reorganisation manifest records hashes of all 241 moved files. The shared
+copies preserve matrix bytes and support checkpoint reload; E remains deferred.
+The additional eNextGen source consolidation checked 340 raw assets: 42 already
+on WSP and 298 copied with verified hashes (10.16 GB). The source-consolidation
+manifest records original/target paths and byte-level variants; configured data
+selection remains unchanged. Older paths below describe the historical layout.
+
 
 ## Current status and next steps
 

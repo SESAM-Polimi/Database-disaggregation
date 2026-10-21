@@ -17,6 +17,7 @@ import pandas as pd
 
 from run_model_trial import fingerprints
 from entice_inventory.reconciliation.row_trade import fit_row_trade
+from entice_inventory.core.shared_runs import remaining_workbook
 
 NS = 'http://schemas.openxmlformats.org/spreadsheetml/2006/main'
 
@@ -80,7 +81,7 @@ def main():
     state = db._intermediate_steps_state
     if state['split_model_options']['accounting'] != 'inherit':
         raise ValueError('This projection requires inherited accounting.')
-    workbook = source/'remaining_add_sectors.xlsx'
+    workbook = remaining_workbook(source)
     master, outputs, trades = (pd.read_excel(workbook,sheet_name=s) for s in ('Master','Total outputs','Trades'))
     parents = master.set_index('Sector')['Parent Sector'].to_dict()
     if set(parents)&set(state['completed_sectors']):

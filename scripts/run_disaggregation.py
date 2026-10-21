@@ -11,6 +11,7 @@ from entice_inventory.core.paths import local_config, project_data_root, data_pa
 from entice_inventory.core.geography import Geography, configured_geography
 from entice_inventory.core.disaggregation import prepare_inputs
 from entice_inventory.core.parent_budgets import ChildTargets, ParentBudgets, require_parent_budgets
+from entice_inventory.core.shared_runs import remaining_workbook
 
 
 def main():
@@ -49,7 +50,7 @@ def main():
         from mario.ops.add_sector_steps import load_checkpoint
         from mario.ops.add_sector_workbook import load_add_sector_workbook_input
         db = load_checkpoint(args.resume)
-        workbook = args.workbook or args.resume / 'remaining_add_sectors.xlsx'
+        workbook = args.workbook or remaining_workbook(args.resume)
         payload, _ = load_add_sector_workbook_input(workbook, table='IOT', read_inventories=True, split=True)
         require_parent_budgets(ParentBudgets.from_database(db),
                                ChildTargets.from_workbook(payload).pending(db),
