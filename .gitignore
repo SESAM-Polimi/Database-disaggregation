@@ -17,6 +17,5 @@ Run.py
 .d24_split_mixed_cache.pkl
 *.png
 
-paths.local.json
 
 external-data/

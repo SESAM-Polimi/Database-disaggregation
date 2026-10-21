@@ -1,4 +1,4 @@
-# ENTICE inventory: reconstruction and implementation plan
+# Database disaggregation: reconstruction and implementation plan
 
 Updated 1 October 2026. This is the single maintained report for the D2.4 reconstruction, consistency findings, agreed decisions and work towards D2.8 and T2.6. Update it in place; do not create separate follow-up, decision or audit Markdown reports. The [repository README](../../README.md) is the installation and usage guide. CSV/JSON evidence and manifests retain their separate purpose: reproducible records that this report references.
 
