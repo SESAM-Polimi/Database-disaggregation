@@ -24,6 +24,18 @@ For one-sector re-export from saved coefficients, use
 includes a concrete command. The export-only dependencies are pinned in
 `requirements/d24-export.txt`; they do not certify the upstream solver environment.
 
+## Shared data structure (21 October 2026)
+
+The WSP `Data split/README.md` is the shared folder guide; its maintained copy
+is [here](docs/shared-data/README.md). Partner templates are directly in
+`Inventory generation/Data collection`; generated inputs are under
+`Inventories/D2.4 inventories` and `Inventories/D2.8 inventories`. Databases
+are under `Database`. D2.8 input/result folders share the original run name
+`YYYYMMDD HHMM - N regions and M sectors`. The complete current monetary result
+is `20261021 0655 - 13 regions and 67 sectors`; E is pending recalculation.
+Configure personal paths via `config/paths.example.json` and `paths.local.json`.
+Historical paths elsewhere in the report describe earlier storage layouts.
+
 ## Layout
 
 ```text
@@ -53,7 +65,7 @@ separate from the lightweight export-only installation.
 
 The numerical GTAP database and `GTAP12_X.xlsx` are not distributed with this
 repository. Supply them from your licensed source. The configured shared archive supplies the totals workbook from
-`Database/GTAP Power 2023/Cache/GTAP12_X.xlsx` for inventory construction and QA features
+`Database/_GTAP Power 2023/Cache/GTAP12_X.xlsx` for inventory construction and QA features
 that require parent output weights. An explicit local copy at
 `data/GTAP12_X.xlsx` is also supported and ignored by Git.
 Its expected sheet is `GTAP totals`, with columns `Region`, `Full name regions`,
@@ -112,11 +124,14 @@ Data split/
     Classifications/
       ENTICE classifications.xlsx consolidated review view
       _sources/                   original specialist concordances
-    Database/GTAP Power 2023/
+    Database/_GTAP Power 2023/
       Original/                   licensed original CSV archive
       Cache/                      preserved D2.4 parquet baseline and output totals
-    Data collection/Inventory cleaning/  preserved partner/MARIO intermediates
-    Inventories/<run-id>/         generated inventory Excel files only
+    Data collection/              partner templates and VA.xlsx
+    Inventories/
+      D2.4 inventories/             historical exports, MARIO inputs and regenerated reference
+      D2.8 inventories/<run-name>/   split trial input workbooks
+    Database/<same-run-name>/       matching result; matrices directly in flows/
 ```
 
 Technical evidence, personal runners and original Git backups are held in the
@@ -135,7 +150,7 @@ adding their files does not make them supported automatically.
 
 End-to-end: open `scripts/run_d24_pipeline.py` and run the `#%%` cells in order.
 Each run creates a new date/time directory, with short sector-code filenames.
-Coefficients and the export diagnostic report go to ignored `build/runs/<run-id>`.
+The database goes to the matching shared `Database/<run-id>` folder; technical work files remain in ignored `build/runs/<run-id>`.
 MARIO's insertion settings are unchanged. The exporter and QA plots use the same
 configured data roles.
 
