@@ -2,7 +2,7 @@
 
 This WSP SharePoint folder contains the project inputs, generated inventories
 and resulting databases. Maintained code lives in the
-[ENTICE inventory repository](https://github.com/SESAM-Polimi/ENTICE_inventory)
+[Database disaggregation repository](https://github.com/SESAM-Polimi/Database-disaggregation)
 (data preparation, reconciliation and runs) and
 [MARIO](https://github.com/it-is-me-mario/MARIO) (database and split model).
 Local repository `build/` folders are computational workspaces; the paired
@@ -119,9 +119,11 @@ The MRIO trial commands below are on ENTICE `codex/configurable-regions`,
 with MARIO `codex/mrio-model-improvements`. The other ENTICE branches retain
 their own pipeline features and share the updated dataset paths.
 
-Configure `data_root` in the repository's ignored `paths.local.json` to your
-local `Data split` directory. `config/paths.example.json`
-lists the current roles; personal paths do not belong in committed code.
+Configure `data_root` in the repository's versioned `paths.local.json` to your
+local `Data split` directory. It currently contains the maintainer's paths;
+`config/paths.example.json` provides a generic starting point. Dataset roles
+are relative to `data_root`, so the same shared layout works for every user.
+`ENTICE_CONFIG` can select a separate configuration file.
 `scripts/run_model_trial.py` publishes finished trials to these paired WSP
 folders by default; `--no-publish` is reserved for explicitly private/CI work.
 `scripts/publish_model_trial.py TRIAL_DIRECTORY` publishes an existing finished
@@ -134,7 +136,9 @@ archive. `Data collection/Raw data/source_consolidation_20261021.json` records
 each checked source, its original WSP destination and hash. Its captured paths
 remain historical evidence. Use `Data collection/Raw data/current_data_layout.json`
 (also in the repository's `manifests/`) to locate them after the latest moves:
-apply its single longest matching prefix once.
+apply its single longest matching prefix once. Its `repository_relocation`
+entry also records the local checkout rename; captured trial manifests retain
+the repository paths used when those trials actually ran.
 
 The operational Purdue `Cost structures`, `Output and trade targets` and `Trades`
 packages are now in `Data collection/Final/PURDUE/Shared material`. Their 26 data
