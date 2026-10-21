@@ -17,6 +17,23 @@ imports continue to work. Data and results live in the project SharePoint
 **Data split** folder; this repository holds code, mappings, configuration and
 provenance records.
 
+## Change regional aggregation for the current D2.8 MRIO workflow
+
+Use branch **`codex/configurable-regions`** together with MARIO
+`codex/mrio-model-improvements`. Follow the
+[step-by-step regional pipeline guide](https://github.com/SESAM-Polimi/Database-disaggregation/blob/codex/configurable-regions/README.md#run-the-mrio-pipeline-with-another-regional-aggregation):
+configure your shared-data root, edit the complete native-to-target region map,
+prepare a new baseline/workbook, set the `Intermediate steps` plan, then execute
+and resume a controlled model trial. Changing geography requires a fresh
+preparation from native GTAP; a 13-region checkpoint cannot be reused for a new map.
+
+The experimental branch also provides the offline benchmark dashboard and
+cumulative input packages: `add_sectors.xlsx` holds the full plan, while
+`step_add_sectors.xlsx` archives the last compiled step. An empty
+`remaining_add_sectors.xlsx` means no children are pending. See the
+[current shared-data guide](https://github.com/SESAM-Polimi/Database-disaggregation/blob/codex/configurable-regions/docs/shared-data/README.md).
+These workflow scripts are on the experimental branch, not on `main`.
+
 ## Workflow
 
 1. Read structured partner templates, Purdue cost structures and production/trade
@@ -191,5 +208,5 @@ build/                        ignored computational work and diagnostics
 Historical audit records identify the code and files used at the time; they
 are not rewritten to claim that an old run used today's configuration.
 Structural checks and successful optimisation do not by themselves validate
-economic assumptions. Benchmarking and sensitivity analysis are still to be
-designed with the project team.
+economic assumptions. The experimental branch includes a first offline
+benchmark; economic review and sensitivity experiments remain project decisions.
