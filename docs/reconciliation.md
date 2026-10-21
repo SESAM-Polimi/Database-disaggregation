@@ -346,6 +346,57 @@ overruns and cannot invalidate another upper bound. Only `optimal` and
 required in both cases. Other statuses, nonfinite results or failed capacity
 checks stop the run.
 
+### Experimental projection against signed row budgets
+
+The capacity-only fit above does not guarantee that child and residual-parent
+rows can satisfy their output targets. In particular, a parent with zero
+residual output may require **increases** in child exports. Decreasing priors
+alone cannot resolve that case. The default ingestion policy is unchanged;
+`scripts/reconcile_model_trade.py` provides a separate copy-only experiment from
+an accepted checkpoint:
+
+```bash
+python scripts/reconcile_model_trade.py \
+  --checkpoint /absolute/path/to/accepted_checkpoint \
+  --trade-audit /absolute/path/to/reconciled/audit/trades.csv \
+  --policy /absolute/path/to/reconciled/audit/policy.json \
+  --output build/model_trials/my_trade_projection
+```
+
+For each parent/origin, retain the preceding Z/Y deliveries' positive and
+negative budgets by destination. Allocate these budgets among all pending
+children and the residual parent, requiring each row's net total to equal its
+unchanged output plus its inherited accounting discrepancy. Foreign child
+deliveries remain nonnegative and retain the producer-output and parent-route
+upper bounds. The parent residual has its own row budget. Missing trade rows
+are free in the feasibility probe; they are not silently treated as observed
+zeros. A group whose existing targets pass this LP and the upper bounds is
+preserved exactly, including its sparse target support.
+
+In a conflicting group, minimize weighted squared trade deviations divided by
+`max(abs(prior), 0.01*parent_route_capacity, 1e-6 MUSD)`. The original source
+weights are used only after matching the source audit against the workbook;
+previously absent routes have a zero reference and weight 0.1. Increases and
+new fitted routes are allowed. This is an explicit experimental estimation
+assumption, replacing the downward-only bound within these conflicting groups.
+Budget fractions improve numerical scaling without deleting negative budgets.
+CLARABEL is attempted first, then OSQP on numerical failure; both attempts and
+their statuses are recorded. Only `optimal`/`optimal_inaccurate` results with an
+independent monetary residual at most `1e-6 MUSD` pass the projection.
+
+The output records every fitted route in `trade_changes.csv`, source hashes,
+weights, solver diagnostics and the estimation rules in `reconciliation.json`.
+Only the `Trades` and `Intermediate steps` ZIP members are rewritten; all other
+workbook members, including output targets and technology profiles, remain
+byte-identical. The source checkpoint is verified before loading and its hashes
+must remain unchanged. The projected workbook puts all pending sectors in one
+group for a subsequent controlled resume.
+
+This projection is a **necessary row-feasibility check**, not full MRIO
+certification: column accounting, cell-specific zeros and V still require the
+normal MARIO solve and independent checkpoint verification. The report therefore
+explicitly sets `full_mrio_certified: false`.
+
 ## Technology profiles and monetary balance
 
 The boundary remains resolved native profiles, not unresolved input overrides.

@@ -415,6 +415,71 @@ direction: preserve output targets and reconcile trade on copies, retaining
 original data and checkpoints. This trade reconciliation has not yet been run;
 the additional full-model feasibility issue above must also be resolved.
 
+### Resumed on 21 October 2026
+
+MARIO `f2cbd4b` resolves the additional numerical preflight failure. The exact
+32-sector LP is infeasible at algebraic precision, but the same complete LP
+with the existing absolute acceptance band (`1e-6 MUSD`, one USD) is feasible.
+The HiGHS preflight now applies this explicit band in scaled canonical rows
+and returns native status without requesting a dual certificate. It does not
+change the final QP constraints or final acceptance tolerances. Forty-nine
+MARIO model/sequential/flow regression tests pass, including scale-dependent
+tests that distinguish sub-tolerance noise from real contradictions.
+
+`build/model_trials/20261021/remaining32_tolerant_lp` is **accepted**. The unchanged
+32-sector targets produce `002_Remaining_32`: 49 completed sectors, 18 pending,
+13 regions and 125 sectors including residual GTAP parents. The LP takes 133.19
+seconds including canonicalization (108.65 solver seconds); the QP is `optimal`
+in 135.41 solver seconds, with no failing constraint cells and maximum violation
+`1.06e-7 MUSD`. The full controlled run takes 626.26 seconds. Reload and
+independent verification pass against Mining and the original GTAP baseline,
+including all 1,487 Mining and 2,576 new selected bilateral trade targets.
+Original-baseline maximum Z/Y/V reaggregation errors are below `5.54e-8 MUSD`.
+All source hashes remain unchanged; E is still explicitly deferred.
+
+The separate experimental signed-row trade projection is documented in
+`docs/reconciliation.md`. Starting from this accepted 49-sector state,
+`build/model_trials/20261021/remaining18_trade_projection_v2` checks 39
+parent/origin groups. Thirty retain their original sparse trade targets; nine
+require fitting (the same conflicts identified on 20 October). Seven QPs are
+`optimal`, two `optimal_inaccurate`; all pass independent monetary residual
+checks, with a maximum of `2.11e-7 MUSD`. Output targets and all workbook members
+outside `Trades` and `Intermediate steps` remain byte-identical.
+
+The nine fitted groups change 431 routes by more than one USD. Their absolute
+trade adjustment is `32,316.16 MUSD`, with a net increase of `32,296.63 MUSD`.
+There are 174 newly written route targets, including fitted values near zero.
+These are calibrated delivery estimates, not additional observations. The
+projection alone does not certify the MRIO. Its controlled full-model resume
+is `build/model_trials/20261021/remaining18_reconciled_trade`.
+
+That full-model resume is now **accepted and independently verified**.
+`003_Reconciled_remaining_sectors` completes **all 67 children** (Mining 17,
+then 32, then 18), with no pending sectors: 13 regions, 143 sectors including
+residual parents. Its LP is feasible in 42.23 seconds including canonicalization
+(28.48 solver seconds). The QP is `optimal` in 66.19 solver seconds, with zero
+failing constraint cells and maximum violation `2.96e-7 MUSD`; the complete
+controlled resume takes 283.03 seconds.
+
+The final reload passes preservation against the immediate predecessor,
+Mining and original GTAP. Maximum original Z/Y/V reaggregation differences are
+`1.34e-7`, `6.21e-8` and `8.87e-9 MUSD`. All 6,152 selected bilateral targets
+across the three accepted stages pass independently. All 871 original child
+output targets (67 x 13) match **exactly**. Source baseline/workbook/checkpoint
+hashes are unchanged. E remains provisional, with `pending_recalculations: ["E"]`;
+EY and VY pass conservation and no E recalculation has been attempted.
+
+The final `signed_flow_quality.json`/CSV also inspect signed flows. No negative
+Z cell exceeds one USD in magnitude. Across 233 rows with output at most one
+USD, the largest gross Y is `4.18 USD` summed over destination/category cells;
+these are numerical remnants, not a newly imposed zero-output-Y rule. The
+checkpoint's own per-cell constraint audit passes. These descriptive diagnostics
+and numerical acceptance do not independently validate the estimated trade
+levels or the chosen Y/technology priors. All reports, executable verification
+drivers, source hashes and solver logs remain in the ignored trial directories.
+The affected ENTICE reconciliation/workbook tests pass (36), alongside the 49
+MARIO regression tests.
+
 `scripts/run_model_trial.py` copies a prepared baseline and workbook into a new
 directory, checks cumulative parent budgets, then executes the selected initial
 group. It never repeats cleaning or modifies the source preparation. Each
