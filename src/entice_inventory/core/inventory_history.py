@@ -208,5 +208,6 @@ def assemble_inventory_history(stages, destination):
                 regions=sorted(merged.master_sheet.Region.unique()), profiles=len(merged.master_sheet),
                 output_targets=len(support['Total outputs']), trade_targets=len(support['Trades']),
                 plan=plan, stages=sources, sha256=_digest(destination),
+                sha256_scope='Workbook bytes immediately after assembly/read-back verification; Office container metadata updates can change the byte hash.',
                 verification='Each stage recompiles to equivalent saved inputs; no optimisation was run.',
                 limitation='Assembled reference; use original stage workbooks and historical code for an exact run replay.')
