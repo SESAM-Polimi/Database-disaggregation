@@ -129,6 +129,21 @@ def main():
     bridge={k:dict(raw_value=q,raw_normalized=q/total,source_inventory=original_summary['factors'][k],
         source_to_raw_normalized_ratio=original_summary['factors'][k]/(q/total)) for k,q in combined.items()}
     if {str(f):sha(f) for f in files}!=hashes:raise RuntimeError('An input changed during the audit.')
+    active=[r for r in regional if r['active_output']]
+    low_v=[r for r in active if r['v_total']<.01]
+    screening=dict(rule='Review flag only: net factor prior below 1% of output; not a certified anomaly or automatic replacement rule.',
+        active_regions=len(active),zero_output_regions=len(regional)-len(active),
+        regions_below_one_percent=low_v,
+        share_of_mcu_output_in_flagged_regions=sum(r['output_MUSD'] for r in low_v)/sum(r['output_MUSD'] for r in active))
+    donor_diagnostics={}
+    for region in ['CHL','PER','AUS','USA']:
+        values=raw.get(region,{})
+        zsum=math.fsum(v['value'] for k,v in values.items() if k not in VA_CODES)
+        total=math.fsum(v['value'] for v in values.values())
+        if total and zsum:
+            donor_diagnostics[region]=dict(raw_normalized_v_share=math.fsum(v['value'] for k,v in values.items() if k in VA_CODES)/total,
+                raw_oil_gas_share_of_z=math.fsum(values.get(k,{'value':0})['value'] for k in ['oil','gas'])/zsum,
+                interpretation='Source profile diagnostics only; not a selected or certified donor.')
     repo=Path(__file__).resolve().parents[1]
     report=dict(format='mcu-prior-review-v1',created_at=datetime.now(timezone.utc).isoformat(),status='review_and_proposals_only',
         source_sha256=hashes,code_revision=subprocess.check_output(['git','-C',str(repo),'rev-parse','HEAD'],text=True).strip(),
@@ -136,7 +151,7 @@ def main():
         sources_unchanged=True,solver_invoked=False,preparation_policy_changed=False,
         raw_csv_units='Raw CSV values as supplied; normalized ratios are computed explicitly. No currency interpretation or conversion is asserted for raw numbers.',
         raw_region_count=len(raw),raw_invalid_regions=[r for r in native if r['invalid_positive_factor']],
-        regions=regional,active_invalid_regions=active_bad,
+        regions=regional,active_invalid_regions=active_bad,screening=screening,raw_same_activity_donor_diagnostics=donor_diagnostics,
         source_brazil_factor_rows={k:value for k,value in brazil.items() if k in VA_CODES},
         original_brazil=original_summary,resolved_brazil=resolved_summary,prepared_brazil=summary(profiles['BR']),
         raw_to_original_bridge=bridge,residual_source_rows=residual_rows,source_othtax_cluster_members=cluster_members,
@@ -168,6 +183,9 @@ def main():
         'The proposals change only cost-coefficient profiles. Output and trade targets stay fixed; they are not readjusted to make a model solve. Capital/Labor remain nonnegative; Tax/TTM remain signed.','',
         '## Interpretation','',
         'These are reviewable imputation scenarios, not certified source corrections. In Brazil the source technology is concentrated in Oil/Gas; preserving that composition while repairing V does not independently validate the profile. The regional OXT technology is a useful control and a broad proxy, not a measured copper technology. Chile/Peru should not be chosen automatically as alternative donors merely because their factor signs are positive; donor technology and source coverage also require review.','']
+    lines += ['', '## Broader screening','',
+        f"{len(low_v)} of {len(active)} active MCU regions have net V priors below 1% of output. They account for {100*screening['share_of_mcu_output_in_flagged_regions']:.1f}% of prepared MCU output. This is a review threshold, not proof of an error or an automatic donor-replacement rule.",
+        'The raw Chile and Peru profiles both have net V/output about 0.195% and Oil+Gas about 77.5% of Z before the 1% residual padding. A neighbouring-country donor does not by itself resolve the source-quality question. The regional OXT reference for Brazil has Oil+Gas about 0.523% of Z, versus 95.7% in the current child profile. Sector scope and valuation must be checked before treating either as a child observation.','']
     lines += ['- '+v for v in report['limitations']]
     lines += ['', '## Files','', '- `review.json`: hashes, lineage, raw source line numbers, factor values and full proposal metadata.', '- `raw-mcu-regions.csv`: 122 raw source profiles.', '- `prepared-mcu-regions.csv`: all 49 prepared regions and sign flags.', '- `candidate-coefficients.csv`: exact before/after coefficients for both Brazil proposals.', '', 'All source hashes were checked again after reading. Reproduce with `scripts/review_mcu_priors.py --prepared ORIGINAL_PREPARATION --output FRESH_DIRECTORY`.']
     (out/'README.md').write_text('\n'.join(lines)+'\n')
