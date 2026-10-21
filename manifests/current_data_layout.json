@@ -94,5 +94,12 @@
       }
     }
   ],
-  "all_moved_file_hashes_verified": true
+  "all_moved_file_hashes_verified": true,
+  "repository_relocation": {
+    "date": "2026-10-21",
+    "previous": "/Users/lorenzorinaldi/Documents/GitHub/SESAM/ENTICE_inventory",
+    "current": "/Users/lorenzorinaldi/Documents/GitHub/Database disaggregation",
+    "github_url": "https://github.com/SESAM-Polimi/Database-disaggregation",
+    "historical_manifests": "Captured local paths are evidence; replace this prefix when locating moved local artifacts."
+  }
 }
