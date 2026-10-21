@@ -28,11 +28,11 @@ from entice_inventory.export import plot_d24_split
 from datetime import datetime
 from entice_inventory.core.paths import project_data_root, data_path
 BASE = project_data_root(required=True)
-RUN_ID = datetime.now().strftime('%Y%m%d %H%M - D2.4 database')
+RUN_ID = datetime.now().strftime('%Y%m%d %H%M')
 GTAP_DB = data_path('baseline', required=True)
 MARIO_INVENTORIES = data_path('mario_inventories', required=True)
 D24_INVENTORIES = data_path('inventory_runs') / RUN_ID
-D24_DATABASE = data_path('database_runs') / RUN_ID
+D24_DATABASE = data_path('d24_database_runs') / RUN_ID
 PURDUE_TRADE = data_path('purdue_trade', required=True)
 D24_INVENTORIES.mkdir(parents=True, exist_ok=False)
 

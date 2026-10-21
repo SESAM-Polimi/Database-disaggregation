@@ -7,12 +7,13 @@ Updated 1 October 2026. This is the single maintained report for the D2.4 recons
 The current folder guide is [Data split README](../shared-data/README.md).
 All 12 controlled model trials have inputs on WSP, with three matching accepted
 database folders. Failed-attempt diagnostics remain with their input workbooks. The
-complete 13-region/67-child result is in `Inventory generation/Database/20261021 0655 - 13 regions and 67 sectors/flows`.
+complete 13-region/67-child result is in `Inventory generation/Database/D2.8/20261021 0655 - 13 regions and 67 sectors/flows`.
 Its input workbooks are in `Inventories/D2.8 inventories` under the same name.
 The 67 regenerated inventories formerly in `Inventories/20261001` are retained
 as `Inventories/D2.4 inventories/Regenerated 20261001`; the old ambiguous folder
 is removed. Partner templates are directly in `Inventory generation/Data collection`.
-The `_GTAP Power 2023` baseline and `20260630 - D2.4 database` retain their names.
+The common baseline remains in `Database/_GTAP Power 2023`; the historical
+`split=False` result is `Database/D2.4/20260630`.
 The reorganisation manifest records hashes of all 241 moved files. The shared
 copies preserve matrix bytes and support checkpoint reload; E remains deferred.
 The additional eNextGen source consolidation checked 340 raw assets: 42 already
