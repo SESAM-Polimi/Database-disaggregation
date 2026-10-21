@@ -29,13 +29,13 @@ from entice_inventory.core.baseline import load_baseline
 
 # --- Paths (all derived from BASE) ----------------------------------------- #
 BASE = project_data_root(required=True)
-RUN_ID = datetime.now().strftime('%Y%m%d %H%M - D2.4 database')
+RUN_ID = datetime.now().strftime('%Y%m%d %H%M')
 GTAP_DB = data_path('baseline', required=True)
 MARIO_INVENTORIES = data_path('mario_inventories', required=True)
 D24_INVENTORIES = data_path('inventory_runs') / RUN_ID
 # Numerical work files and logs stay outside the partner-facing output folder.
 D24_WORK = PROJECT_ROOT / 'build' / 'runs' / RUN_ID
-D24_DATABASE = data_path('database_runs') / RUN_ID
+D24_DATABASE = data_path('d24_database_runs') / RUN_ID
 PURDUE_TRADE = data_path('purdue_trade', required=True)
 D24_INVENTORIES.mkdir(parents=True, exist_ok=False)
 D24_WORK.mkdir(parents=True, exist_ok=False)
