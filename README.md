@@ -28,11 +28,22 @@ provenance records.
 4. Construct a database with MARIO. Historical D2.4 insertion uses `split=False`;
    monetary MRIO disaggregation uses `split=True` and CVXLab.
 5. Export inventories, databases and diagnostics to paired shared folders.
+6. Benchmark saved monetary MRIO results against their exact baseline, with an
+   offline interactive dashboard and JSON/CSV KPIs; no model rerun is needed.
 
 Source preparation, reconciliation and the optimisation model are separate
 steps. Reproducing an inventory is distinct from validating the economic
 plausibility of a balanced MRIO. Environmental E is still provisional in the
 current accepted 13-region monetary split.
+
+## Benchmark saved MRIO results
+
+The experimental branch includes a first dashboard for the accepted **13-region,
+67-new-sector** split (143 total sectors), compared with its exact 76-sector
+baseline. It covers conservation/accounting, technology, signed V/Y, trade,
+Leontief responses and a filterable economic review queue. E and environmental
+footprints remain pending. See [benchmarking methodology and commands](docs/benchmarking.md).
+Generated numerical reports stay beside the final database in Data split.
 
 ## Branches and reproducibility
 

@@ -16,12 +16,16 @@ export = ["pandas", "pyarrow"]
 # Needed only for the QA plotting module (entice_inventory.export.plot_d24_split).
 plots = ["pandas", "numpy", "matplotlib"]
 reconcile = ["pandas>=2.3.3", "numpy", "pyarrow", "scipy", "cvxpy"]
+benchmark = ["pandas", "numpy", "pyarrow", "scipy"]
 
 # Note: the database steps in scripts/run_d24_pipeline.py also require `mario`,
 # which is installed separately (local/Git checkout), not from PyPI.
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"entice_inventory.core" = ["benchmark_dashboard.html"]
 
 [tool.setuptools.data-files]
 "share/entice-inventory/registry" = [
