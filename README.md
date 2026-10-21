@@ -41,7 +41,7 @@ current accepted 13-region monetary split.
 The experimental branch includes a first dashboard for the accepted **13-region,
 67-new-sector** split (143 total sectors), compared with its exact 76-sector
 baseline. It covers conservation/accounting, technology, signed V/Y, trade,
-Leontief responses and a filterable economic review queue. E and environmental
+stability and multipliers and a filterable economic review queue. E and environmental
 footprints remain pending. See [benchmarking methodology and commands](docs/benchmarking.md).
 Generated numerical reports stay beside the final database in Data split.
 

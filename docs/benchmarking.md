@@ -49,14 +49,14 @@ preceding 17/49-child checkpoint for this comparison.
 ## Dashboard views
 
 1. **Overview:** aggregate output, V, foreign deliveries, conservation checks,
-   gross signed flows, review counts and largest common-shock differences.
+   gross signed flows, review counts.
 2. **Sector explorer:** region, parent, scope, name/code and output filters;
    sortable/ranked technology, V/Y/trade and multiplier KPIs. Detail compares a
    child or residual with its baseline parent, on a common input classification.
 3. **Trade & adjustments:** all origin-destination Z+Y deliveries for a selected
    sector, in M USD or as a delivery/X difference from the baseline parent;
    route-level prepared-prior → projected-target → final audit where available.
-4. **System response:** comparable final demand shocks, output multipliers,
+4. **System diagnostics:** output multipliers,
    spectral radius, conditioning and omitted zero-output flows.
 5. **Review queue:** filterable findings, click-through to sector detail, CSV
    export. Findings stay separate from hard accounting checks.
@@ -113,8 +113,7 @@ Transparent first screening rules are:
 - remaining gross Z/Y/V flows beyond 1 USD when X is at most 1 USD;
 - exhausted parent residuals where the baseline parent had material output;
 - V/X, exports/X, input import share or Y/X differing by >25 percentage points
-  from the baseline parent;
-- common-shock output multipliers differing by >0.25 output per unit shock.
+  from the baseline parent.
 
 These thresholds select cases to inspect; they are **not empirical acceptance
 tests**. Ratios for denominators ≤1 USD remain null. The output filter helps
@@ -123,22 +122,16 @@ reported, without being automatically interpreted as errors.
 
 ## Leontief diagnostics
 
-Build `A = Z / X` by column and solve `(I-A) response = shock` by LU, without
-optimisation. Report the spectral radius, a 1-norm condition estimate, column-sum
-output multipliers and linear solve residual. Tiny signed Z values remain in A.
+Build `A = Z / X` by column and solve `(I-A)^T m = 1` by LU for the
+column-sum output multipliers, without optimisation. Report the spectral radius,
+a 1-norm condition estimate, multipliers and their linear solve residual. Tiny signed Z values remain in A.
 X≤1 USD rows/columns are excluded; report their gross input and output flows.
 **Material excluded inputs make the resulting multipliers conditional on that
 exclusion** and require review even when the matrix is numerically stable.
 
-Each common shock adds 1 M USD of final demand to one baseline sector/region.
-In the detailed system it is allocated to the children and residual in fixed
-authoritative-X shares of that same original parent/region. No share is fitted
-to reproduce the baseline response. If active fine-sector shares fail to retain
-the full shock to within 1e-8, exclude that shock instead of renormalising it.
-Aggregate output responses geographically for comparison. Do not require fine
-and coarse Leontief multipliers to coincide: conservation of flows does not
-imply conservation of economic responses. Median/max multiplier statistics span
-different sector universes; common shocks provide the aligned comparison.
+The dashboard does not simulate hypothetical final demand shocks. Stability
+and multiplier distributions remain descriptive comparisons; fine and coarse
+sector universes differ, so those distributions need not coincide.
 
 ## Limits and next steps
 
@@ -156,11 +149,11 @@ python -m pytest tests/test_benchmark.py -q
 ```
 
 Synthetic tests cover two-axis aggregation, independent X, inherited accounting,
-common shocks against a direct inverse, undefined ratios/gross signed flows,
+multipliers against a direct inverse, undefined ratios/gross signed flows,
 new negative labor despite exact conservation, hash/non-finite/mapping failures,
 offline export and source/overwrite protection. Browser verification of the
 generated report should cover tab navigation, filters, sector drill-down, trade
-views, common shocks and review exports before sharing a new template version.
+views, system diagnostics and review exports before sharing a new template version.
 
 An optional DOM smoke test exercises those interactions on a synthetic exported
 fixture, including JSON/CSV downloads. It is not a visual browser/layout test:

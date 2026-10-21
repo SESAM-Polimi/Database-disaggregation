@@ -31,8 +31,8 @@ el('explore-table').querySelector('[data-sector-index]').click();assert.match(el
 assert.ok(el('input-chart').querySelector('[role=img]'));
 el('tab-trade').click();change('trade-mode','delta');assert.match(el('trade-matrix').textContent,/pp/);
 assert.doesNotMatch(el('trade-matrix').textContent,/NaN|undefined/);
-el('tab-system').click();change('shock-sector','P');assert.match(el('shock-stats').textContent,/Baseline total output/);
-assert.ok(el('shock-chart').querySelector('[role=img]'));
+el('tab-system').click();assert.match(el('system-diagnostics').textContent,/Spectral radius/);
+assert.equal(el('shock-sector'),null);assert.doesNotMatch(document.body.textContent,/\+1 M USD/);
 el('tab-review').click();change('review-metric','Negative Labor');assert.match(el('review-count').textContent,/1 findings/);
 el('review-table').querySelector('[data-sector-index]').click();assert.equal(el('explorer').hidden,false);
 el('tab-overview').dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));assert.equal(el('explorer').hidden,false);
@@ -40,5 +40,5 @@ el('download-json').click();el('download-sectors').click();el('export-review').c
 assert.equal(downloads.length,4);assert.ok(JSON.parse(blobs[0].parts[0]).summary);
 assert.match(blobs[1].parts[0],/"multiplier"/);
 assert.equal(errors.length,0,errors.join('\n'));
-console.log('DOM smoke passed: tabs, filters, detail, trade, shocks, review and four downloads.');
+console.log('DOM smoke passed: tabs, filters, detail, trade, system diagnostics, review and four downloads.');
 dom.window.close();

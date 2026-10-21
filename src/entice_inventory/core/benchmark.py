@@ -245,54 +245,21 @@ def leontief(db):
                              spectral_radius=rho, condition_1_estimate=float(1 / rcond),
                              multiplier_min=float(mult.min()), multiplier_max=float(mult.max()),
                              multiplier_median=float(np.median(mult)),
-                             negative_multipliers=int((mult < -RTOL).sum())))
+                             negative_multipliers=int((mult < -RTOL).sum()),
+                             multiplier_solve_residual_max=float(np.abs(m.T @ mult - 1.).max())))
 
 
-def compare_systems(base, final, mapped):
-    """Same 1 M USD parent/region demand injection; children get fixed X shares."""
-    from scipy.linalg import lu_solve
+def compare_systems(base, final):
+    """Stability and multiplier summaries only; no hypothetical demand shocks."""
     from contextlib import nullcontext
     try:
         from threadpoolctl import threadpool_limits
         thread_limit = threadpool_limits(limits=2)
     except ImportError:
         thread_limit = nullcontext()
-
     with thread_limit:
         b, f = leontief(base), leontief(final)
-        baxis = base['X'].index
-        parent_positions = baxis.get_indexer(mapped)
-        bx, fx = base['X'].iloc[:, 0].to_numpy(), final['X'].iloc[:, 0].to_numpy()
-        weights = np.divide(fx, bx[parent_positions], out=np.zeros(len(fx)), where=bx[parent_positions] > ATOL)
-        active_parents = np.flatnonzero(b['active'])
-        # Do not silently normalise away output omitted by the materiality threshold.
-        q = np.zeros((len(fx), len(bx)))
-        q[np.arange(len(fx)), parent_positions] = weights
-        q = q[f['active']][:, active_parents]
-        retained = q.sum(axis=0)
-        usable = np.abs(retained - 1) <= 1e-8
-        b_response = lu_solve(b['lu'], np.eye(len(active_parents))[:, usable])
-        f_response = lu_solve(f['lu'], q[:, usable])
-        shock_positions = active_parents[usable]
-        b_residual = b['matrix'] @ b_response - np.eye(len(active_parents))[:, usable]
-        f_residual = f['matrix'] @ f_response - q[:, usable]
-        regions = list(baxis.get_level_values(0).unique())
-        b_regions = np.array(baxis[b['active']].get_level_values(0))
-        f_regions = np.array(final['X'].index[f['active']].get_level_values(0))
-        shocks = []
-        for j, pos in enumerate(shock_positions):
-            region, sector = baxis[pos]
-            br = [float(b_response[b_regions == r, j].sum()) for r in regions]
-            fr = [float(f_response[f_regions == r, j].sum()) for r in regions]
-            shocks.append(dict(region=region, sector=sector, baseline_multiplier=sum(br),
-                               final_multiplier=sum(fr), delta=sum(fr) - sum(br),
-                               baseline_response=br, final_response=fr))
-        summary = dict(baseline=b['summary'], final=f['summary'],
-                       compared_shocks=len(shocks), excluded_shocks=int((~usable).sum()),
-                       max_linear_solve_residual=float(max(np.abs(b_residual).max(), np.abs(f_residual).max())),
-                       shock_size_MUSD=1, allocation='Fixed authoritative-X shares within original parent and region',
-                       shock_regions=regions)
-    return summary, shocks, b['multipliers'], f['multipliers']
+    return dict(baseline=b['summary'], final=f['summary']), b['multipliers'], f['multipliers']
 
 
 def prepared_targets(final, state):
@@ -388,8 +355,7 @@ def build_report(baseline, database, *, system=True):
     def issue(row, metric, value, note, severity='review'):
         issues.append(dict(region=row['region'], sector=row['sector'], parent=row['parent'],
                            metric=metric, value=float(value), note=note, severity=severity,
-                           unit='M USD output / M USD shock' if metric == 'Common shock multiplier change'
-                           else 'fraction (1 = 100 pp)' if metric.endswith('change') else 'M USD'))
+                           unit='fraction (1 = 100 pp)' if metric.endswith('change') else 'M USD'))
     for i, row in enumerate(rows):
         bi = b_lookup[(row['region'], row['parent'])]
         ref = b_rows[bi]
@@ -423,19 +389,15 @@ def build_report(baseline, database, *, system=True):
     if target_summary['status'] == 'checked' and target_summary['outputs'] != target_summary['expected_child_outputs']:
         checks.append(dict(name='Complete prepared output coverage', passed=False, failed_cells=1,
                            max_absolute=None, unit='observations', cells=target_summary['expected_child_outputs']))
-    systems, shocks = dict(status='not_computed'), []
+    systems = dict(status='not_computed')
     if system:
         try:
-            systems, shocks, bm, fm = compare_systems(base, final, mapped)
+            systems, bm, fm = compare_systems(base, final)
             systems['status'] = 'computed'
             for row, m in zip(b_rows, bm):
                 row['multiplier'] = float(m) if np.isfinite(m) else None
             for row, m in zip(rows, fm):
                 row['multiplier'] = float(m) if np.isfinite(m) else None
-            for s in shocks:
-                if abs(s['delta']) > .25:
-                    issue(dict(region=s['region'], sector=s['sector'], parent=s['sector']),
-                          'Common shock multiplier change', s['delta'], 'Change >0.25 M USD output per 1 M USD shock; review, not a conservation failure.')
         except (ValueError, RuntimeError, np.linalg.LinAlgError, Warning) as exc:
             systems = dict(status='unavailable', reason=str(exc))
     # Keep only meaningful input comparisons, not full IO matrices, in the dashboard.
@@ -484,9 +446,9 @@ def build_report(baseline, database, *, system=True):
     dims['sector_names'] = {code: item['name'] for code, item in registry.sectors.items()}
     dims['sector_names'].update({item['id']: item.get('name', item.get('label', item['id']))
                                 for item in registry.adapters['GTAP12']['parent_catalogue']})
-    return dict(format='entice-benchmark-v1', generated_at=datetime.now(timezone.utc).isoformat(),
+    return dict(format='entice-benchmark-v2', generated_at=datetime.now(timezone.utc).isoformat(),
                 summary=summary, dimensions=dims, checks=checks, targets=target_summary,
-                sectors=rows, baseline_sectors=b_rows, issues=issues, systems=systems, shocks=shocks,
+                sectors=rows, baseline_sectors=b_rows, issues=issues, systems=systems,
                 trade_changes=changes,
                 provenance=dict(baseline=str(base.root), database=str(final.root), baseline_sha256=base.hashes,
                                 database_sha256=final.hashes, sources_unchanged=True, auxiliary_sources=sources,
@@ -496,7 +458,7 @@ def build_report(baseline, database, *, system=True):
                                 baseline_origin=json.loads((base.root / 'baseline_provenance.json').read_text())
                                 if (base.root / 'baseline_provenance.json').is_file() else None),
                 policy=dict(atol_MUSD=ATOL, rtol=RTOL, active_output_threshold_MUSD=ATOL,
-                            share_screening_threshold=.25, multiplier_screening_threshold=.25,
+                            share_screening_threshold=.25,
                             accounting='inherit', monetary_unit='M USD'))
 
 

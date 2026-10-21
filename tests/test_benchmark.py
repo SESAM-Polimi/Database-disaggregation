@@ -71,16 +71,15 @@ def test_reaggregation_both_axes_and_explicit_x(pair):
     np.testing.assert_allclose(ac['column']['expected'], [.28, .12, .4, .16, .24, .4], atol=1e-12)
 
 
-def test_common_shock_keeps_total_injection_and_matches_exact_reference(pair):
+def test_multiplier_summaries_match_exact_reference(pair):
     base, final = map(Flows.read, pair)
     mapped = mapping_to_baseline(base, final, {'C': 'P'})
-    system, shocks, bm, fm = compare_systems(base, final, mapped)
+    system, bm, fm = compare_systems(base, final)
     expected = np.linalg.inv(np.eye(4) - base['Z'].to_numpy() / base['X'].iloc[:, 0].to_numpy()[None, :])
     np.testing.assert_allclose(bm, expected.sum(0), atol=1e-12)
-    np.testing.assert_allclose([s['final_multiplier'] for s in shocks], expected.sum(0), atol=1e-12)
-    np.testing.assert_allclose([s['delta'] for s in shocks], 0, atol=1e-12)
-    assert system['max_linear_solve_residual'] < 1e-12
-    assert system['compared_shocks'] == 4
+    assert system['baseline']['active_sectors'] == 4
+    assert system['final']['active_sectors'] == 6
+    np.testing.assert_allclose(fm, expected.sum(0)[[0, 0, 1, 2, 2, 3]], atol=1e-12)
 
 
 def test_zero_output_uses_null_ratios_and_gross_signed_flows(pair):
