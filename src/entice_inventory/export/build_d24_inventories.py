@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from datetime import datetime
+
 import argparse
 import importlib
 import math
@@ -16,19 +18,16 @@ from typing import Iterable
 from openpyxl import load_workbook
 
 from entice_inventory.core.matching_utils import load_parent_map
-from entice_inventory.core.paths import DATA_DIR
+from entice_inventory.core.paths import DATA_DIR, data_path, project_data_root
 
 
-DEFAULT_DATA_ROOT = (
-    Path.home()
-    / "Library/CloudStorage/OneDrive-SharedLibraries-eNextGen/ENTICE - Documents/WPs, Tasks & Deliverables/WP2 - Data/T2.2 & T2.3 - GTAP disaggregation"
-)
-DEFAULT_DB_PATH = DEFAULT_DATA_ROOT / "Database/GTAP 2023/2023entice"
-DEFAULT_SOURCE_DIR = DEFAULT_DATA_ROOT / "Data collection/Inventory cleaning/MARIO inventories copy"
-DEFAULT_OUTPUT_DIR = DEFAULT_DATA_ROOT / "Data collection/Inventory cleaning/D2.4 inventories"
-DEFAULT_PURDUE_SPLITARGS_PATH = DEFAULT_DATA_ROOT / "Shared material/Purdue data collection/June1/splttargs.xlsx"
-DEFAULT_PURDUE_TRADE_PATH = DEFAULT_DATA_ROOT / "Shared material/Purdue data collection/May13/trade.xlsx"
-DEFAULT_GTAP_SECTORS_PATH = DEFAULT_DATA_ROOT / "Shared material/Purdue data collection/May13/GTAP sectors H5.xlsx"
+DEFAULT_DATA_ROOT = project_data_root()
+DEFAULT_DB_PATH = data_path('baseline')
+DEFAULT_SOURCE_DIR = data_path('mario_inventories')
+DEFAULT_OUTPUT_DIR = data_path('inventory_runs') / datetime.now().strftime('%Y%m%d-%H%M%S-%f')
+DEFAULT_PURDUE_SPLITARGS_PATH = data_path('purdue_split_targets')
+DEFAULT_PURDUE_TRADE_PATH = data_path('purdue_trade')
+DEFAULT_GTAP_SECTORS_PATH = data_path('gtap_sector_names')
 DEFAULT_MATCHING_PATH = DATA_DIR / "GTAP12_matching.xlsx"
 DEFAULT_MARIO_SRC = Path.home() / "Documents/GitHub/MARIO"
 REPORT_FILENAME = "export_d24_report.txt"

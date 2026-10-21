@@ -9,8 +9,8 @@ Run as Jupyter-style cells (#%%). The flow is:
   5. Inject Purdue bilateral trade data into the exported workbooks.
   6. Plot the X / VA disaggregation of each split parent sector for QA.
 
-Edit BASE below to point at your local OneDrive copy of the WP2 data folder;
-every path is derived from it.
+Set data_root in paths.local.json to the WSP Data split/Inventory generation folder.
+Input and database output paths use the shared project roles.
 """
 
 #%%
@@ -24,18 +24,17 @@ from entice_inventory.export.build_d24_inventories import (
 )
 from entice_inventory.export import plot_d24_split
 
-# --- Paths (all derived from BASE) ----------------------------------------- #
-BASE = Path(
-    "/Users/lorenzorinaldi/Library/CloudStorage/OneDrive-SharedLibraries-eNextGen"
-    "/ENTICE - Documents/WPs, Tasks & Deliverables/WP2 - Data"
-    "/T2.2 & T2.3 - GTAP disaggregation"
-)
-INVENTORY_CLEANING = BASE / "Data collection/Inventory cleaning"
-GTAP_DB = BASE / "Database/GTAP 2023/2023entice"
-MARIO_INVENTORIES = INVENTORY_CLEANING / "MARIO inventories"
-D24_INVENTORIES = INVENTORY_CLEANING / "D2.4 inventories"
-D24_DATABASE = INVENTORY_CLEANING / "D2.4 database"
-PURDUE_TRADE = BASE / "Shared material/Purdue data collection/May13/trade.xlsx"
+# --- Shared paths (personal data_root is configured outside Git) ----------- #
+from datetime import datetime
+from entice_inventory.core.paths import project_data_root, data_path
+BASE = project_data_root(required=True)
+RUN_ID = datetime.now().strftime('%Y%m%d %H%M - D2.4 database')
+GTAP_DB = data_path('baseline', required=True)
+MARIO_INVENTORIES = data_path('mario_inventories', required=True)
+D24_INVENTORIES = data_path('inventory_runs') / RUN_ID
+D24_DATABASE = data_path('database_runs') / RUN_ID
+PURDUE_TRADE = data_path('purdue_trade', required=True)
+D24_INVENTORIES.mkdir(parents=True, exist_ok=False)
 
 #%%
 # 1. Baseline GTAP database (flows).

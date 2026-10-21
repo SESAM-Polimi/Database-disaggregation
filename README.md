@@ -24,6 +24,18 @@ For one-sector re-export from saved coefficients, use
 includes a concrete command. The export-only dependencies are pinned in
 `requirements/d24-export.txt`; they do not certify the upstream solver environment.
 
+## Shared data structure (21 October 2026)
+
+The WSP `Data split/README.md` is the shared folder guide; its maintained copy
+is [here](docs/shared-data/README.md). Partner templates are directly in
+`Inventory generation/Data collection`; generated inputs are under
+`Inventories/D2.4 inventories` and `Inventories/D2.8 inventories`. Databases
+are under `Database`. D2.8 input/result folders share the original run name
+`YYYYMMDD HHMM - N regions and M sectors`. The complete current monetary result
+is `20261021 0655 - 13 regions and 67 sectors`; E is pending recalculation.
+Configure personal paths via `config/paths.example.json` and `paths.local.json`.
+Historical paths elsewhere in the report describe earlier storage layouts.
+
 ## Layout
 
 ```text
@@ -76,8 +88,7 @@ parent" residual clusters), `core.matching_utils` (read `GTAP12_matching.xlsx`).
 
 ## Running it
 
-End-to-end: open `scripts/run_d24_pipeline.py`, set `BASE` to your local OneDrive
-copy of the WP2 data folder, and run the `#%%` cells in order.
+Copy `config/paths.example.json` to ignored `paths.local.json`, set `data_root` to your WSP `Data split/Inventory generation` directory, then run the `#%%` cells in `scripts/run_d24_pipeline.py` in order.
 
 The modules with a `__main__` block can also be run from the command line, e.g.:
 
