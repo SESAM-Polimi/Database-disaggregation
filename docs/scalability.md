@@ -276,3 +276,53 @@ profile uses a 10 GiB process-tree RSS stop and a two-hour wall limit per phase.
 A resource stop is an incomplete scalability probe, not mathematical
 infeasibility or an accepted database. Numerical inputs, logs and profiles are
 retained under the ignored local build directory.
+
+### Recorded native probe — resource stop, 21 October 2026
+
+The two-sector probe did **not** produce an accepted database. Preparation
+completed, but the trial was stopped while the add-sectors engine was filling
+the CHR input slices, before CVXLab optimisation. MOSEK had been selected by the
+policy; neither its native optimiser nor the quadratic/Gurobi fallback ran.
+
+| Measurement | Recorded native probe |
+| --- | ---: |
+| Preparation wall time | 576.2 s |
+| Preparation peak sampled RSS | 4.59 GiB |
+| Trial wall time to resource stop | 404.2 s |
+| Trial peak sampled RSS | 5.27 GiB |
+| macOS physical footprint at stop | about 19 GiB |
+| macOS physical footprint peak | about 20 GiB |
+
+The RSS-only guard **underestimated compressed/swapped allocations on macOS**.
+An additional `vmmap -summary` measurement exposed the footprint and triggered
+an external stop of the owned process group. A future macOS guard must include
+footprint rather than rely on RSS alone. The raw RSS profiler output, original
+interrupted manifests and external-stop record are all retained; the normalised
+trial records `failure_category=resource_stopped`. The RSS and footprint figures
+are different measures and must not be treated as interchangeable scaling ratios.
+
+The native preparation retained all 67 children and passed cumulative output,
+bilateral-trade and producer-export budget checks. Its full workbook contains
+10,932 worksheets (10,921 child/region inventories). All **174 original source
+files**, the prepared workbook/baseline and the working baseline were verified
+unchanged. No factor-prior repair or donor proposal was adopted. The read-only
+sign audit finds negative Capital/Labor for active MCU/Brazil; negative
+MCU/Lithuania and CHR/Japan coefficient priors occur at zero prepared output.
+This input-domain issue remains separate from the resource stop.
+
+Inputs and complete diagnostics were published only under
+`Inventories/D2.8 inventories/20261021 2205 - 163 regions and 2 sectors`.
+`add_sectors.xlsx` is the exact two-sector compiled input;
+`source_add_sectors.xlsx` retains the full preparation and pending plan.
+`scalability.md`, JSON summaries, profiles, memory snapshot, source-integrity
+checks, compressed preparation audit and reproduction scripts accompany them.
+No corresponding database directory or baseline benchmark was created. The
+probe establishes a pre-solver memory limitation of this execution, not
+mathematical infeasibility or economic validity of a native-region solution.
+
+After publication, the shared XLSX containers received Office metadata additions.
+ZIP-member comparison verified byte-identical original model members and
+worksheets, with every original relationship retained. The published
+`diagnostics/publication-integrity.json` records both hashes and package
+differences; `diagnostics/exact-inputs.zip` preserves the original containers
+and was verified against their trial hashes. No numerical input was changed.
