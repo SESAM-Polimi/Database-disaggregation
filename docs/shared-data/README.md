@@ -13,34 +13,48 @@ folders below are the shared copies to use and exchange.
 ```text
 Data split/
 ├── README.md
-├── Data collection/                       Original consortium deliveries
-│   ├── Shared sources.xlsx
-│   └── <partner>/                        Purdue, ICCS, POLIMI & ENEXTGEN, etc.
-├── FNAM split/                            Preserved alternative-method examples
-└── Inventory generation/
-    ├── Classifications/                  Shared classification workbooks
-    ├── Data collection/                  Partner inventory templates and VA.xlsx
-    ├── Inventories/
-    │   ├── D2.4 inventories/              Released D2.4 per-sector workbooks
-    │   │   ├── MARIO inventories/20260630/ Original add_sectors inputs (split=False)
-    │   │   └── Regenerated 20261001/       67 regenerated D2.4 reference inventories
-    │   └── D2.8 inventories/
-    │       └── <run name>/                MARIO inputs for one split trial
-    └── Database/
-        ├── _GTAP Power 2023/
-        │   ├── Original/                 Original licensed GTAP archive
-        │   └── Cache/                    Baseline matrices and GTAP12_X.xlsx
-        ├── D2.4/
-        │   └── 20260630/                 Historical result of split=False
-        └── D2.8/
-            └── <same run name>/           MRIO result, state and diagnostics
+├── Data collection/
+│   ├── Final/                            Operational inputs read by the pipeline
+│   │   ├── Inventory_*.xlsx, Add_sector_*.xlsx
+│   │   ├── VA.xlsx
+│   │   └── PURDUE/Shared material/
+│   │       ├── Cost structures/          EXIOIOT, copper and supporting cost data
+│   │       ├── Output and trade targets/ Selected splttargs workbook and GDX
+│   │       └── Trades/                   Selected trade workbook and GDX
+│   └── Raw data/                         Other deliveries and historical versions
+│       ├── <partner>/                    Purdue, ICCS, POLIMI & ENEXTGEN, etc.
+│       ├── Shared sources.xlsx
+│       ├── source_consolidation_20261021.json
+│       └── current_data_layout.json       Map of historical paths to current paths
+├── Classifications/                      Shared classification workbooks
+├── Inventories/
+│   ├── D2.4 inventories/                  Released D2.4 per-sector workbooks
+│   │   ├── MARIO inventories/20260630/    Original add_sectors inputs (split=False)
+│   │   └── Regenerated 20261001/          67 regenerated D2.4 reference inventories
+│   └── D2.8 inventories/
+│       └── <run name>/                    MARIO inputs for one split trial
+├── Database/
+│   ├── _GTAP Power 2023/
+│   │   ├── Original/                     Original licensed GTAP archive
+│   │   └── Cache/                        Baseline matrices and GTAP12_X.xlsx
+│   ├── D2.4/
+│   │   └── 20260630/                     Historical result of split=False
+│   └── D2.8/
+│       └── <same run name>/              MRIO result, state and diagnostics
+└── _others/
+    └── FNAM split/                       Preserved alternative-method examples
 ```
 
-The two `Data collection` directories have different roles: the top-level one
-preserves complete partner deliveries; the one inside `Inventory generation`
-contains the structured partner templates used by the inventory pipeline.
-Generated inventories belong under `Inventories`, outside either collection.
-`FNAM split` is retained reference material, not the maintained MRIO pipeline.
+`Data collection/Final` contains the selected operational inputs: partner
+templates and VA.xlsx directly, and Purdue cost/output/trade packages in their
+own subdirectories. `Final` means selected input, not an independently validated
+final database. `Data collection/Raw data` preserves other deliveries, source
+documentation and historical or alternative versions. Different byte versions
+are kept separately; folder reorganisation does not change source selection.
+
+Generated inventories, classifications and databases are siblings of the README.
+The former `Inventory generation` level has been removed. `_others/FNAM split`
+is retained reference material, not the maintained MRIO pipeline.
 
 ## Pairing a trial's inputs and results
 
@@ -75,7 +89,7 @@ the MARIO `codex/mrio-model-improvements` branch. From that environment:
 from pathlib import Path
 from mario.ops.add_sector_steps import load_checkpoint
 
-root = Path("/your/local/Data split/Inventory generation")
+root = Path("/your/local/Data split")
 name = "20261021 0655 - 13 regions and 67 sectors"
 db = load_checkpoint(root / "Database" / "D2.8" / name)
 ```
@@ -106,7 +120,7 @@ with MARIO `codex/mrio-model-improvements`. The other ENTICE branches retain
 their own pipeline features and share the updated dataset paths.
 
 Configure `data_root` in the repository's ignored `paths.local.json` to your
-local `Data split/Inventory generation` directory. `config/paths.example.json`
+local `Data split` directory. `config/paths.example.json`
 lists the current roles; personal paths do not belong in committed code.
 `scripts/run_model_trial.py` publishes finished trials to these paired WSP
 folders by default; `--no-publish` is reserved for explicitly private/CI work.
@@ -116,13 +130,20 @@ trial. Existing published names are never overwritten.
 The additional eNextGen source consolidation checked 340 raw assets: 42 were
 already on WSP and 298 were copied with SHA-256 verification (about 10.16 GB,
 including two large GTAP Power archives). Original source files remain in the
-archive. `Data collection/source_consolidation_20261021.json` maps every checked
-source to its WSP location and hash. Missing production/trade data, templates,
-literature and classifications are now under the top-level `Data collection`.
-Different byte versions are preserved separately; the current pipeline's source
-selection remains explicit in its path configuration. In particular, Purdue's
-`Cost structures`, `Output and trade targets` and `Trades` remain the configured
-inputs; newly captured `June1`/`May13` folders preserve the other eNextGen versions.
+archive. `Data collection/Raw data/source_consolidation_20261021.json` records
+each checked source, its original WSP destination and hash. Its captured paths
+remain historical evidence. Use `Data collection/Raw data/current_data_layout.json`
+(also in the repository's `manifests/`) to locate them after the latest moves:
+apply its single longest matching prefix once.
+
+The operational Purdue `Cost structures`, `Output and trade targets` and `Trades`
+packages are now in `Data collection/Final/PURDUE/Shared material`. Their 26 data
+files were moved with before/after SHA-256 verification. The `June1`, `May13`
+and `_old/May27` deliveries remain in `Data collection/Raw data/PURDUE/Shared material`.
+Other eNextGen material is filed by partner in `Raw data`; `Raw data/eNextGen sources`
+contains additional classifications and shared documents, not all eNextGen files.
+The licensed GTAP baseline is under `Database/_GTAP Power 2023`; classification
+workbooks are under `Classifications`. These roles remain explicit in configuration.
 
 Original deliveries, the GTAP baseline and the historical D2.4 result remain
 reference inputs. Create a new paired run for changed data or settings. Keep

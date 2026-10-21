@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-21",
+  "root": "Data split",
+  "data_root": "Data split",
+  "resolution": "Apply the single longest matching prefix once; historical source/audit manifests retain their captured paths.",
+  "operational_inputs": "Data collection/Final",
+  "raw_deliveries": "Data collection/Raw data",
+  "previous_path_mappings": [
+    {
+      "previous": "Data collection/Raw data/PURDUE/Shared material/Output and trade targets",
+      "current": "Data collection/Final/PURDUE/Shared material/Output and trade targets"
+    },
+    {
+      "previous": "Data collection/Raw data/PURDUE/Shared material/Cost structures",
+      "current": "Data collection/Final/PURDUE/Shared material/Cost structures"
+    },
+    {
+      "previous": "Data collection/PURDUE/Shared material/Output and trade targets",
+      "current": "Data collection/Final/PURDUE/Shared material/Output and trade targets"
+    },
+    {
+      "previous": "Data collection/PURDUE/Shared material/Cost structures",
+      "current": "Data collection/Final/PURDUE/Shared material/Cost structures"
+    },
+    {
+      "previous": "Data collection/Raw data/PURDUE/Shared material/Trades",
+      "current": "Data collection/Final/PURDUE/Shared material/Trades"
+    },
+    {
+      "previous": "Data collection/PURDUE/Shared material/Trades",
+      "current": "Data collection/Final/PURDUE/Shared material/Trades"
+    },
+    {
+      "previous": "Inventory generation/Data collection",
+      "current": "Data collection/Final"
+    },
+    {
+      "previous": "Inventory generation",
+      "current": ""
+    },
+    {
+      "previous": "Data collection",
+      "current": "Data collection/Raw data"
+    },
+    {
+      "previous": "FNAM split",
+      "current": "_others/FNAM split"
+    }
+  ],
+  "purdue_moves": [
+    {
+      "source": "Data collection/Raw data/PURDUE/Shared material/Cost structures",
+      "destination": "Data collection/Final/PURDUE/Shared material/Cost structures",
+      "files": {
+        "COPCOSTS.csv": "40f1a4dffbe371071257a1d39ddd42ff7ad428d738efa6ba4a006319d1d07054",
+        "COPSEC.csv": "46c610d3a1b9955ca68db1a85673755f765ebef922fa341b77b8b2aafc76c475",
+        "EXIOIOT.csv": "829a5a98baec516d9392db14f694b8a67bc4b95d58a7611fb96e2830610948c9",
+        "Supporting data/CMDEMD.csv": "d3b6f556222b90079bfc0043cb4e068ce346a2b657457135faba23afb1ae6fe8",
+        "Supporting data/CRPSEC.csv": "9a3ba50a6ee82405d94b8602b2514d4fb4557f1fb3a366e2b8e059e2dbf12e6f",
+        "Supporting data/FRTCOM.csv": "ff461f6c87601c290c0e4afa7a250857dde6d98040708da44b00f70eb64a2cd6",
+        "Supporting data/FRTUSESHR.csv": "ac4a6d85deafb37cb76e11a2056eb12f88e3b55728d3ddacc525b53d7f34e641",
+        "Supporting data/GCEROWS.csv": "cbbc689e69803dbedc73cb4c6397be69b969479b55dfa24231d4a30f4d2fe945",
+        "Supporting data/GlobalSet.csv": "33188e0515fce069fc423e9e7fc2e428d124fd101886e0d87bb9c77e77f3f9c5",
+        "Supporting data/KFCOSTS.csv": "375f50c1e01556600c765cd8872cb5dbf3ea66bbca03b68be03b755e22846145",
+        "Supporting data/KFCOSTSHR.csv": "90fcfaf2bee6ff637e921bb3c730ba4a9dfdeaa836d43692c8d5bb205c5243ff",
+        "Supporting data/MINMSEC.csv": "dce415318a99b159fa4aff0e67ce932af441fc3f9675a07f73a54530668ba238",
+        "Supporting data/MINSUP.csv": "7a3b0744504c41e65c99e556cb0541055fba295a21f8920508d46d3fe6f74a58",
+        "Supporting data/MUTSEC.csv": "ab58c453770f00aee2e83b552c37950c8acb38e3e03b68bddde8096d2d636f0b",
+        "Supporting data/NFCOSTS.csv": "37089d5c7b67da50206092d6ab82e5916e61463f2b0f8153f3534afc68cf720c",
+        "Supporting data/NFCOSTSHR.csv": "45ddd0c0f95aa90da9b27373560ce0a3f99bf39de48316d57646e6a061aa1d6b",
+        "Supporting data/PFCOSTS.csv": "1019f06b47f382c935bb50dcbcb6d7b3f0cd54701337259ccd4fbd23c17334f3",
+        "Supporting data/PFCOSTSHR.csv": "dfc086ca7f902ba4515ac73fbd7b6d1b004f5bb9a814165ae5e2096f27d61e64",
+        "Supporting data/REG.csv": "756defcf2ac3f9189da1207a048cbc3e9ece6fb8f6ba867706567bc46ccd63d0",
+        "Supporting data/SUPCATS.csv": "592164f585582a237ac609413cff119664965fead52c68df163db5a0a55810b0",
+        "costsup.gdx": "a6e444a8f136bfe54ac104237289243561abcde1a74abe5534e1f2a033f073b2",
+        "costsup.xlsx": "4a49d60d7102831fbf4bbee58b5466d5412b3c61c393335522571cb9b4c0c600"
+      }
+    },
+    {
+      "source": "Data collection/Raw data/PURDUE/Shared material/Output and trade targets",
+      "destination": "Data collection/Final/PURDUE/Shared material/Output and trade targets",
+      "files": {
+        "splttargs.gdx": "68c3909c415adeb181bfa14dd9bb14bec6343c8dcf17652378023a5dc78e3dda",
+        "splttargs.xlsx": "b1af2610eb27712c7d530327bf2b0bf865a77f4183e01b822993bb522aae5d06"
+      }
+    },
+    {
+      "source": "Data collection/Raw data/PURDUE/Shared material/Trades",
+      "destination": "Data collection/Final/PURDUE/Shared material/Trades",
+      "files": {
+        "trade.gdx": "459bb8decf1ae6ed634f2ad2ef9b67be9ea514f870499d2ac0d7cea561c94507",
+        "trade.xlsx": "2931e932031e131d820f0c0220c89f57d71c2ea8d421d9e28f35fe5bcadeac9e"
+      }
+    }
+  ],
+  "all_moved_file_hashes_verified": true
+}
