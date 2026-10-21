@@ -16,14 +16,14 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 DATA_DIR = PROJECT_ROOT / "data"
 
-# Paths are relative to Inventory generation. A local override may point outside
-# it, e.g. to the sibling consortium Data collection directory.
+# Paths are relative to Data split. Final contains selected operational inputs;
+# Raw data preserves other deliveries and historical versions.
 DATA_PATHS = {
     'baseline': 'Database/_GTAP Power 2023/Cache',
     'gtap_totals': 'Database/_GTAP Power 2023/Cache/GTAP12_X.xlsx',
     'classifications': 'Classifications/ENTICE classifications.xlsx',
     'mario_inventories': 'Inventories/D2.4 inventories/MARIO inventories/20260630',
-    'partner_templates': 'Data collection',
+    'partner_templates': 'Data collection/Final',
     'reference_inventories': 'Inventories/D2.4 inventories',
     'inventory_runs': 'Inventories/D2.4 inventories',
     'resolved_inventories': 'Inventories/D2.4 inventories/Regenerated 20261001',
@@ -31,13 +31,13 @@ DATA_PATHS = {
     'database_runs': 'Database/D2.8',
     'd24_database_runs': 'Database/D2.4',
     'reference_coefficients': 'Database/D2.4/20260630/coefficients',
-    'value_added': 'Data collection/VA.xlsx',
-    'purdue_split_targets': '../Data collection/PURDUE/Shared material/Output and trade targets/splttargs.xlsx',
-    'purdue_trade': '../Data collection/PURDUE/Shared material/Trades/trade.xlsx',
+    'value_added': 'Data collection/Final/VA.xlsx',
+    'purdue_split_targets': 'Data collection/Final/PURDUE/Shared material/Output and trade targets/splttargs.xlsx',
+    'purdue_trade': 'Data collection/Final/PURDUE/Shared material/Trades/trade.xlsx',
     'gtap_sector_names': 'Classifications/_sources/Purdue/GTAP sectors H5.xlsx',
-    'exioiot': '../Data collection/PURDUE/Shared material/Cost structures/EXIOIOT.csv',
-    'copcosts': '../Data collection/PURDUE/Shared material/Cost structures/COPCOSTS.csv',
-    'copper_sectors': '../Data collection/PURDUE/Shared material/Cost structures/COPSEC.csv',
+    'exioiot': 'Data collection/Final/PURDUE/Shared material/Cost structures/EXIOIOT.csv',
+    'copcosts': 'Data collection/Final/PURDUE/Shared material/Cost structures/COPCOSTS.csv',
+    'copper_sectors': 'Data collection/Final/PURDUE/Shared material/Cost structures/COPSEC.csv',
 }
 
 

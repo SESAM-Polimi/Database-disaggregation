@@ -5,21 +5,29 @@ Updated 21 October 2026. This is the single maintained report for the D2.4 recon
 ## WSP storage layout: 21 October 2026
 
 The current folder guide is [Data split README](../shared-data/README.md).
+The operational root is now `Data split`, with `Classifications`, `Database`
+and `Inventories` directly inside it. Selected partner templates and VA.xlsx
+are in `Data collection/Final`; operational Purdue costs, output and trade inputs
+are in `Data collection/Final/PURDUE/Shared material`. Other deliveries and
+historical Purdue variants remain in `Data collection/Raw data`.
+Alternative-method examples are in `_others/FNAM split`.
+
 All 12 controlled model trials have inputs on WSP, with three matching accepted
-database folders. Failed-attempt diagnostics remain with their input workbooks. The
-complete 13-region/67-child result is in `Inventory generation/Database/D2.8/20261021 0655 - 13 regions and 67 sectors/flows`.
-Its input workbooks are in `Inventories/D2.8 inventories` under the same name.
-The 67 regenerated inventories formerly in `Inventories/20261001` are retained
-as `Inventories/D2.4 inventories/Regenerated 20261001`; the old ambiguous folder
-is removed. Partner templates are directly in `Inventory generation/Data collection`.
-The common baseline remains in `Database/_GTAP Power 2023`; the historical
-`split=False` result is `Database/D2.4/20260630`.
-The reorganisation manifest records hashes of all 241 moved files. The shared
-copies preserve matrix bytes and support checkpoint reload; E remains deferred.
-The additional eNextGen source consolidation checked 340 raw assets: 42 already
-on WSP and 298 copied with verified hashes (10.16 GB). The source-consolidation
-manifest records original/target paths and byte-level variants; configured data
-selection remains unchanged. Older paths below describe the historical layout.
+database folders. Failed-attempt diagnostics remain with their input workbooks.
+The complete 13-region/67-child result is in
+`Database/D2.8/20261021 0655 - 13 regions and 67 sectors/flows`; its input
+workbooks are under `Inventories/D2.8 inventories` with the same run name.
+The baseline is in `Database/_GTAP Power 2023`, the historical `split=False`
+result in `Database/D2.4/20260630`, and the regenerated references in
+`Inventories/D2.4 inventories/Regenerated 20261001`. E remains deferred.
+
+The earlier reorganisation and source-consolidation manifests retain the paths
+captured at the time. `manifests/current_data_layout.json` maps those paths to
+the current layout and records before/after hashes for the 26 operational Purdue
+files moved from Raw data to Final. A copy is in `Data collection/Raw data`.
+The source consolidation checked 340 assets (298 copied, 42 already on WSP).
+These storage changes preserve source selection and the numerical database.
+Paths in historical evidence below describe the earlier layouts.
 
 
 ## Current status and next steps
@@ -50,7 +58,7 @@ The remaining work is implementation and controlled verification. The order belo
 
 The registry now provides a common basis for the guided Excel pilot and T2.6. Next connect source observations and transformation records to it, progressively complete the remaining activity reviews, and replace legacy parent lookups during controlled sector rebuilds. Keep full-scale numerical acceptance open. The baseline-residual policy is settled: report the supplied residuals and any new extension residuals separately, without repairing GTAP.
 
-The owner has now selected the project SharePoint for operational data and editing: `Data split/Inventory generation`. Git holds code, schemas, mappings/configuration and manifests. MARIO/CVXLAB is the selected implementation. Diagnostics are optional, with clear warnings and visible skipped checks; the final MRIO must still satisfy accounting identities within reported numerical tolerances.
+The current project SharePoint root for operational data and editing is `Data split`. Git holds code, schemas, mappings/configuration and manifests. MARIO/CVXLAB is the selected implementation. Diagnostics are optional, with clear warnings and visible skipped checks; the final MRIO must still satisfy accounting identities within reported numerical tolerances.
 
 Navigate to [baseline and source chain](#the-release-reference), [recovery](#why-zir-failed-and-what-was-recovered), [classification](#nace-led-parent-definitions), [consistency](#production-and-trade-consistency), [environment](#producer-environment-and-representative-verification), [Excel and T2.6](#portability-excel-and-t26), [single-sector export](#regenerating-one-sector), or [decision register](#decision-register).
 
@@ -655,19 +663,19 @@ The [GTAP 12 terms, section 3](https://www.gtap.agecon.purdue.edu/databases/docu
 
 ### Project SharePoint organisation
 
-The current operational root is `Data split/Inventory generation`. Partner submissions and `Shared sources.xlsx` are in the sibling `Data split/Data collection`. The owner reorganised the initial archive on 2 October; the configuration and source catalogue now follow that structure. The initial 1 October copy contained 1,170 files (approximately 2.47 GB), verified against source and destination SHA-256. That historical transfer is not the current folder inventory. Original eNextGen source files were retained.
+The current operational root is `Data split`. Selected inputs are in `Data collection/Final`; other partner deliveries and `Shared sources.xlsx` are in `Data collection/Raw data`. The owner reorganised the initial archive on 2 October; the configuration and source catalogue now follow that structure. The initial 1 October copy contained 1,170 files (approximately 2.47 GB), verified against source and destination SHA-256. That historical transfer is not the current folder inventory. Original eNextGen source files were retained.
 
 | Current location | Purpose |
 |---|---|
-| `Data collection/PURDUE/Shared material/Cost structures` | June1 EXIOIOT and copper data; original cost container and supporting tables. |
-| `Data collection/PURDUE/Shared material/Output and trade targets` | June1 `splttargs.xlsx` and its original GDX. |
-| `Data collection/PURDUE/Shared material/Trades` | May13 `trade.xlsx` and its original GDX. |
-| `Data collection/PURDUE/Shared material/_old/May27` | Previous delivery, preserved for comparison. |
-| `Inventory generation/Classifications` | One consolidated review workbook; original specialist files under `_sources`. |
-| `Inventory generation/Database/GTAP Power 2023/Original` | Original licensed Purdue CSV archive. |
-| `Inventory generation/Database/GTAP Power 2023/Cache` | The eight unchanged D2.4 baseline parquet matrices and `GTAP12_X.xlsx`. |
-| `Inventory generation/Data collection/Inventory cleaning` | Preserved partner/MARIO intermediate inputs, historical D2.4 inventories and coefficients. |
-| `Inventory generation/Inventories/20261001` | Only the 67 regenerated inventory workbooks. |
+| `Data collection/Final/PURDUE/Shared material/Cost structures` | June1 EXIOIOT and copper data; original cost container and supporting tables. |
+| `Data collection/Final/PURDUE/Shared material/Output and trade targets` | June1 `splttargs.xlsx` and its original GDX. |
+| `Data collection/Final/PURDUE/Shared material/Trades` | May13 `trade.xlsx` and its original GDX. |
+| `Data collection/Raw data/PURDUE/Shared material/_old/May27` | Previous delivery, preserved for comparison. |
+| `Classifications` | One consolidated review workbook; original specialist files under `_sources`. |
+| `Database/_GTAP Power 2023/Original` | Original licensed Purdue CSV archive. |
+| `Database/_GTAP Power 2023/Cache` | The eight unchanged D2.4 baseline parquet matrices and `GTAP12_X.xlsx`. |
+| `Inventories/D2.4 inventories/MARIO inventories/20260630` | Preserved MARIO inputs; historical coefficients are in `Database/D2.4/20260630/coefficients`. |
+| `Inventories/D2.4 inventories/Regenerated 20261001` | Only the 67 regenerated inventory workbooks. |
 
 `Repository inputs` was a staging folder, not a separate database or classification layer: it held the licensed numerical `GTAP12_X.xlsx` and personal runners. It has been removed after relocating those contents. **GTAP12_X is not a mapping:** it holds regional GTAP output totals used for weights, caps and QA. It therefore belongs beside the baseline cache, not in Classifications.
 
@@ -737,7 +745,7 @@ Three metadata differences reproduce the current exporter's historical mapping o
 
 Existing numerical diagnostics are preserved: **2,017 of 9,830 regional monetary profiles** fall outside `1 ± 0.01`, excluding satellite rows; 7,161 coefficient values are negative; 21 sectors have empty final trade sheets. Negative values are diagnostic observations, not automatically errors. Exact reproduction shows that these values were already in the reference. The earlier published-package count of 2,007 distinct sum warnings excluded ZIR; its ten warnings account for the difference. The native `export_d24_report.txt` describes preliminary June1 trade coverage before replacement; final trade coverage is recorded separately in `verification_summary.json`. A read-only HYE preview confirms rendering but retains the native narrow columns, which clip some labels and numbers. No workbook formatting was changed.
 
-The run's current shared location is `Data split/Inventory generation/Inventories/20261001`: 67 files named by sector code, such as `HYE.xlsx` and `ZIR.xlsx`. Its fresh coefficient database, executed pipeline, environment/source hashes, comparison results, warning details and copy manifest have moved to the private eNextGen `Inventory archive/Regeneration 20261001`.
+The run's current shared location is `Data split/Inventories/D2.4 inventories/Regenerated 20261001`: 67 files named by sector code, such as `HYE.xlsx` and `ZIR.xlsx`. Its fresh coefficient database, executed pipeline, environment/source hashes, comparison results, warning details and copy manifest have moved to the private eNextGen `Inventory archive/Regeneration 20261001`.
 
 All 95 files (approximately 1.24 GB) were hash-verified during the original run transfer; `archive.json` retains its historical paths. The reorganisation manifest records subsequent moves. The date in the inventory directory is the run start date. No original inventory or database was overwritten. Remote SharePoint synchronisation has not been independently confirmed. Local execution evidence remains in ignored `build/rebuild_d24_2026-10-01/`.
 

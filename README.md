@@ -26,15 +26,24 @@ includes a concrete command. The export-only dependencies are pinned in
 
 ## Shared data structure (21 October 2026)
 
-The WSP `Data split/README.md` is the shared folder guide; its maintained copy
-is [here](docs/shared-data/README.md). Partner templates are directly in
-`Inventory generation/Data collection`; generated inputs are under
-`Inventories/D2.4 inventories` and `Inventories/D2.8 inventories`. Databases
-are grouped under `Database/D2.4` and `Database/D2.8`. D2.8 input/result folders share the original run name
+The operational root is the WSP `Data split` directory. The shared folder guide
+is maintained [here](docs/shared-data/README.md). `Classifications`, `Database`
+and `Inventories` are directly under that root; `_others/FNAM split` holds
+alternative-method reference material.
+
+Selected inputs are in `Data collection/Final`: partner templates and VA.xlsx
+at its top level, and Purdue `Cost structures`, `Output and trade targets` and
+`Trades` under `PURDUE/Shared material`. Other deliveries and historical versions
+are in `Data collection/Raw data`. Source selection and file contents are unchanged.
+
+Generated inputs are under `Inventories/D2.4 inventories` and
+`Inventories/D2.8 inventories`; databases are grouped under `Database/D2.4` and
+`Database/D2.8`. D2.8 input/result folders share the original run name
 `YYYYMMDD HHMM - N regions and M sectors`. The complete current monetary result
 is `20261021 0655 - 13 regions and 67 sectors`; E is pending recalculation.
 Configure personal paths via `config/paths.example.json` and `paths.local.json`.
-Historical paths elsewhere in the report describe earlier storage layouts.
+Historical audit paths can be located with `manifests/current_data_layout.json`;
+those source records retain their captured paths and hashes.
 
 ## Layout
 
@@ -101,38 +110,51 @@ parent" residual clusters), `core.matching_utils` (read `GTAP12_matching.xlsx`).
 ## Running it
 
 Copy `config/paths.example.json` to `paths.local.json` in the repository root
-and set `data_root` to your local copy of `Data split/Inventory generation` on the
+and set `data_root` to your local copy of `Data split` on the
 project SharePoint. This personal configuration is ignored by Git. Alternatively,
 set `ENTICE_DATA_ROOT`; it takes precedence over the file. `ENTICE_CONFIG` selects
 a configuration stored elsewhere, including when using an installed wheel.
 
 The `paths` object can override individual data roles without changing source
-code. Relative paths are resolved from `data_root`, including sibling paths
-such as `../Data collection/PURDUE/Shared material/Trades/trade.xlsx`.
+code. Relative paths are resolved from the `Data split` root, for example
+`Data collection/Final/PURDUE/Shared material/Trades/trade.xlsx`.
 `core.paths.data_path()` resolves the same roles for the driver, export and QA.
 
 The shared layout is:
 
 ```text
 Data split/
-  Data collection/                 partner submissions and Shared sources.xlsx
-    PURDUE/Shared material/
-      Cost structures/            EXIOIOT, copper and supporting cost data
-      Output and trade targets/   June1 splttargs.xlsx and original GDX
-      Trades/                     May13 trade.xlsx and original GDX
-      _old/May27/                 preserved older delivery
-  Inventory generation/
-    Classifications/
-      ENTICE classifications.xlsx consolidated review view
-      _sources/                   original specialist concordances
-    Database/_GTAP Power 2023/
-      Original/                   licensed original CSV archive
-      Cache/                      preserved D2.4 parquet baseline and output totals
-    Data collection/              partner templates and VA.xlsx
-    Inventories/
-      D2.4 inventories/             historical exports, MARIO inputs and regenerated reference
-      D2.8 inventories/<run-name>/   split trial input workbooks
-    Database/D2.8/<same-run-name>/       matching result; matrices directly in flows/
+├── README.md
+├── Data collection/
+│   ├── Final/                            Operational inputs read by the pipeline
+│   │   ├── Inventory_*.xlsx, Add_sector_*.xlsx
+│   │   ├── VA.xlsx
+│   │   └── PURDUE/Shared material/
+│   │       ├── Cost structures/          EXIOIOT, copper and supporting cost data
+│   │       ├── Output and trade targets/ Selected splttargs workbook and GDX
+│   │       └── Trades/                   Selected trade workbook and GDX
+│   └── Raw data/                         Other deliveries and historical versions
+│       ├── <partner>/                    Purdue, ICCS, POLIMI & ENEXTGEN, etc.
+│       ├── Shared sources.xlsx
+│       ├── source_consolidation_20261021.json
+│       └── current_data_layout.json       Map of historical paths to current paths
+├── Classifications/                      Shared classification workbooks
+├── Inventories/
+│   ├── D2.4 inventories/                  Released D2.4 per-sector workbooks
+│   │   ├── MARIO inventories/20260630/    Original add_sectors inputs (split=False)
+│   │   └── Regenerated 20261001/          67 regenerated D2.4 reference inventories
+│   └── D2.8 inventories/
+│       └── <run name>/                    MARIO inputs for one split trial
+├── Database/
+│   ├── _GTAP Power 2023/
+│   │   ├── Original/                     Original licensed GTAP archive
+│   │   └── Cache/                        Baseline matrices and GTAP12_X.xlsx
+│   ├── D2.4/
+│   │   └── 20260630/                     Historical result of split=False
+│   └── D2.8/
+│       └── <same run name>/              MRIO result, state and diagnostics
+└── _others/
+    └── FNAM split/                       Preserved alternative-method examples
 ```
 
 Technical evidence, personal runners and original Git backups are held in the
