@@ -237,3 +237,42 @@ Failed input-only folders are preserved under `Inventories/D2.8 inventories/`:
 
 No corresponding failed database folders were created. The earlier accepted
 `20261021 1741 - 49 regions and 1 sectors` database remains unchanged.
+
+## Native 163-region, two-sector probe
+
+`data/geographies/gtap163.json` is an identity partition of all native regions,
+verified against the native cache. `config/gtap163-two-sector-steps.json` retains
+all 67 children and their cumulative preparation budgets, but puts only MCU and
+CHR in the first group. The intended solve stops there: **163 regions, 78 total
+sectors**. This is a fresh preparation and cannot resume a 49-region checkpoint.
+The 17-child Mining sequence is not requested for this probe.
+
+```bash
+python scripts/run_disaggregation.py \
+  --mapping data/geographies/gtap163.json \
+  --cleaning-policy config/cleaning-policy.json \
+  --steps config/gtap163-two-sector-steps.json \
+  --output build/scalability/my_gtap163/prepared
+python scripts/run_model_trial.py \
+  --prepared build/scalability/my_gtap163/prepared \
+  --output build/scalability/my_gtap163/trial \
+  --policy config/model-trials/scalability-commercial.json \
+  --stop-after-step "Pilot MCU and CHR"
+```
+
+The bounded pilot policy tries KL/MOSEK then quadratic/Gurobi, with the same
+common options and independent acceptance checks as the standard policy. It
+limits this resource probe to one solver per formulation; open-solver support
+and the general entropy-first policy are unchanged. A negative Capital/Labor
+prior rejects KL before optimisation, regardless of the solver. Original factor
+priors are retained: the separate factor-repair experiment and proposed
+parent-based prior recipes are not used.
+
+The native geography re-runs the existing reconciliation rules, so its targets
+are geography-specific rather than a disaggregation of the 49-region results.
+Preparation trade fitting retains its recorded cleaning-policy solver. Resource
+profiling covers preparation separately from the model trial; the initial
+profile uses a 10 GiB process-tree RSS stop and a two-hour wall limit per phase.
+A resource stop is an incomplete scalability probe, not mathematical
+infeasibility or an accepted database. Numerical inputs, logs and profiles are
+retained under the ignored local build directory.
